@@ -1,78 +1,132 @@
-# Yahoo! Mojito
+<html>
+<head><title>Yahoo! Mojito</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
 
-Mojito is the JavaScript library implementing Cocktails, a JavaScript-based
-on-line/off-line, multi-device, hosted application platform.
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="qVaiynOj5DTpgOxzyLa7N1MLKtS+oprEdCwqfSyTHxY=" name="csrf-token" />
 
-## Installation
+    <link href="https://a248.e.akamai.net/assets.github.com/assets/github-4cdfe51085d51343892c756d1d0a1264ec8d8668.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="https://a248.e.akamai.net/assets.github.com/assets/github2-e2c3745da1a65f53d59081b283521c9ce2cbc65f.css" media="screen" rel="stylesheet" type="text/css" />
+    
 
-### via GitHub
 
-    $ git clone git://github.com/yahoo/mojito.git
-    $ cd mojito/source
-    $ npm install -g .
-    $ npm install .
+    <script src="https://a248.e.akamai.net/assets.github.com/assets/frameworks-c12eab4295f1d4a7040c603970f25528f7f173ba.js" type="text/javascript"></script>
+    
+    <script defer="defer" src="https://a248.e.akamai.net/assets.github.com/assets/github-5f51a5e583805a16720b2bc2452cbab8e2e2398f.js" type="text/javascript"></script>
+</head>
+</html>
 
-### via npm
+<div id="readme" class="blob instapaper_body">
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a name="yahoo-mojito" class="anchor" href="#yahoo-mojito"><span class="mini-icon mini-icon-link"></span></a>Yahoo! Mojito</h1>
 
-    $ npm install -g mojito
+<p>Mojito is the JavaScript library implementing Cocktails, a JavaScript-based
+on-line/off-line, multi-device, hosted application platform.</p>
 
-## Quick Start
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="mini-icon mini-icon-link"></span></a>Installation</h2>
 
-Create an app and install local Mojito:
+<h3>
+<a name="via-github" class="anchor" href="#via-github"><span class="mini-icon mini-icon-link"></span></a>via GitHub</h3>
 
-    $ mojito create app hello
-    $ cd hello
-    $ npm install .
+<pre><code>$ git clone git://github.com/yahoo/mojito.git
+$ cd mojito/source
+$ npm install -g .
+$ npm install .
+</code></pre>
 
-Create a mojit:
+<h3>
+<a name="via-npm" class="anchor" href="#via-npm"><span class="mini-icon mini-icon-link"></span></a>via npm</h3>
 
-    $ mojito create mojit HelloMojit
+<pre><code>$ npm install -g mojito
+</code></pre>
 
-Start the server:
+<h2>
+<a name="quick-start" class="anchor" href="#quick-start"><span class="mini-icon mini-icon-link"></span></a>Quick Start</h2>
 
-    $ mojito start
+<p>Create an app and install local Mojito:</p>
 
-Go to URL:
+<pre><code>$ mojito create app hello
+$ cd hello
+$ npm install .
+</code></pre>
 
-    http://localhost:8666/@HelloMojit/index
+<p>Create a mojit:</p>
 
-Run Unit Tests:
+<pre><code>$ mojito create mojit HelloMojit
+</code></pre>
 
-    $ mojito test app .
+<p>Start the server:</p>
 
-Generate documentation:
+<pre><code>$ mojito start
+</code></pre>
 
-    $ mojito docs app hello
+<p>Go to URL:</p>
 
-## Documentation
+<pre><code>http://localhost:8666/@HelloMojit/index
+</code></pre>
 
-### General
+<p>Run Unit Tests:</p>
 
-* Mojito Home Page - http://developer.yahoo.com/cocktails/mojito
-* Mojito Docs Navigation - http://developer.yahoo.com/cocktails/mojito/docs/
-* Mojito FAQ - http://developer.yahoo.com/cocktails/mojito/docs/faq/
-* Mojito Introduction - http://developer.yahoo.com/cocktails/mojito/docs/intro/
-* Mojito Getting Started - http://developer.yahoo.com/cocktails/mojito/docs/getting_started/
+<pre><code>$ mojito test app .
+</code></pre>
 
-### API Documentation
+<p>Generate documentation:</p>
 
-* Running the following command will generate API docs and locally save them to `./artifacts/docs/mojito/`
-    `$ mojito docs mojito`
-* View the Mojito API documentation on YDN: http://developer.yahoo.com/cocktails/mojito/api/
+<pre><code>$ mojito docs app hello
+</code></pre>
 
-## Discussion/Forums
+<h2>
+<a name="documentation" class="anchor" href="#documentation"><span class="mini-icon mini-icon-link"></span></a>Documentation</h2>
 
-http://developer.yahoo.com/forum/Yahoo-Mojito
+<h3>
+<a name="general" class="anchor" href="#general"><span class="mini-icon mini-icon-link"></span></a>General</h3>
 
-## Licensing and Contributions
+<ul>
+<li>Mojito Home Page - <a href="http://developer.yahoo.com/cocktails/mojito">http://developer.yahoo.com/cocktails/mojito</a>
+</li>
+<li>Mojito Docs Navigation - <a href="http://developer.yahoo.com/cocktails/mojito/docs/">http://developer.yahoo.com/cocktails/mojito/docs/</a>
+</li>
+<li>Mojito FAQ - <a href="http://developer.yahoo.com/cocktails/mojito/docs/faq/">http://developer.yahoo.com/cocktails/mojito/docs/faq/</a>
+</li>
+<li>Mojito Introduction - <a href="http://developer.yahoo.com/cocktails/mojito/docs/intro/">http://developer.yahoo.com/cocktails/mojito/docs/intro/</a>
+</li>
+<li>Mojito Getting Started - <a href="http://developer.yahoo.com/cocktails/mojito/docs/getting_started/">http://developer.yahoo.com/cocktails/mojito/docs/getting_started/</a>
+</li>
+</ul><h3>
+<a name="api-documentation" class="anchor" href="#api-documentation"><span class="mini-icon mini-icon-link"></span></a>API Documentation</h3>
 
-Mojito is licensed under a [BSD license](https://github.com/yahoo/mojito/blob/master/LICENSE.txt). To contribute to the Mojito project, please see [Contributing](https://github.com/yahoo/mojito/wiki/Contributing-Code-to-Mojito). 
+<ul>
+<li>Running the following command will generate API docs and locally save them to <code>./artifacts/docs/mojito/</code>
+<code>$ mojito docs mojito</code>
+</li>
+<li>View the Mojito API documentation on YDN: <a href="http://developer.yahoo.com/cocktails/mojito/api/">http://developer.yahoo.com/cocktails/mojito/api/</a>
+</li>
+</ul><h2>
+<a name="discussionforums" class="anchor" href="#discussionforums"><span class="mini-icon mini-icon-link"></span></a>Discussion/Forums</h2>
 
-The Mojito project is a [meritocratic, consensus-based community project](https://github.com/yahoo/mojito/wiki/Governance-Model) which allows anyone to contribute and gain additional responsibilities.
+<p><a href="http://developer.yahoo.com/forum/Yahoo-Mojito">http://developer.yahoo.com/forum/Yahoo-Mojito</a></p>
 
-## Third-party libraries
+<h2>
+<a name="licensing-and-contributions" class="anchor" href="#licensing-and-contributions"><span class="mini-icon mini-icon-link"></span></a>Licensing and Contributions</h2>
 
-Mojito includes the Mulib software available here:
+<p>Mojito is licensed under a <a href="https://github.com/yahoo/mojito/blob/master/LICENSE.txt">BSD license</a>. To contribute to the Mojito project, please see <a href="https://github.com/yahoo/mojito/wiki/Contributing-Code-to-Mojito">Contributing</a>. </p>
 
-https://github.com/raycmorgan/Mu
+<p>The Mojito project is a <a href="https://github.com/yahoo/mojito/wiki/Governance-Model">meritocratic, consensus-based community project</a> which allows anyone to contribute and gain additional responsibilities.</p>
 
+<h2>
+<a name="third-party-libraries" class="anchor" href="#third-party-libraries"><span class="mini-icon mini-icon-link"></span></a>Third-party libraries</h2>
+
+<p>Mojito includes the Mulib software available here:</p>
+
+<p><a href="https://github.com/raycmorgan/Mu">https://github.com/raycmorgan/Mu</a></p></article>
+  </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
