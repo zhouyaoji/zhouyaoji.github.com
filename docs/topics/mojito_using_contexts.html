@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Using Context Configurations - Mojito Topics</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="using-context-configurations">
+<h1>Using Context Configurations<a class="headerlink" href="#using-context-configurations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Mojito framework allows you to define sets of configurations for different environments, languages, and devices. Your applications can either
+statically apply configurations when the application is started or dynamically apply configurations based on incoming HTTP requests. In both static and
+dynamic cases, Mojito determines which configurations to apply by a string consisting of key-value pairs known as the <em>context</em>. In the case of applying
+configurations per request, Mojito looks for the context in the HTTP headers or the query string. If no context is found, Mojito uses
+the <a class="reference internal" href="#context-config-exs-defaults-json"><em>defaults.json</em></a>.</p>
+</div>
+<div class="section" id="why-use-context-configurations">
+<h2>Why Use Context Configurations?<a class="headerlink" href="#why-use-context-configurations" title="Permalink to this headline">¶</a></h2>
+<p>Context configurations make it easier to develop applications by allowing developers to create sets of configurations associated to environments.
+Developers can experiment or make modifications to configurations mapped to a testing environment context without affecting the application running
+with the default configurations. Context configurations also make it easier to customize content for users. Applications can dynamically apply language
+and device configurations by determining the user&#8217;s language preferences and the device making the HTTP request. Mojito provides default contexts that
+you can define configurations for, but you can also <a class="reference external" href="#creating-custom-contexts">create custom contexts</a> to meet your application&#8217;s needs.</p>
+</div>
+<div class="section" id="flow-of-using-context-configurations">
+<h2>Flow of Using Context Configurations<a class="headerlink" href="#flow-of-using-context-configurations" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first"><strong>Create context configurations:</strong></p>
+<p>Define context configurations in <tt class="docutils literal"><span class="pre">application.json</span></tt>, <tt class="docutils literal"><span class="pre">routes.json</span></tt>, and default context configurations for your mojits in the <tt class="docutils literal"><span class="pre">defaults.json</span></tt> file in your mojit directory.</p>
+</li>
+<li><p class="first"><strong>Start application:</strong></p>
+<ul class="simple">
+<li>Use the default configurations by not specifying a base context: <tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span></tt></li>
+<li>Specify the base context with the <tt class="docutils literal"><span class="pre">--context</span></tt> option. Mojito will apply the configurations mapped to the base context. For example: <tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span> <span class="pre">--context</span> <span class="pre">&quot;environment:test&quot;</span></tt></li>
+</ul>
+</li>
+<li><p class="first"><strong>Receive HTTP requests:</strong></p>
+<dl class="docutils">
+<dt><em>Request new context:</em></dt>
+<dd><p class="first last">Mojito will look at the HTTP headers for language and device contexts and the query string parameters for any of the default contexts.
+Contexts found in the request are referred to as request contexts. Mojito will then merge the default configurations or the
+configurations of the base context with the configurations of the request context. The configurations of the request context override
+default configurations or those of the base context.</p>
+</dd>
+<dt><em>Change configurations:</em></dt>
+<dd><p class="first last">The application can dynamically change configurations by having a parent mojit execute a child with new configuration values.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="contexts">
+<h2>Contexts<a class="headerlink" href="#contexts" title="Permalink to this headline">¶</a></h2>
+<p>The context is a string consisting of key-value pairs that map to a set of configurations. Mojito provides default contexts for environments, devices, and languages.
+If none of the default contexts meet your needs, you can create <a class="reference internal" href="#context-configs-custom"><em>Creating Custom Contexts</em></a>.</p>
+<div class="section" id="syntax">
+<h3>Syntax<a class="headerlink" href="#syntax" title="Permalink to this headline">¶</a></h3>
+<p>The context has the following syntax :</p>
+<p><tt class="docutils literal"><span class="pre">&quot;key1:value1[,key2:value2]&quot;</span></tt></p>
+</div>
+<div class="section" id="default-contexts">
+<span id="contexts-defaults"></span><h3>Default Contexts<a class="headerlink" href="#default-contexts" title="Permalink to this headline">¶</a></h3>
+<p>The following lists the contexts that are defined by Mojito. You can define configurations for these default contexts. You can combine multiple contexts to
+form a compound context as well. For example, if you wanted a context to map to configurations for Android devices in a testing environment, you could use the
+following compound context: <tt class="docutils literal"><span class="pre">&quot;environment:test,device:android&quot;</span></tt></p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">environment:development</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">environment:production</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">environment:dev</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">environment:test</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">environment:stage</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">environment:prod</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:android</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:blackberry</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:iemobile</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:iphone</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:ipad</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:kindle</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:opera-mini</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">device:palm</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">lang:{BCP</span> <span class="pre">47</span> <span class="pre">language</span> <span class="pre">tag}</span></tt></li>
+</ul>
+<p>You can view the supported BCP 47 language tags and default contexts in the <a class="reference external" href="https://github.com/yahoo/mojito/blob/develop/source/lib/dimensions.json">dimensions.json</a> file of Mojito.</p>
+</div>
+<div class="section" id="configuration-precedence">
+<h3>Configuration Precedence<a class="headerlink" href="#configuration-precedence" title="Permalink to this headline">¶</a></h3>
+<p>Mojito evaluates configurations in the following order:</p>
+<ol class="arabic simple">
+<li>default context configurations specified in the configuration object with the <tt class="docutils literal"><span class="pre">setting</span></tt> array with the &#8220;master&#8221; string.</li>
+<li>configurations associated with a context specified on the command line with the <tt class="docutils literal"><span class="pre">--context</span></tt> option.</li>
+<li>configurations associated with a context set using the query string, HTTP headers, or through the execution of a child mojit with configuration information.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="defining-configurations-for-contexts">
+<h2>Defining Configurations for Contexts<a class="headerlink" href="#defining-configurations-for-contexts" title="Permalink to this headline">¶</a></h2>
+<p>Configurations for contexts are defined in the application configuration file <tt class="docutils literal"><span class="pre">application.json</span></tt>. Routing configurations for contexts are defined in the
+routing configuration file <tt class="docutils literal"><span class="pre">routes.json</span></tt>. Default configurations are defined in the <tt class="docutils literal"><span class="pre">defaults.json</span></tt> file of a mojit. All configurations are merged when
+an application starts. The configuration values in <tt class="docutils literal"><span class="pre">application.json</span></tt> override those
+in <tt class="docutils literal"><span class="pre">defaults.json</span></tt>.</p>
+<div class="section" id="configuration-objects">
+<h3>Configuration Objects<a class="headerlink" href="#configuration-objects" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">application.json</span></tt> and <tt class="docutils literal"><span class="pre">routes.json</span></tt> files in the application directory and the <tt class="docutils literal"><span class="pre">defaults.json</span></tt> file in a mojit&#8217;s directory consist of an array of configuration objects.
+The configuration object has a <tt class="docutils literal"><span class="pre">settings</span></tt> array that specifies the context. The configuration objects in <tt class="docutils literal"><span class="pre">application.json</span></tt> also have a <tt class="docutils literal"><span class="pre">specs</span></tt> object
+containing mojit instances, which may also have a <tt class="docutils literal"><span class="pre">config</span></tt> object that has data in the form of key-value pairs. The configuration objects in <tt class="docutils literal"><span class="pre">defaults.json</span></tt> do not
+have a <tt class="docutils literal"><span class="pre">specs</span></tt> object because they do not define mojits, but do have a <tt class="docutils literal"><span class="pre">config</span></tt> object for storing key-value pairs. The <tt class="docutils literal"><span class="pre">routes.json</span></tt> file specifies routing
+configuration such as the path, HTTP methods, actions, and routing parameters, but does not contain a <tt class="docutils literal"><span class="pre">specs</span></tt> or a <tt class="docutils literal"><span class="pre">config</span></tt> object.</p>
+<div class="section" id="setting">
+<h4>setting<a class="headerlink" href="#setting" title="Permalink to this headline">¶</a></h4>
+<p>The <tt class="docutils literal"><span class="pre">settings</span></tt> array specifies the context or the default (&#8220;master&#8221;) that is then mapped to configurations.</p>
+<div class="section" id="default-configurations">
+<h5>Default Configurations<a class="headerlink" href="#default-configurations" title="Permalink to this headline">¶</a></h5>
+<p>Default configurations are used when no context is given. These configurations are found in the object where the settings array has the string &#8220;master&#8221; as seen below.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="simple-context-configuration">
+<h5>Simple Context Configuration<a class="headerlink" href="#simple-context-configuration" title="Permalink to this headline">¶</a></h5>
+<p>The context is specified in the <tt class="docutils literal"><span class="pre">settings</span></tt> array of the configuration object.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">...</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:development&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+     <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="compound-context-configuration">
+<h5>Compound Context Configuration<a class="headerlink" href="#compound-context-configuration" title="Permalink to this headline">¶</a></h5>
+<p>Compound contexts are specified in the settings array as a series of contexts separated by commas as seen below.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">...</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:development&quot;</span><span class="p">,</span> <span class="s2">&quot;device:android&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="routing-context-configuration">
+<h5>Routing Context Configuration<a class="headerlink" href="#routing-context-configuration" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;master_route&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:development&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;dev_route&quot;</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="specs">
+<h4>specs<a class="headerlink" href="#specs" title="Permalink to this headline">¶</a></h4>
+<p>The <tt class="docutils literal"><span class="pre">specs</span></tt> object contains the mojit instances associated with a context.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">...</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:production&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;photos&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;PhotoMojit&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="config">
+<h4>config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h4>
+<p>The <tt class="docutils literal"><span class="pre">config</span></tt> object stores configuration for a mojit that is mapped to the context.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">...</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;device:iphone&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;iphone&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;iPhoneMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;viewport_width&quot;</span><span class="o">:</span> <span class="mi">320</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="application-json">
+<h4>application.json<a class="headerlink" href="#application-json" title="Permalink to this headline">¶</a></h4>
+<p>The configuration objects in <tt class="docutils literal"><span class="pre">application.json</span></tt> below define default configurations and three context configurations. The last context configuration contains
+two strings containing key-value pairs and is, thus, called a compound context configuration.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;mainPage&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;TestMojit&quot;</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;env&quot;</span><span class="o">:</span> <span class="s2">&quot;This is the default environment.&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:development&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;mainPage&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;TestMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;env&quot;</span><span class="o">:</span> <span class="s2">&quot;I am in the development environment.&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:production&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;mainPage&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;TestMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;env&quot;</span><span class="o">:</span> <span class="s2">&quot;I am in the production environment.&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:production&quot;</span><span class="p">,</span> <span class="s2">&quot;device:kindle&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;mainPage&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;TestMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;env&quot;</span><span class="o">:</span> <span class="s2">&quot;I am in the production environment for Kindles.&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defaults-json">
+<span id="context-config-exs-defaults-json"></span><h4>defaults.json<a class="headerlink" href="#defaults-json" title="Permalink to this headline">¶</a></h4>
+<p>The configuration <tt class="docutils literal"><span class="pre">gamma</span></tt> in the example <tt class="docutils literal"><span class="pre">defaults.json</span></tt> below is mapped to contexts for languages.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;alpha&quot;</span> <span class="o">:</span> <span class="s2">&quot;I am the first!&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;beta&quot;</span> <span class="o">:</span> <span class="s2">&quot;I am the second!&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;gamma&quot;</span><span class="o">:</span> <span class="s2">&quot;I am the third!&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;lang:de&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;gamma&quot;</span><span class="o">:</span> <span class="s2">&quot;I am (when lang=de is passed) the third!&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;lang:fr&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;gamma&quot;</span><span class="o">:</span> <span class="s2">&quot;defaults.json - (when lang=fr is passed) the third!&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="routes-json">
+<h4>routes.json<a class="headerlink" href="#routes-json" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;prod_route&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;hello.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;environment:development&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;dev_route&quot;</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/testing&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span> <span class="o">:</span> <span class="s2">&quot;dev_hello.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="applying-context-configurations">
+<h2>Applying Context Configurations<a class="headerlink" href="#applying-context-configurations" title="Permalink to this headline">¶</a></h2>
+<p>The configurations for a context can be applied statically or dynamically. The base context is used to statically apply configurations. The request context is used to
+dynamically apply configurations.</p>
+<div class="section" id="base-context">
+<h3>Base Context<a class="headerlink" href="#base-context" title="Permalink to this headline">¶</a></h3>
+<p>The base context is specified with the <tt class="docutils literal"><span class="pre">--context</span></tt> option when you start an application. The following starts the application with the base context <tt class="docutils literal"><span class="pre">environment:production</span></tt>:</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span> <span class="pre">--context</span> <span class="pre">&quot;environment:production&quot;</span></tt></p>
+</div>
+<div class="section" id="request-contexts">
+<h3>Request Contexts<a class="headerlink" href="#request-contexts" title="Permalink to this headline">¶</a></h3>
+<p>Contexts that are dynamically invoked by HTTP requests are called request contexts. When Mojito receives an HTTP request that specifies a context, the configurations mapped
+to that context will be dynamically applied. The contexts can be specified in HTTP request as a parameter in the query string or in the HTTP header.</p>
+<div class="section" id="request-headers">
+<h4>Request Headers<a class="headerlink" href="#request-headers" title="Permalink to this headline">¶</a></h4>
+<p>The contexts for languages can be requested using the HTTP header <tt class="docutils literal"><span class="pre">Accept-Language</span></tt>. After starting an application with the context <tt class="docutils literal"><span class="pre">&quot;environment:testing&quot;</span></tt>, you can
+dynamically apply the configurations for the context <tt class="docutils literal"><span class="pre">&quot;environment:testing,lang:fr&quot;</span></tt> by sending the HTTP header <tt class="docutils literal"><span class="pre">&quot;Accept-Language:</span> <span class="pre">fr&quot;</span></tt>. In the same way, the contexts
+for devices can be requested using the HTTP header <tt class="docutils literal"><span class="pre">User-Agent</span></tt>. The configurations for the context &#8220;device:android&#8221; could be requested with the
+HTTP header <tt class="docutils literal"><span class="pre">&quot;User-Agent:</span> <span class="pre">Mozilla/5.0</span> <span class="pre">(Linux;</span> <span class="pre">U;</span> <span class="pre">Android</span> <span class="pre">2.3;</span> <span class="pre">en-us)&quot;</span></tt>.</p>
+</div>
+<div class="section" id="query-string-parameters">
+<h4>Query String Parameters<a class="headerlink" href="#query-string-parameters" title="Permalink to this headline">¶</a></h4>
+<p>The key and value pairs in the context are dynamically set by the query string using the standard syntax for query strings: <tt class="docutils literal"><span class="pre">?key1=value1,key2=value2</span></tt></p>
+<p>For example, if an application is started with the base context <tt class="docutils literal"><span class="pre">&quot;environment:testing&quot;</span></tt> and you want to dynamically apply the context <tt class="docutils literal"><span class="pre">&quot;environment:testing,device:iphone&quot;</span></tt>, you could append the following query string to the application URL: <tt class="docutils literal"><span class="pre">?device=iphone</span></tt></p>
+</div>
+</div>
+<div class="section" id="merged-base-and-request-contexts">
+<h3>Merged Base and Request Contexts<a class="headerlink" href="#merged-base-and-request-contexts" title="Permalink to this headline">¶</a></h3>
+<p>An application started with a base context can apply configurations for request contexts. Mojito will merge the configurations for both the base and request contexts.
+The configurations for request contexts override those of the base context.</p>
+</div>
+</div>
+<div class="section" id="dynamically-changing-configurations">
+<h2>Dynamically Changing Configurations<a class="headerlink" href="#dynamically-changing-configurations" title="Permalink to this headline">¶</a></h2>
+<p>You may dynamically change the configurations for any context by having a parent mojit execute a child mojit with new configurations. This is different than getting
+different configurations by requesting a new context or specifying a different base context. Regardless of the context being used, you can use the same context and change
+the configurations by executing a child mojit with new configurations. The parent mojit uses the <tt class="docutils literal"><span class="pre">execute</span></tt> method of the
+<a class="reference external" href="../../api/classes/Composite.common.html">Composite addon</a> to execute the child mojit.
+Let&#8217;s look at an example to see how it works.</p>
+<p>In the example controller below, if the <tt class="docutils literal"><span class="pre">child</span></tt> parameter is found in the routing, query string, or request body, a child instance with its own configuration is executed, allowing the application to add new or change configurations of the current context.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;TestMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">cfg</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">children</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;one&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Child&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;alpha&quot;</span><span class="o">:</span> <span class="s2">&quot;Creating a new &#39;alpha&#39; key or replacing the value of the alpha key mapped to the context being used. The context, however, does not change.&quot;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      <span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">getFromMerged</span><span class="p">(</span><span class="s1">&#39;child&#39;</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">child</span><span class="p">){</span>
+        <span class="nx">ac</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">cfg</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">meta</span><span class="p">){</span>
+          <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">]);</span>
+        <span class="p">});</span>
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span>
+          <span class="s1">&#39;config key &quot;alpha&quot;: &#39;</span> <span class="o">+</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;[alpha not found]&#39;</span><span class="p">)</span>
+        <span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-custom-contexts">
+<span id="context-configs-custom"></span><h2>Creating Custom Contexts<a class="headerlink" href="#creating-custom-contexts" title="Permalink to this headline">¶</a></h2>
+<p>The Mojito framework defines default contexts that developers can map configurations to. These default contexts are defined in the <tt class="docutils literal"><span class="pre">dimensions.json</span></tt> file found in
+the Mojito source code. Developers can create an application-level <tt class="docutils literal"><span class="pre">dimensions.json</span></tt> to define custom contexts that can be mapped to configurations as well.
+Defining and applying configurations for custom contexts is done in the same way as for default contexts.</p>
+<div class="section" id="who-should-create-custom-contexts">
+<h3>Who Should Create Custom Contexts?<a class="headerlink" href="#who-should-create-custom-contexts" title="Permalink to this headline">¶</a></h3>
+<p>Developers who create applications that require a degree of personalization that extends beyond language and device would be good candidates to create custom contexts.
+Before beginning to create your own <tt class="docutils literal"><span class="pre">dimensions.json</span></tt> file, you should review the <a class="reference internal" href="#contexts-defaults"><em>Default Contexts</em></a> to make sure that you truly need custom contexts.</p>
+</div>
+<div class="section" id="dimensions-file">
+<h3>Dimensions File<a class="headerlink" href="#dimensions-file" title="Permalink to this headline">¶</a></h3>
+<p>The key-value pairs of the context are defined in the <tt class="docutils literal"><span class="pre">dimensions.json</span></tt> file in the application directory. Once contexts are defined in the <tt class="docutils literal"><span class="pre">dimensions.file</span></tt>,
+you can then map configurations to those contexts. If your application has configurations for a context that has not been defined by Mojito or at the application
+level in <tt class="docutils literal"><span class="pre">dimensions.json</span></tt>, an error will prevent you from starting the application.</p>
+<div class="section" id="syntax-for-javascript-object">
+<h4>Syntax for JavaScript Object<a class="headerlink" href="#syntax-for-javascript-object" title="Permalink to this headline">¶</a></h4>
+<p>In the <tt class="docutils literal"><span class="pre">dimension.json</span></tt> file, the <tt class="docutils literal"><span class="pre">dimensions</span></tt> array contains JavaScript objects that define the contexts. The keys of the context are the names of the objects,
+and the values are the object&#8217;s properties as seen below.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;dimensions&quot;</span><span class="o">:</span><span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;us&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="s2">&quot;jp&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="s2">&quot;cn&quot;</span><span class="o">:</span> <span class="kc">null</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+     <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-dimensions-js">
+<h4>Example dimensions.js<a class="headerlink" href="#example-dimensions-js" title="Permalink to this headline">¶</a></h4>
+<p>Based on the example <tt class="docutils literal"><span class="pre">dimensions.json</span></tt> below, the following are valid contexts:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">&quot;account_type:basic&quot;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&quot;account_type:premium&quot;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&quot;account_type:basic,region:us&quot;</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&quot;account_type:premium,region:fr&quot;</span></tt></li>
+</ul>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;dimensions&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;account_type&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;basic&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="s2">&quot;premium&quot;</span><span class="o">:</span> <span class="kc">null</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;region&quot;</span><span class="o">:</span><span class="p">{</span>
+          <span class="s2">&quot;us&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="s2">&quot;gb&quot;</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+          <span class="s2">&quot;fr&quot;</span><span class="o">:</span> <span class="kc">null</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

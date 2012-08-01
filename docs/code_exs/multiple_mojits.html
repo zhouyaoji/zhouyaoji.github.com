@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Using Multiple Mojits - Mojito Code Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="using-multiple-mojits">
+<h1>Using Multiple Mojits<a class="headerlink" href="#using-multiple-mojits" title="Permalink to this headline">¶</a></h1>
+<p><strong>Time Estimate:</strong> 15 minutes</p>
+<p><strong>Difficulty Level:</strong> Intermediate</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to use a parent mojit with multiple child mojits to create an HTML page.</p>
+<p>The following topics will be covered:</p>
+<ul class="simple">
+<li>configuring the application to use multiple mojits</li>
+<li>including the output from different mojits in one view template</li>
+<li>embedding the rendered view template into the HTML frame</li>
+</ul>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">To learn how to use the Mojito built-in mojit <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> to aggregate and display the output from child mojits, see <a class="reference external" href="./htmlframe_view.html">Using the HTML Frame Mojit</a>.</p>
+</div>
+</div>
+<div class="section" id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></h2>
+<p>In the screenshot below, you see an HTML page divided into header, body, and footer sections that were created by individual mojits.</p>
+<img alt="_images/preview.multiple_mojits.gif" src="_images/preview.multiple_mojits.gif" style="width: 401px; height: 368px;" />
+<p>In the <tt class="docutils literal"><span class="pre">application.json</span></tt> below that is used for this code example, you see that this application is using the <tt class="docutils literal"><span class="pre">frame</span></tt> instance of type <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>.
+The <tt class="docutils literal"><span class="pre">FrameMojit</span></tt> forms a skeleton page of <tt class="docutils literal"><span class="pre">div</span></tt> tags that use content created by the child mojits <tt class="docutils literal"><span class="pre">HeaderMojit</span></tt>, <tt class="docutils literal"><span class="pre">BodyMojit</span></tt>, and <tt class="docutils literal"><span class="pre">FooterMojit</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;appPort&quot;</span><span class="o">:</span> <span class="mi">8666</span><span class="p">,</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;parent&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;FrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;header&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HeaderMojit&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;BodyMojit&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;footer&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;FooterMojit&quot;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>In <tt class="docutils literal"><span class="pre">routes.json</span></tt>, the path set for each mojit is different, but the <tt class="docutils literal"><span class="pre">index</span></tt> function from each mojit is called when GET calls are made. What&#8217;s not obvious here is how the <tt class="docutils literal"><span class="pre">frame</span></tt> mojit
+gets output from the other mojits because that happens in the controller of the <tt class="docutils literal"><span class="pre">frame</span></tt> mojit and not in the route configuration.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;master&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;root&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;frame.index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;header&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/header&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;header.index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/body&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;body.index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;footer&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/footer&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;footer.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>In <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> of the <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>, the <tt class="docutils literal"><span class="pre">Composite</span></tt> addon allows the parent mojit to execute the child mojits defined in <tt class="docutils literal"><span class="pre">application.json</span></tt> that we looked at earlier.
+After the children mojits are executed, the data that is passed to the <tt class="docutils literal"><span class="pre">done</span></tt> method in the children mojits becomes accessible in the <tt class="docutils literal"><span class="pre">index.mu.html</span></tt> view template of <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>,
+which we will take a look at next.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;FrameMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actionContext</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">actionContext</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">template</span><span class="o">:</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Parent Frame&quot;</span><span class="p">}});</span>
+      <span class="p">}</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">index.mu.html</span></tt> view template of <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>, shown below, has variables from the children mojits in different <tt class="docutils literal"><span class="pre">div</span></tt> tags. The variables <tt class="docutils literal"><span class="pre">header</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt>, and <tt class="docutils literal"><span class="pre">footer</span></tt> are in triple mustaches,
+which allows you to return unescaped HTML.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span> <span class="na">style=</span><span class="s">&quot;border: dashed black 1px;&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>{{title}}<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;header&quot;</span> <span class="na">style=</span><span class="s">&quot;border: dashed black 1px; margin: 10px 10px 10px 10px;&quot;</span><span class="nt">&gt;</span>
+    {{{header}}}
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;body&quot;</span> <span class="na">style=</span><span class="s">&quot;border: dashed black 1px; margin: 10px 10px 10px 10px;&quot;</span><span class="nt">&gt;</span>
+    {{{body}}}
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;footer&quot;</span> <span class="na">style=</span><span class="s">&quot;border: dashed black 1px; margin: 10px 10px 10px 10px;&quot;</span><span class="nt">&gt;</span>
+    {{{footer}}}
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-up-this-example">
+<h2>Setting Up this Example<a class="headerlink" href="#setting-up-this-example" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run <tt class="docutils literal"><span class="pre">multiple_mojits</span></tt>:</p>
+<ol class="arabic">
+<li><p class="first">Create your application.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">app</span> <span class="pre">multiple_mojits</span></tt></p>
+</li>
+<li><p class="first">Change to the application directory.</p>
+</li>
+<li><p class="first">Create the mojits for the HTML frame, body, header, and footer.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">FrameMojit</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">BodyMojit</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">HeaderMojit</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">FooterMojit</span></tt></p>
+</li>
+<li><p class="first">To configure your application to use the mojits you created, replace the code in <tt class="docutils literal"><span class="pre">application.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;FrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;header&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HeaderMojit&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;BodyMojit&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;footer&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;FooterMojit&quot;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To configure routing, create the file <tt class="docutils literal"><span class="pre">routes.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;master&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;root&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;frame.index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;header&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/header&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;header.index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/body&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;body.index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;footer&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/footer&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;footer.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change to <tt class="docutils literal"><span class="pre">mojits/FrameMojit</span></tt>.</p>
+</li>
+<li><p class="first">To allow the <tt class="docutils literal"><span class="pre">FrameMojit</span></tt> to execute its child mojits, replace the code in <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;FrameMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actionContext</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">actionContext</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">template</span><span class="o">:</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Parent Frame&quot;</span><span class="p">}});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Modify the default template to use mustache variables from the child mojits by replacing the code in <tt class="docutils literal"><span class="pre">views/index.mu.html</span></tt> with the following:</p>
+<div class="highlight-javascript"><pre>&lt;div id="{{mojit_view_id}}" class="mojit" style="border: dashed black 1px;"&gt;
+  &lt;h1&gt;{{title}}&lt;/h1&gt;
+  &lt;div class="header" style="border: dashed black 1px; margin: 10px 10px 10px 10px;"&gt;
+    {{{header}}}
+  &lt;/div&gt;
+  &lt;div class="body" style="border: dashed black 1px; margin: 10px 10px 10px 10px;"&gt;
+    {{{body}}}
+  &lt;/div&gt;
+  &lt;div class="footer" style="border: dashed black 1px; margin: 10px 10px 10px 10px;"&gt;
+    {{{footer}}}
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+</div>
+</li>
+<li><p class="first">Change to <tt class="docutils literal"><span class="pre">HeaderMojit</span></tt> directory.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">cd</span> <span class="pre">../HeaderMojit</span></tt></p>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;HeaderMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actionContext</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">actionContext</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Header&quot;</span><span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">done</span></tt> method will make its parameters available to the view template.</p>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">views/index.mu.html</span></tt> with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3&gt;</span>{{title}}<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>This HTML fragment will be included in the header section of the default view template of <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>.</p>
+</li>
+<li><p class="first">Change to <tt class="docutils literal"><span class="pre">BodyMojit</span></tt> directory.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">cd</span> <span class="pre">../BodyMojit</span></tt></p>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;BodyMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actionContext</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">actionContext</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Body&quot;</span><span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">views/index.mu.html</span></tt> with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h4&gt;</span>{{title}}<span class="nt">&lt;/h4&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>This HTML fragment will be included in the body section of the default view template of <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>.</p>
+</li>
+<li><p class="first">Change to the <tt class="docutils literal"><span class="pre">FooterMojit</span></tt> directory.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">cd</span> <span class="pre">../FooterMojit</span></tt></p>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;FooterMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actionContext</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">actionContext</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Footer&quot;</span><span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">views/index.mu.html</span></tt> with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3&gt;</span>{{title}}<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<p>This HTML fragment will be included in the footer section of the default view template of <tt class="docutils literal"><span class="pre">FrameMojit</span></tt>.</p>
+</li>
+<li><p class="first">From the application directory, run the server.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span></tt></p>
+</li>
+<li><p class="first">To view your application, go to the URL:</p>
+<p><a class="reference external" href="http://localhost:8666">http://localhost:8666</a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="source-code">
+<h2>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/multiple_mojits/application.json">Application Configuration</a></li>
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/multiple_mojits/">Multiple Mojit Application</a></li>
+</ul>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

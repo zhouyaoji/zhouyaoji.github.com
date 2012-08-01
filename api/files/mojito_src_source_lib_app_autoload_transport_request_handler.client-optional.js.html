@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;request_handler.client-optional.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;request_handler.client-optional.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+YUI.add(&#x27;request-handler&#x27;, function(Y) {
+
+    var NAME = &#x27;requestHandler&#x27;,
+        OK = &#x27;ok&#x27;,
+        E_ABORT = &#x27;abort&#x27;,
+        E_TIMEOUT = &#x27;timeout&#x27;,
+        &#x2F;&#x2F;disable types
+        E_DISABLED_WITH_QUEUE = 2,
+        E_DISABLED_WITHOUT_QUEUE = 1,
+        E_ENABLED = 0,
+        &#x2F;&#x2F;error types
+        E_SERVER = &#x27;server&#x27;,
+        E_RESULT_BADFORMAT = &#x27;badformat&#x27;,
+        E_UNSUPPORTED = &#x27;unsupported&#x27;,
+        E_GATEWAY_TIMEOUT = &#x27;Gateway Timeout&#x27;,
+        &#x2F;&#x2F;events
+        REQUEST_EV = &#x27;request&#x27;,
+        RESPONSE_EV = &#x27;response&#x27;,
+        &#x2F;&#x2F;callback names
+        FAILURE_CB = &#x27;failure&#x27;,
+        ERROR = &#x27;error&#x27;,
+        &#x2F;&#x2F;YUI method shortcuts
+        Lang = Y.Lang,
+        isFunction = Lang.isFunction,
+        isObject = Lang.isObject,
+        isUndefined = Lang.isUndefined,
+        isNull = Lang.isNull,
+        _disabled = E_ENABLED,
+        _requestProps = null,
+        txId = 0,
+        &#x2F;&#x2F; dependencies
+        _requestor,
+        _modulePlatform,
+        _requestFormatter,
+        _serviceRegistry,
+        _registrationProvider,
+        _responseProcessor,
+        _ioFacade,
+        _errorReporter,
+        _configProvider,
+        RequestHandler;
+
+
+    function reportUnsupportedOperation(name) {
+        _errorReporter.error(E_UNSUPPORTED, &#x27;&quot;&#x27; + NAME +
+            &#x27;&quot; does not support operation: &#x27; + name);
+    }
+
+
+    &#x2F;**
+     * Adds the request to the queue for processing
+     * @param {Object} requestObject the request Id.
+     * @param {Object} cb callback object.
+     * @param {Number} id the id of the module making the request.
+     * @return {Number} the id of the request for tracking.
+     * @private
+     *&#x2F;
+    function _processRequest(requestObject, cb, id) {
+        var r,
+            request = {
+                requestObject: requestObject,
+                moduleId: id,
+                originId: id
+            };
+
+        if (requestObject.moduleId) {
+            request.targetId = requestObject.moduleId;
+        }
+
+        &#x2F;&#x2F; so the transport bean can fire through YUI3
+        this.fire(REQUEST_EV, {
+            type: REQUEST_EV,
+            request: request.requestObject,
+            originId: request.originId
+        }, NAME);
+
+        r = _requestFormatter.formatRequest(txId += 1, request);
+
+        _requestor.doRequest({
+            request: r,
+            callback: cb,
+            immediate: true,
+            forcepost: requestObject.forcepost
+        });
+    }
+
+
+    &#x2F;**
+      * once a request has been finished (either complete or aborted)
+      * this method handles the final tasks of firing events, formatting
+      * responses registering any modules found, and calling callbacks
+      * @private
+      *&#x2F;
+    function completeRequest(arg0) {
+        var response = arg0.response || {},
+            method = arg0.method,
+            result = arg0.result,
+            cb = arg0.cb,
+            resultDetail = arg0.resultDetail,
+            mods = null,
+            res = null,
+            arg,
+            j,
+            defaultCallbackWrapper,
+            failureCallbackWrapper,
+            mgr,
+            mlen;
+
+        response.result = result || OK;
+        response.resultDetail = resultDetail || &#x27;&#x27;;
+
+        &#x2F;&#x2F; Y.log(&#x27;Firing response event.&#x27;, &#x27;debug&#x27;, NAME);
+
+        this.fire(RESPONSE_EV, {type: RESPONSE_EV, response: response}, NAME);
+
+        if (isObject(response.data)) {
+            res = response.data.res;
+            mods = response.data.mods;
+        }
+
+        if (isObject(mods)) {
+            &#x2F;&#x2F; Y.log(&#x27;Module found in response.&#x27;, &#x27;debug&#x27;, NAME);
+
+            if (mods[0].state &amp;&amp; mods[0].state.defer) {
+                &#x2F;&#x2F; this is a multiple retry situation
+                &#x2F;&#x2F; Y.log(&#x27;Module is marked defered, but this request handler &#x27; +
+                &#x2F;&#x2F;     &#x27; does not handle defers.&#x27;, &#x27;warn&#x27;, NAME);
+
+                &#x2F;&#x2F; gave up on retries, this is a timeout.
+                response.status = 504;
+                response.statusText = E_GATEWAY_TIMEOUT;
+                method = FAILURE_CB;
+            }
+
+            for (j = 0, mlen = mods.length; j &lt; mlen; j) {
+                if (mods[j].props &amp;&amp; mods[j].props.id) {
+                    &#x2F;&#x2F; make sure its a real module config
+                    &#x2F;&#x2F; Y.log(&#x27;Registering module with platform. Not starting&#x27;,
+                    &#x2F;&#x2F;     &#x27;debug&#x27;, NAME);
+                    _modulePlatform.registerModule(mods[j]);
+                }
+            }
+        }
+
+        response = _responseProcessor.createResponseObject(response);
+
+        cb = response.cb || cb;
+
+        if (!isUndefined(cb.argument)) {
+            response.argument = cb.argument; &#x2F;&#x2F; this is to support existing code
+            arg = cb.argument;
+        }
+
+        if (isFunction(cb[method])) {
+            &#x2F;&#x2F; Y.log(&#x27;Dispatching callbacks&#x27;, &#x27;debug&#x27;, NAME);
+            defaultCallbackWrapper =
+                Y.bind(cb[method], cb.scope || this, response, arg);
+            failureCallbackWrapper =
+                Y.bind(cb[FAILURE_CB], cb.scope || this, response, arg);
+
+            if (isObject(res)) {
+                mgr = _serviceRegistry.getService(&#x27;resourcemgr&#x27;);
+                mgr.load(res, {
+                    success: defaultCallbackWrapper,
+                    failure: failureCallbackWrapper
+                }, _configProvider.getProxyTimeout());
+            } else {
+                defaultCallbackWrapper();
+            }
+        }
+    }
+
+
+    &#x2F;**
+     * Process a complete transaction.
+     * @private
+     *&#x2F;
+    function processTransactionResponse(arg0) {
+
+        var bc = arg0.badcookie || false,
+            ioResponseObj = arg0.resp,
+            responseData = arg0.responseData,
+            cb = arg0.cb,
+            txId = arg0.id,
+            status = ioResponseObj.status,
+            rd = &#x27;&#x27;,
+            r = ERROR,
+            responseText,
+            contentType;
+
+        &#x2F;&#x2F; TODO: What about 304 (Not changed) ?
+        if (status !== 200 &amp;&amp; status !== 201 &amp;&amp; status !== OK) {
+
+            &#x2F;&#x2F; Y.log(&#x27;Error response received from server.&#x27;, &#x27;warn&#x27;, NAME);
+            &#x2F;&#x2F; this is an error case
+            &#x2F;&#x2F; server failure single &#x27;=&#x27; just in case we get a &#x27;200&#x27; string
+            if (status === 0) {
+                r = (ioResponseObj.statusText === E_TIMEOUT) ?
+                        E_TIMEOUT :
+                        E_ABORT;
+            } else {
+                rd = E_SERVER;
+                _errorReporter.error(E_SERVER, &#x27;A server error occurred: &#x27;,
+                    { responseObject: ioResponseObj });
+            }
+
+            completeRequest.call(this, {
+                txId: txId,
+                method: FAILURE_CB,
+                result: r,
+                resultDetail: rd + &#x27; &#x27; + status,
+                cb: cb
+            });
+        } else {
+            &#x2F;&#x2F;not an error
+            &#x2F;&#x2F; Y.log(&#x27;Valid response received, processing...&#x27;, &#x27;warn&#x27;, NAME);
+
+            responseText = ioResponseObj.responseText;
+            contentType = ioResponseObj.getResponseHeader(&#x27;Content-Type&#x27;);
+
+            &#x2F;&#x2F; Test here is faster than regex.
+            if (contentType.indexOf(&#x27;Multipart&#x2F;Related&#x27;) !== -1) {
+                reportUnsupportedOperation(&#x27;multi-part response&#x27;);
+                completeRequest.call(this, {
+                    cb: cb,
+                    method: FAILURE_CB,
+                    result: ERROR,
+                    resultDetail: E_RESULT_BADFORMAT
+                });
+                return;
+            }
+
+            _responseProcessor.processResponse(responseData.resps[0],
+                { cb: cb }, bc);
+        }
+    }
+
+
+    RequestHandler = function() {
+        var inst = {
+
+            setRequestor: function(requestor) {
+                _requestor = requestor;
+            },
+
+
+            setModulePlatform: function(platform) {
+                _modulePlatform = platform;
+            },
+
+
+            setReqFormatter: function(formatter) {
+                _requestFormatter = formatter;
+            },
+
+
+            getRequestFormatter: function() {
+                return _requestFormatter;
+            },
+
+
+            setServiceRegistry: function(provider) {
+                _serviceRegistry = provider;
+            },
+
+
+            setRegistrationProvider: function(provider) {
+                _registrationProvider = provider;
+            },
+
+
+            setResponseProcessor: function(processor) {
+                if (_responseProcessor) { _responseProcessor.detach(); }
+                _responseProcessor = processor;
+                _responseProcessor.on(&#x27;responseProcessed&#x27;, completeRequest,
+                    this);
+            },
+
+
+            getResponseProcessor: function() {
+                return _responseProcessor;
+            },
+
+
+            setIoFacade: function(facade) {
+                if (_ioFacade) { _ioFacade.detach(); }
+                _ioFacade = facade;
+                _ioFacade.on(&#x27;transactionResponse&#x27;, processTransactionResponse,
+                    this);
+            },
+
+
+            getIoFacade: function() {
+                return _ioFacade;
+            },
+
+
+            setConfigProvider: function(provider) {
+                _configProvider = provider;
+            },
+
+
+            getConfigProvider: function() {
+                return _configProvider;
+            },
+
+
+            setErrorReporter: function(reporter) {
+                _errorReporter = reporter;
+            },
+
+
+            replaceRequestFormatter: function(requestType, formatter) {
+                _requestFormatter.replaceRequestFormatter(requestType,
+                    formatter);
+            },
+
+
+            replaceResponseFormatter: function(formatter) {
+                _responseProcessor.replaceResponseFormatter(formatter);
+            },
+
+
+            disable: function(queue) {
+                &#x2F;&#x2F; Y.log(&#x27;Disabling transport. Queue state: &#x27;+ queue, &#x27;debug&#x27;,
+                &#x2F;&#x2F;     NAME);
+                _disabled = queue ?
+                        E_DISABLED_WITH_QUEUE :
+                        E_DISABLED_WITHOUT_QUEUE;
+            },
+
+
+            enable: function(queue) {
+                &#x2F;&#x2F; Y.log(&#x27;Enabling transport&#x27;, &#x27;debug&#x27;, NAME);
+                _disabled = E_ENABLED;
+            },
+
+
+            isEnabled: function() {
+                return _disabled !== E_DISABLED_WITHOUT_QUEUE;
+            },
+
+
+            processRequest: _processRequest,
+
+
+            abortRequest: function(requestId, moduleId) {
+                reportUnsupportedOperation(&#x27;abortRequest&#x27;);
+            },
+
+
+            abortModuleRequests: function(moduleId) {
+                reportUnsupportedOperation(&#x27;abortModuleRequests&#x27;);
+            },
+
+
+            isRequestPending: function(requestId, moduleId) {
+                reportUnsupportedOperation(&#x27;isRequestPending&#x27;);
+            }
+        };
+
+        return new Y.Dali.Bean(inst);
+    };
+
+    RequestHandler.NAME = NAME;
+
+    Y.Dali.beanRegistry.registerBean(NAME, RequestHandler);
+
+}, &#x27;1.6.3&#x27;, {requires: [
+    &#x27;dali-bean&#x27;,
+    &#x27;breg&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

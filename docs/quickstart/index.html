@@ -1,0 +1,138 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mojito Quickstart - Mojito Quickstart</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="mojito-quickstart">
+<h1>Mojito Quickstart<a class="headerlink" href="#mojito-quickstart" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p><strong>System:</strong> Unix-based system.</p>
+<p><strong>Software:</strong> <a class="reference external" href="http://nodejs.org/">Node.js (&gt;= 0.4.0 &lt; 0.7)</a>, <a class="reference external" href="http://npmjs.org/">npm (&gt; 1.0.0)</a></p>
+</div>
+<div class="section" id="installation-steps">
+<h2>Installation Steps<a class="headerlink" href="#installation-steps" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Get Mojito from the npm registry and globally install Mojito so that it can be run from the
+command line. You may need to use <tt class="docutils literal"><span class="pre">sudo</span></tt> if you run into permission errors.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">npm</span> <span class="pre">install</span> <span class="pre">mojito</span> <span class="pre">-g</span></tt></p>
+</li>
+<li><p class="first">Confirm that Mojito has been installed by running unit tests.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">test</span></tt></p>
+</li>
+</ol>
+</div>
+<div class="section" id="create-a-mojito-application">
+<h2>Create a Mojito Application<a class="headerlink" href="#create-a-mojito-application" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">app</span> <span class="pre">hello_world</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">$</span> <span class="pre">cd</span> <span class="pre">hello_world</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">myMojit</span></tt></li>
+</ol>
+</div>
+<div class="section" id="modify-your-application">
+<h2>Modify Your Application<a class="headerlink" href="#modify-your-application" title="Permalink to this headline">¶</a></h2>
+<p>To make the application return a string we want, replace the code in <tt class="docutils literal"><span class="pre">mojits/myMojit/controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;myMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+
+      <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="s1">&#39;Hello, world. I have created my first Mojito app at &#39;</span> <span class="o">+</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+
+  <span class="p">};</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-application">
+<h2>Running the Application<a class="headerlink" href="#running-the-application" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">From the <tt class="docutils literal"><span class="pre">hello_world</span></tt> application directory, start Mojito:</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span></tt></p>
+</li>
+<li><p class="first">Go to <a class="reference external" href="http://localhost:8666/&#64;myMojit/index">http://localhost:8666/&#64;myMojit/index</a> to see your application.</p>
+</li>
+<li><p class="first">Stop your application by pressing <strong>Ctrl-C</strong>.</p>
+</li>
+</ol>
+<p>For a more in-depth tutorial, please see <a class="reference external" href="../getting_started/">Mojito: Getting Started</a>. To learn more about Mojito, see
+the <a class="reference external" href="../">Mojito Documentation</a>.</p>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

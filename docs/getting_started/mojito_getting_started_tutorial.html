@@ -1,0 +1,299 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tutorial: Creating Your First Application - Mojito Getting Started</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="tutorial-creating-your-first-application">
+<h1>Tutorial: Creating Your First Application<a class="headerlink" href="#tutorial-creating-your-first-application" title="Permalink to this headline">¶</a></h1>
+<p>In this tutorial, you create a simple application that serves a single page and uses a controller to generate output.</p>
+<p>You will learn how to do the following:</p>
+<ul class="simple">
+<li>create an application</li>
+<li>create a mojit</li>
+<li>configure a mojit</li>
+<li>run an action (method) on the controller</li>
+<li>run unit tests for your application</li>
+</ul>
+<div class="section" id="make-the-application">
+<h2>Make the Application<a class="headerlink" href="#make-the-application" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Create a directory for your app and change to it.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mkdir</span> <span class="pre">mojito_apps</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">cd</span> <span class="pre">mojito_apps</span></tt></p>
+</li>
+<li><p class="first">Create the Mojito application  <tt class="docutils literal"><span class="pre">minty_app</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">app</span> <span class="pre">minty_app</span></tt></p>
+</li>
+<li><p class="first">Change to your application directory.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">cd</span> <span class="pre">minty_app</span></tt></p>
+</li>
+</ol>
+</div>
+<div class="section" id="make-the-sample-mojit">
+<h2>Make the Sample Mojit<a class="headerlink" href="#make-the-sample-mojit" title="Permalink to this headline">¶</a></h2>
+<p>The name <em>mojit</em> is a fusion of the words module and widget. The mojit, however, is neither a module nor a widget. Instead, it is best understood as
+a unit of execution used to generate output. Mojits have an MVC structure and consist of two parts: the definition and the instance configuration.</p>
+<p>The definition contains the controller and model code for the mojit, along with the views (and assets) used to render the output. The definition also
+contains unit tests for the code.</p>
+<p>The instance configuration is what configures each instance of your mojit. For example, you might have an <tt class="docutils literal"><span class="pre">RSSMojit</span></tt> which is used to display an
+RSS feed. The mojit definition would have the code and views for fetching and rendering a feed, and the instance configuration would have the RSS URL
+to fetch, how many items to show, and whether to show thumbnails, etc.</p>
+<p>Let&#8217;s now begin by creating your mojit, but note that you won&#8217;t be working with models or views in this tutorial.</p>
+<ol class="arabic">
+<li><p class="first">Create the mojit for your <tt class="docutils literal"><span class="pre">minty_app</span></tt> application.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">HelloMojit</span></tt></p>
+<p>The <a class="reference external" href="../reference/mojito_cmdline.html">Mojito command-line tool</a> creates a canned mojit definition named <tt class="docutils literal"><span class="pre">HelloMojit</span></tt>.</p>
+</li>
+<li><p class="first">To configure your application to use <tt class="docutils literal"><span class="pre">HelloMojit</span></tt>, replace the code in <tt class="docutils literal"><span class="pre">application.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;appPort&quot;</span><span class="o">:</span> <span class="mi">8666</span><span class="p">,</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;hello&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HelloMojit&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Here you have defined the instance <tt class="docutils literal"><span class="pre">hello</span></tt> of the <tt class="docutils literal"><span class="pre">HelloMojit</span></tt> mojit, which will allow you to call the functions in the mojit controller.</p>
+</li>
+<li><p class="first">To set up a new route for executing your mojit, create the routing configuration file <tt class="docutils literal"><span class="pre">routes.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;hello index&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;hello.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>This <tt class="docutils literal"><span class="pre">routes.json</span></tt> file defines the routing paths, the accepted HTTP methods, and what action to take.
+The action is what method to call from the mojit instance when a call is made on the defined path.
+The <tt class="docutils literal"><span class="pre">routes.json</span></tt> above configures Mojito to execute the <tt class="docutils literal"><span class="pre">index</span></tt> method from the <tt class="docutils literal"><span class="pre">hello</span></tt>
+instance (defined in <tt class="docutils literal"><span class="pre">application.json</span></tt>) when receiving HTTP GET calls on the root path.</p>
+</li>
+<li><p class="first">From the application directory, test your application. You will notice that some tests are deferred.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">test</span> <span class="pre">app</span> <span class="pre">.</span></tt></p>
+</li>
+</ol>
+</div>
+<div class="section" id="start-the-server">
+<h2>Start the Server<a class="headerlink" href="#start-the-server" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Start the server.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span></tt></p>
+</li>
+<li><p class="first">Open <a class="reference external" href="http://localhost:8666/">http://localhost:8666/</a> in a browser.</p>
+</li>
+<li><p class="first">The Web page should display &#8220;Mojito is working.&#8221;. The text was served by the controller, the <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> file in the <tt class="docutils literal"><span class="pre">minty_app/mojits/HelloMojit</span></tt> directory. You will learn more about the controller in <a class="reference internal" href="#modify-the-sample-mojit">Modify the Sample Mojit</a>.</p>
+</li>
+<li><p class="first">Stop the server by going back to your terminal pressing <strong>^C</strong>.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="modify-the-sample-mojit">
+<span id="first-app-modify-mojit"></span><h2>Modify the Sample Mojit<a class="headerlink" href="#modify-the-sample-mojit" title="Permalink to this headline">¶</a></h2>
+<p>You will now modify the controller, so that the <tt class="docutils literal"><span class="pre">index</span></tt> function called in the controller outputs different results.</p>
+<ol class="arabic simple">
+<li>Change to <tt class="docutils literal"><span class="pre">mojits/HelloMojit</span></tt>.</li>
+<li>Edit <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> and replace the string &#8216;Just a simple mojit.&#8217; in the code with &#8216;Hello World!&#8217;. Your <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> should look similar to the following code:</li>
+</ol>
+<blockquote>
+<div><div class="highlight-javascript"><pre>    YUI.add('HelloMojit', function(Y, NAME) {
+
+      /**
+      * The HelloMojit module.
+      *
+      * @module HelloMojit
+      **/
+
+      /**
+      * Constructor for the Controller class.
+      *
+      * @class Controller
+      * @constructor
+      */
+      Y.mojito.controllers[NAME] = {
+
+        init: function(config) {
+          this.config = config;
+        },
+
+        /**
+        * Method corresponding to the 'index' action.
+        *
+        * @param ac {Object} The ActionContext that provides access
+        *        to the Mojito API.
+        **/
+        index: function(ac) {
+          ac.models.HelloMojitModelFoo.getData(function(err, data) {
+          if (err) {
+             ac.error(err);
+             return;
+          }
+          ac.assets.addCss('./index.css');
+            ac.done({
+              status: 'Hello World!',
+              data: data
+            });
+          });
+        }
+      };
+    }, '0.0.1', {requires: ['mojito', 'HelloMojitModelFoo']});
+
+As you can see the "controllers" are just an array of JavaScript objects, and the "action" is just a method called on the controller object.
+The result of the method are communicated back to Mojito through the ``actionContext`` object.</pre>
+</div>
+</div></blockquote>
+<ol class="arabic">
+<li><p class="first">Change to the <tt class="docutils literal"><span class="pre">tests</span></tt> directory.</p>
+</li>
+<li><p class="first">Edit <tt class="docutils literal"><span class="pre">controller.server-tests.js</span></tt> and replace the string &#8216;Mojito is working.&#8217; in the code with &#8216;Hello World!&#8217;. Your <tt class="docutils literal"><span class="pre">controller.server-tests.js</span></tt> should look similar to the  following code:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;HelloMojit-tests&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="kd">var</span> <span class="nx">suite</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">YUITest</span><span class="p">.</span><span class="nx">TestSuite</span><span class="p">(</span><span class="s1">&#39;HelloMojit-tests&#39;</span><span class="p">),</span>
+     <span class="nx">controller</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+     <span class="nx">A</span> <span class="o">=</span> <span class="nx">YUITest</span><span class="p">.</span><span class="nx">Assert</span><span class="p">;</span>
+
+  <span class="nx">suite</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="k">new</span> <span class="nx">YUITest</span><span class="p">.</span><span class="nx">TestCase</span><span class="p">({</span>
+
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;HelloMojit user tests&#39;</span><span class="p">,</span>
+
+    <span class="nx">setUp</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+       <span class="nx">controller</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">.</span><span class="nx">HelloMojit</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">tearDown</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+       <span class="nx">controller</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;test mojit&#39;</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">ac</span><span class="p">,</span> <span class="nx">modelData</span><span class="p">,</span> <span class="nx">assetsResults</span><span class="p">,</span> <span class="nx">doneResults</span><span class="p">;</span>
+      <span class="nx">modelData</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span><span class="s1">&#39;y&#39;</span> <span class="p">};</span>
+      <span class="nx">ac</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">assets</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">addCss</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">css</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">assetsResults</span> <span class="o">=</span> <span class="nx">css</span><span class="p">;</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">models</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">HelloMojitModelFoo</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">getData</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+              <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">modelData</span><span class="p">);</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">done</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">doneResults</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      <span class="nx">A</span><span class="p">.</span><span class="nx">isNotNull</span><span class="p">(</span><span class="nx">controller</span><span class="p">);</span>
+      <span class="nx">A</span><span class="p">.</span><span class="nx">isFunction</span><span class="p">(</span><span class="nx">controller</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+      <span class="nx">controller</span><span class="p">.</span><span class="nx">index</span><span class="p">(</span><span class="nx">ac</span><span class="p">);</span>
+      <span class="nx">A</span><span class="p">.</span><span class="nx">areSame</span><span class="p">(</span><span class="s1">&#39;./index.css&#39;</span><span class="p">,</span> <span class="nx">assetsResults</span><span class="p">);</span>
+      <span class="nx">A</span><span class="p">.</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">doneResults</span><span class="p">);</span>
+      <span class="nx">A</span><span class="p">.</span><span class="nx">areSame</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">,</span> <span class="nx">doneResults</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
+      <span class="nx">A</span><span class="p">.</span><span class="nx">areSame</span><span class="p">(</span><span class="s1">&#39;{&quot;x&quot;:&quot;y&quot;}&#39;</span><span class="p">,</span> <span class="nx">doneResults</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">}));</span>
+
+  <span class="nx">YUITest</span><span class="p">.</span><span class="nx">TestRunner</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">suite</span><span class="p">);</span>
+
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito-test&#39;</span><span class="p">,</span> <span class="s1">&#39;HelloMojit&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+<p>Mojito has the unit test given in <tt class="docutils literal"><span class="pre">controller.server-tests.js</span></tt> confirms that the output from the action index is the same as the
+string given in the assert statement.</p>
+</li>
+<li><p class="first">From the application directory, run the application test.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">test</span> <span class="pre">app</span> <span class="pre">.</span></tt></p>
+</li>
+<li><p class="first">Restart the server and reopen <a class="reference external" href="http://localhost:8666/">http://localhost:8666/</a> in a browser to see the text &#8220;Hello World!&#8221;</p>
+</li>
+<li><p class="first">Congratulations, now go try our <a class="reference external" href="../code_exs/">code examples</a> or check out the <a class="reference external" href="../">Mojito Documentation</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

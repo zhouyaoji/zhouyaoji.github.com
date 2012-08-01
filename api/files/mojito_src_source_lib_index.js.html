@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;index.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true, node:true*&#x2F;
+
+&#x2F;**
+ * The Mojito Server bootstrap
+ * @module MojitoServer
+ * @class MojitoServer
+ * @constructor
+ *&#x2F;
+
+var MOJITO_MIDDLEWARE = [
+        &#x27;mojito-handler-static&#x27;,
+        &#x27;mojito-parser-body&#x27;,
+        &#x27;mojito-parser-cookies&#x27;,
+        &#x27;mojito-contextualizer&#x27;,
+        &#x27;mojito-handler-tunnel&#x27;,
+        &#x27;mojito-router&#x27;,
+        &#x27;mojito-handler-dispatcher&#x27;
+    ],
+    CORE_YUI_MODULES = [&#x27;get&#x27;, &#x27;features&#x27;, &#x27;intl-base&#x27;, &#x27;mojito&#x27;],
+    CORE_MOJITO_MODULES = [&#x27;mojito&#x27;, &#x27;mojito-route-maker&#x27;],
+
+    MOJITO_INIT = new Date().getTime(),
+    YUI = require(&#x27;yui&#x27;).YUI,
+    serverLog = require(&#x27;.&#x2F;server-log&#x27;),
+    requestCounter = 0, &#x2F;&#x2F; used to scope logs per request
+    logger;
+
+&#x2F;&#x2F; TODO: [Issue 80] go back to connect?
+var express = require(&#x27;express&#x27;),
+    ResourceStore = require(&#x27;.&#x2F;store.server&#x27;),
+    OutputHandler = require(&#x27;.&#x2F;output-handler.server&#x27;),
+    libpath = require(&#x27;path&#x27;);
+
+&#x2F;&#x2F; The only global namespace within the framework code, used for Dali
+&#x2F;&#x2F; transaction counts (really session ID?)
+&#x2F;**
+ *&#x2F;
+global._mojito = {};
+
+
+&#x2F;&#x2F; This configures YUI with both the Mojito framework and all the
+&#x2F;&#x2F; YUI modules in the application.
+function configureYUI(YUI, store, load) {
+    var fw,
+        app,
+        module;
+    fw = store.getYuiConfigFw(&#x27;server&#x27;, {});
+    app = store.getYuiConfigApp(&#x27;server&#x27;, {});
+    YUI.applyConfig({
+        groups: {
+            &#x27;mojito-fw&#x27;: fw,
+            &#x27;mojito-app&#x27;: app
+        }
+    });
+    &#x2F;&#x2F; also pre-load fw and app modules
+    for (module in fw.modules) {
+        if (fw.modules.hasOwnProperty(module)) {
+            load.push(module);
+        }
+    }
+    for (module in app.modules) {
+        if (app.modules.hasOwnProperty(module)) {
+            load.push(module);
+        }
+    }
+}
+
+
+&#x2F;&#x2F; TODO: [Issue 81] try to make this not a function
+var MojitoServer = function() {};
+
+MojitoServer.prototype = {
+
+    &#x2F;* private properties *&#x2F;
+
+    _logFormatter: null,
+
+    _logPublisher: null,
+
+    _logWriter: null,
+
+    &#x2F;* public interface *&#x2F;
+
+    &#x2F;**
+     * Adds the Mojito framework to the Express application.
+     *
+     * You only need to call one of addMojitoToExpressApp() or createServer().
+     * If you want to create your own Express app do that then use
+     * addMojitoToExpressApp().  Otherwise Mojito can create an app for you
+     * if you use createServer().
+     *
+     * @method addMojitoToExpressApp
+     * @param {Object} app Express application.
+     * @param {Object} options The directory to start the application in.
+     *&#x2F;
+    addMojitoToExpressApp: function(app, options) {
+
+        var store,
+            loader,
+            Y,
+            startupTime,
+            appConfig,
+            logConfig = {},
+            middleware,
+            m,
+            midName,
+            midBase,
+            midPath,
+            midFactory,
+            hasMojito,
+            midConfig,
+            dispatcher;
+
+        if (!options) {
+            options = {};
+        }
+        if (!options.dir) {
+            options.dir = process.cwd();
+        }
+        if (!options.context) {
+            options.context = {};
+        }
+
+        store = new ResourceStore(options.dir);
+
+        &#x2F;&#x2F; share the resource store as a property of the application instance
+        &#x2F;&#x2F; (useful for the Mojito CLI)
+        app.store = store;
+
+        store.preload(options.context, options.appConfig);
+        appConfig = store.getAppConfig(null, &#x27;application&#x27;);
+
+        &#x2F;&#x2F; TODO: extract function
+        if (appConfig.log &amp;&amp; appConfig.log.server) {
+            logConfig = appConfig.log.server;
+            &#x2F;&#x2F; attach custom formatter, writer, and publisher
+            if (this._logFormatter) {
+                logConfig.formatter = this._logFormatter;
+            }
+            if (this._logWriter) {
+                logConfig.writer = this._logWriter;
+            }
+            if (this._logPublisher) {
+                logConfig.publisher = this._logPublisher;
+            }
+        }
+
+        configureYUI(YUI, store, CORE_MOJITO_MODULES);
+
+        &#x2F;&#x2F; all logging that comes from YUI comes from here
+        &#x2F;&#x2F; We need to do this early, since creating a Y instance appears to copy
+        &#x2F;&#x2F; the function.
+        YUI.GlobalConfig.logFn = function(msg, lvl, src) {
+            &#x2F;&#x2F; translating YUI logs so they are categorized outside the rest
+            &#x2F;&#x2F; of Mojito&#x27;s log levels
+            var args = Array.prototype.slice.call(arguments);
+            if (!this.mojito || src === &#x27;yui&#x27; || src === &#x27;loader&#x27; ||
+                    src === &#x27;get&#x27;) {
+                if ((!logger) &amp;&amp; (!logConfig.yui)) {
+                    return;
+                }
+                args[1] = &#x27;YUI-&#x27; + lvl.toUpperCase();
+            }
+            if (logger) {
+                logger.log.apply(logger, args);
+            } else {
+                console.log(serverLog.options.formatter(msg, lvl, src,
+                    new Date().getTime(), serverLog.options));
+            }
+        };
+
+        &#x2F;&#x2F; merge application log options over top defaults
+        Object.keys(logConfig).forEach(function(k) {
+            if (logConfig[k] !== undefined) {
+                serverLog.options[k] = logConfig[k];
+            }
+        });
+
+        Y = YUI({ core: CORE_YUI_MODULES, useSync: true });
+
+        &#x2F;&#x2F; Load logger early so that we can plug it in before the other loading
+        &#x2F;&#x2F; happens.
+        Y.use(&#x27;mojito-logger&#x27;);
+        &#x2F;&#x2F; TODO: extract function
+        logger = new Y.mojito.Logger(serverLog.options);
+        store.setLogger(logger);
+
+        Y.use.apply(Y, CORE_MOJITO_MODULES);
+        Y.applyConfig({ useSync: false });
+
+        loader = new Y.mojito.Loader(appConfig);
+
+        Y.mojito.perf.instrumentConnectApp(app);
+
+        if (appConfig.middleware &amp;&amp; appConfig.middleware.length) {
+            hasMojito = false;
+            for (m = 0; m &lt; appConfig.middleware.length; m += 1) {
+                midName = appConfig.middleware[m];
+                if (0 === midName.indexOf(&#x27;mojito-&#x27;)) {
+                    hasMojito = true;
+                    break;
+                }
+            }
+            if (hasMojito) {
+                &#x2F;&#x2F; User has specified at least one of mojito&#x27;s middleware, so
+                &#x2F;&#x2F; we assume that they have specified all that they need.
+                middleware = appConfig.middleware;
+            } else {
+                &#x2F;&#x2F; backwards compatibility mode:
+                &#x2F;&#x2F;  middlware = user&#x27;s, then mojito&#x27;s
+                middleware = [];
+                for (m = 0; m &lt; appConfig.middleware.length; m += 1) {
+                    middleware.push(appConfig.middleware[m]);
+                }
+                for (m = 0; m &lt; MOJITO_MIDDLEWARE.length; m += 1) {
+                    middleware.push(MOJITO_MIDDLEWARE[m]);
+                }
+            }
+        } else {
+            middleware = MOJITO_MIDDLEWARE;
+        }
+
+        midConfig = {
+            Y: Y,
+            store: store,
+            logger: logger,
+            context: options.context
+        };
+
+        dispatcher = function(req, res, next) {
+            &#x2F;&#x2F; create a request-scoped logger for the dispatcher and output
+            &#x2F;&#x2F; handler, as well as for all Y.log executions during this request
+            &#x2F;&#x2F; TODO: Create instances of this conditionally
+            logger = new Y.mojito.Logger(serverLog.options,
+                requestCounter += 1);
+            logger.log(&#x27;request received&#x27;, &#x27;mojito&#x27;, &#x27;server&#x27;);
+            logger.log(&#x27;request received&#x27;, &#x27;mojito&#x27;, &#x27;qeperf&#x27;);
+
+            var command = req.command,
+                dispatcher,
+                outputHandler = new OutputHandler(req, res, next);
+
+            outputHandler.setLogger(logger);
+
+            if (!command) {
+                &#x2F;&#x2F; this supports handlers after this one
+                next();
+                return;
+                &#x2F;&#x2F;error = new Error(&quot;Missing route for &quot; + req.method + &#x27; &#x27; +
+                &#x2F;&#x2F;    req.url);
+                &#x2F;&#x2F;error.code = 404;
+                &#x2F;&#x2F;return outputHandler.error(error);
+            }
+
+            logger.log(&#x27;START&#x27;, &#x27;mojito&#x27;, &#x27;server&#x27;);
+
+            &#x2F;&#x2F; Pass the &quot;Resource Store&quot; by wrapping it with the adapter
+            dispatcher = Y.mojito.Dispatcher.init(
+                Y.mojito.ResourceStoreAdapter.init(&#x27;server&#x27;, store, logger),
+                CORE_YUI_MODULES,
+                logger,
+                loader
+            );
+
+            try {
+                dispatcher.dispatch(command, outputHandler);
+            } catch (err) {
+                if (!err.code) {
+                    err.code = 500;
+                }
+                outputHandler.error(err);
+            }
+        };
+
+        for (m = 0; m &lt; middleware.length; m += 1) {
+            midName = middleware[m];
+            if (0 === midName.indexOf(&#x27;mojito-&#x27;)) {
+                &#x2F;&#x2F; one special one, since it might be difficult to move to a
+                &#x2F;&#x2F; separate file
+                if (midName === &#x27;mojito-handler-dispatcher&#x27;) {
+                    &#x2F;&#x2F;console.log(&quot;======== MIDDLEWARE mojito -- &quot; +
+                    &#x2F;&#x2F;    &quot;builtin mojito-handler-dispatcher&quot;);
+                    app.use(dispatcher);
+                } else {
+                    midPath = libpath.join(__dirname, &#x27;app&#x27;, &#x27;middleware&#x27;, midName);
+                    &#x2F;&#x2F;console.log(&quot;======== MIDDLEWARE mojito &quot; + midPath);
+                    midFactory = require(midPath);
+                    &#x2F;&#x2F; We assume the middleware is a factory function
+                    &#x2F;&#x2F; and pass in the following config object when
+                    &#x2F;&#x2F; calling said function.
+                    &#x2F;&#x2F;
+                    &#x2F;&#x2F; midConfig = {
+                    &#x2F;&#x2F;    Y: Y,
+                    &#x2F;&#x2F;    store: store,
+                    &#x2F;&#x2F;    logger: logger,
+                    &#x2F;&#x2F;    context: options.context
+                    &#x2F;&#x2F; };
+                    app.use(midFactory(midConfig));
+                }
+            } else {
+                &#x2F;&#x2F; backwards-compatibility: user-provided middleware is
+                &#x2F;&#x2F; specified by path
+                midPath = libpath.join(options.dir, midName);
+                &#x2F;&#x2F;console.log(&quot;======== MIDDLEWARE user &quot; + midPath);
+                midBase = libpath.basename(midPath);
+                if (0 === midBase.indexOf(&#x27;mojito-&#x27;)) {
+                    &#x2F;&#x2F; Same as above (case of Mojito&#x27;s special middlewares)
+                    &#x2F;&#x2F; Gives a user-provided middleware access to the YUI
+                    &#x2F;&#x2F; instance, resource store, logger, context, etc.
+                    midFactory = require(midPath);
+                    app.use(midFactory(midConfig));
+                } else {
+                    app.use(require(midPath));
+                }
+            }
+        }
+
+        &#x2F;&#x2F; TODO: [Issue 82] The last middleware in the stack should be an
+        &#x2F;&#x2F; error handler
+
+        startupTime = new Date().getTime() - MOJITO_INIT;
+        logger.log(&#x27;Mojito HTTP Server initialized in &#x27; + startupTime + &#x27;ms.&#x27;);
+    },
+
+    &#x2F;**
+     * Creates an Express application with the Mojito framework already added.
+     *
+     * @method createServer
+     * @param {Object} options Options for starting the app.
+     * @return {Object} Express application.
+     *&#x2F;
+    createServer: function(options) {
+
+        var app = express.createServer();
+
+        this.addMojitoToExpressApp(app, options);
+
+        return app;
+    },
+
+    setLogFormatter: function(formatter) {
+        this._logFormatter = formatter;
+    },
+    setLogWriter: function(writer) {
+        this._logWriter = writer;
+    },
+    setLogPublisher: function(publisher) {
+        this._logPublisher = publisher;
+    }
+};
+
+
+&#x2F;&#x2F; TODO: [Issue 83] rethink how we are exporting stuff here. It is getting
+&#x2F;&#x2F; messy. Seems like this should not export an instance of the server with a
+&#x2F;&#x2F; bunch of extra stuff attached to it.
+
+&#x2F;**
+ *&#x2F;
+module.exports = new MojitoServer();
+
+&#x2F;**
+ *&#x2F;
+module.exports.constructor = MojitoServer; &#x2F;&#x2F; for unit testing
+
+&#x2F;**
+ * Surfaces the CLI.
+ * @param {string} path The path used to locate resources.
+ *&#x2F;
+module.exports.include = function(path) {
+    require(&#x27;.&#x2F;&#x27; + path);
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

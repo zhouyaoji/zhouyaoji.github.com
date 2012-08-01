@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;route-maker.common.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;route-maker.common.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, regexp: true, nomen:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+YUI.add(&#x27;mojito-route-maker&#x27;, function(Y, NAME) {
+
+    var doCallReplacement,
+        copy;
+
+
+    function wild(it) {
+        &#x2F;&#x2F; if {it}, then it is a wildcard
+        if (it.indexOf(&#x27;{&#x27;) === 0) {
+            &#x2F;&#x2F; so return the true value without the {}
+            return it.substring(1, it.length - 1);
+        }
+    }
+
+
+    function resolveParams(route, params) {
+        &#x2F;&#x2F; console.log(&#x27;============= resolving params for route &#x27; +
+        &#x2F;&#x2F;     route.name);
+        &#x2F;&#x2F; console.log(params);
+        &#x2F;&#x2F; console.log(&#x27;requires: &#x27; + Y.JSON.stringify(route.requires));
+        var tester = [];
+
+        &#x2F;&#x2F; we don&#x27;t need to do anything if this route requires no params
+        if (Y.Object.size(route.requires) === 0) {
+            return route;
+        }
+
+        Y.Object.each(params, function(pval, pname) {
+            if (route.requires &amp;&amp; route.requires[pname]) {
+                tester.push(pname + &#x27;=&#x27; + pval);
+            }
+        });
+
+        if (tester.length) {
+            tester.sort();
+            if (new RegExp(route.int_match).test(tester.join(&#x27;&amp;&#x27;))) {
+                Y.Object.each(params, function(pval, pname) {
+                    route.query[pname] = pval;
+                });
+                return route;
+            }
+        }
+    }
+
+
+    function buildRoute(name, route) {
+
+        var i,
+            verbObj,
+            path,
+            matches,
+            build,
+            segment,
+            key;
+
+        if (!route.name) {
+            route.name = name;
+        }
+        if (!route.verbs) {
+            route.verbs = [&#x27;GET&#x27;];
+        }
+
+        &#x2F;&#x2F; Checking route.verbs is changed from an array to an object by the
+        &#x2F;&#x2F; building process, so routes that have already been computed are
+        &#x2F;&#x2F; not recomputed.
+
+        if (route.verbs.length &amp;&amp; route.path &amp;&amp; route.call) {
+            &#x2F;&#x2F; FUTURE: [Issue 73] allow object params, not just string
+            if (!route.params) {
+                route.params = &#x27;&#x27;;
+            }
+            if (!route.regex) {
+                route.regex = {};
+            }
+            if (!route.query) {
+                route.query = {};
+            }
+
+            &#x2F;*
+             * Here we convert the verb array to a map for easy use later on
+             **&#x2F;
+            verbObj = {};
+            for (i in route.verbs) {
+                if (route.verbs.hasOwnProperty(i)) {
+                    verbObj[route.verbs[i].toUpperCase()] = true;
+                }
+            }
+            route.verbs = verbObj;
+
+            path = route.path.split(&#x27;&#x2F;&#x27;);
+
+            &#x2F;*
+             * Here we build the matching regex for external URI&#x27;s
+             *&#x2F;
+            for (segment in path) {
+                if (path.hasOwnProperty(segment)) {
+                    if (path[segment][0] === &#x27;:&#x27;) {
+                        key = path[segment].substr(1);
+                        route.query[key] = &#x27;&#x27;;
+                        path[segment] = route.regex[key] ?
+                                &#x27;(&#x27; + route.regex[key] + &#x27;)&#x27; :
+                                &#x27;([^\&#x2F;]+)&#x27;;
+                    }
+
+                    if (path[segment][0] === &#x27;*&#x27;) {
+                        path[segment] = &#x27;(.*)&#x27;;
+                    }
+                }
+            }
+
+            &#x2F;*
+             * Here we build the matching regex for internal URI&#x27;s
+             *&#x2F;
+            route.requires = {};
+            matches = route.path.match(&#x2F;:([^\&#x2F;]+)&#x2F;g);
+            for (i in matches) {
+                if (matches.hasOwnProperty(i)) {
+                    route.requires[matches[i].substr(1)] = &#x27;[^&amp;]+&#x27;;
+                }
+            }
+            for (i in route.regex) {
+                if (route.regex.hasOwnProperty(i)) {
+                    route.requires[i] = route.regex[i];
+                }
+            }
+
+            if (typeof route.params !== &#x27;object&#x27;) {
+                route.params = Y.QueryString.parse(String(route.params));
+            }
+
+            build = [];
+            for (i in route.requires) {
+                if (route.requires.hasOwnProperty(i)) {
+                    build.push(i + &#x27;=&#x27; + route.requires[i]);
+                }
+            }
+            build.sort();
+
+            &#x2F;*
+             * We are done so lets store the regex&#x27;s for the route.
+             *&#x2F;
+            &#x2F;&#x2F; TODO: [Issue 74] These Regexes are recreated on
+            &#x2F;&#x2F; every request because they need to be serialized and sent to the
+            &#x2F;&#x2F; client, need to figure out a way to prevent that
+            route.ext_match = &#x27;^&#x27; + path.join(&#x27;\&#x2F;&#x27;) + &#x27;$&#x27;;
+            route.int_match = &#x27;^&#x27; + build.join(&#x27;&amp;&#x27;) + &#x27;$&#x27;;
+        }
+
+        return route;
+    }
+
+
+    doCallReplacement = function(route, uri) {
+        var uriParts = uri.substr(1).split(&#x27;\&#x2F;&#x27;),
+            pathParts = route.path.substr(1).split(&#x27;\&#x2F;&#x27;),
+            template = {},
+            cnt = 0;
+
+        pathParts.forEach(function(pathPart) {
+            var key,
+                val,
+                regex;
+
+            &#x2F;&#x2F; process only those keyed by &#x27;:&#x27;
+            if (pathPart.indexOf(&#x27;:&#x27;) === 0) {
+                key = pathPart.substr(1);
+                val = uriParts[cnt];
+                template[key] = val;
+                regex = new RegExp(&#x27;{&#x27; + key + &#x27;}&#x27;, &#x27;g&#x27;);
+                if (regex.test(route.call)) {
+                    route.call = route.call.replace(regex, template[key]);
+                } else {
+                    route.params[key] = val;
+                }
+            }
+            cnt += 1;
+        });
+        return route;
+    };
+
+
+    copy = function(obj) {
+        var temp = null, key = &#x27;&#x27;;
+        if (!obj || typeof obj !== &#x27;object&#x27;) {
+            return obj;
+        }
+        temp = new obj.constructor();
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                temp[key] = copy(obj[key]);
+            }
+        }
+        return temp;
+    };
+
+
+    &#x2F;*
+     * The route maker for reverse URL lookup.
+     * @class Maker
+     * @namespace Y.mojito
+     * @param {Object} routes key value store of all routes in the system
+     *&#x2F;
+    function Maker(routes) {
+        var name;
+        this._routes = {};
+        &#x2F;&#x2F; TODO: [Issue 75] Cache these computed routes so we
+        &#x2F;&#x2F; don&#x27;t have to do this on each request.
+        for (name in routes) {
+            if (routes.hasOwnProperty(name)) {
+                this._routes[name] = buildRoute(name, routes[name]);
+            }
+        }
+    }
+
+
+    Maker.prototype = {
+
+        &#x2F;*
+         * Generates a URL from a route query
+         * @method make
+         * @param {String} query string to convert to a URL
+         * @param {String} verb http method
+         *&#x2F;
+        make: function(query, verb) {
+            &#x2F;&#x2F; Y.log(&#x27;make(&#x27; + query + &#x27;, &#x27; + verb + &#x27;)&#x27;, &#x27;debug&#x27;, NAME);
+
+            var parts = query.split(&#x27;?&#x27;),
+                call = parts[0],
+                params = {},
+                route,
+                uri;
+
+            &#x2F;&#x2F; TODO: don&#x27;t assign to a parameter.
+            verb = verb || &#x27;GET&#x27;;
+
+            if (parts[1]) {
+                params = Y.QueryString.parse(parts[1]);
+            }
+            route = this._matchToExternal(call, params, verb, this._routes);
+
+            if (!route) {
+                throw new Error(
+                    &quot;No route match found for &#x27;&quot; + query + &quot;&#x27; (&quot; + verb + &#x27;)&#x27;
+                );
+            }
+
+            uri = route.path;
+
+            Y.Object.each(route.query, function(v, k) {
+                uri = uri.replace(&#x27;:&#x27; + k, v);
+                delete params[k];
+            });
+
+            if (!Y.Object.isEmpty(params)) {
+                uri += &#x27;?&#x27; + Y.QueryString.stringify(params);
+            }
+
+            return uri;
+        },
+
+
+        &#x2F;**
+         * Finds a route for a given method+URL
+         * @method find
+         * @param {string} url the URL to find a route for.
+         * @param {string} verb the HTTP method.
+         *&#x2F;
+        find: function(uri, verb) {
+            &#x2F;&#x2F; logger.log(&#x27;[UriRouter] find( &#x27; + uri + &#x27;, &#x27; + verb + &#x27; )&#x27;);
+
+            var route,
+                match,
+                ret,
+                i,
+                id;
+
+            &#x2F;&#x2F; TODO: don&#x27;t assign to parameter.
+            verb = verb || &#x27;GET&#x27;;
+
+            route = this._matchToInternal(uri, verb, this._routes);
+            if (!route) {
+                return null;
+            }
+
+            &#x2F;&#x2F; logger.log(&#x27;[UriRouter] found route: &#x27; + Y.JSON.stringify(route));
+
+            match = copy(route);
+
+            &#x2F;&#x2F; Add the extracted URI params to the query obj
+            ret = new RegExp(route.ext_match).exec(uri);
+            i = 1;
+
+            for (id in match.query) {
+                if (match.query.hasOwnProperty(id)) {
+                    match.query[id] = ret[i];
+                    i += 1;
+                }
+            }
+
+            &#x2F;&#x2F; Add the fixed params to a query obj if they are not there
+            for (i in match.params) {
+                if (match.params.hasOwnProperty(i) &amp;&amp; !match.query[i]) {
+                    match.query[i] = match.params[i];
+                }
+            }
+
+            return match;
+        },
+
+
+        &#x2F;**
+         * For optimization. Call this to get the computed routes that can be
+         * passed to the constructor to avoid recomputing the routes.
+         * @method getComputedRoutes
+         * @return {object} computed routes.
+         *&#x2F;
+        getComputedRoutes: function() {
+            return this._routes;
+        },
+
+
+        &#x2F;**
+         * Returns a matching route for the given URI
+         * @method _matchToInternal
+         * @param {string} uri The uri to find a route for.
+         * @param {string} verb. The HTTP verb for the route.
+         * @private
+         *&#x2F;
+        _matchToInternal: function(uri, verb, routes) {
+            var name;
+
+            &#x2F;&#x2F; TODO: don&#x27;t assign to a parameter.
+            if (!verb) {
+                verb = &#x27;GET&#x27;;
+            }
+
+            verb = verb.toUpperCase();
+
+            &#x2F;&#x2F; logger.log(&#x27;[UriRouter] Start Matching ...&#x27;);
+            for (name in routes) {
+                if (routes.hasOwnProperty(name)) {
+                    &#x2F;&#x2F; logger.log(&#x27;[UriRouter] testing &#x27; + name);
+
+                    &#x2F;&#x2F; TODO: [Issue 74] See comment elsewhere
+                    &#x2F;&#x2F; about regexes being created... we need to stash these
+                    &#x2F;&#x2F; objects somewhere instead of creating them on every
+                    &#x2F;&#x2F; request
+                    if (new RegExp(routes[name].ext_match).test(uri) &amp;&amp;
+                            routes[name].verbs &amp;&amp;
+                            routes[name].verbs.hasOwnProperty(verb)) {
+
+                        &#x2F;&#x2F; TODO: [Issue 74] Prevent more Regex creations.
+                        return doCallReplacement(routes[name], uri);
+                    }
+                    &#x2F;&#x2F; logger.log(&#x27;[UriRouter] &#x27; + verb + &#x27; &#x27; + uri + &#x27; &#x27; +
+                    &#x2F;&#x2F;     routes[name].ext_match);
+                }
+            }
+            return false;
+        },
+
+
+        &#x2F;*
+         * @method _matchToExternal
+         * @private
+         *&#x2F;
+        _matchToExternal: function(call, params, verb, routes) {
+            var match,
+                callParts = call.split(&#x27;.&#x27;),
+                callId = callParts[0],
+                callAction = callParts[1];
+
+            Y.Object.some(routes, function(route) {
+                var routeCall,
+                    routeId,
+                    routeAction,
+                    wildId,
+                    wildAction;
+
+                &#x2F;&#x2F; it might be an exact match
+                if (call === route.call &amp;&amp; route.verbs[verb]) {
+                    match = resolveParams(route, params);
+                    if (match) {
+                        return true;
+                    }
+                }
+
+                &#x2F;&#x2F; if we have a wild card try a match
+                if (&#x27;*.*&#x27; === route.call &amp;&amp; route.verbs[verb]) {
+                    params.module = callId;
+                    params.action = callAction;
+                    match = resolveParams(route, params);
+                    if (match) {
+                        return true;
+                    }
+                }
+
+                routeCall = route.call.split(&#x27;.&#x27;);
+                routeId = routeCall[0];
+                routeAction = routeCall[1];
+
+                wildId = wild(routeId);
+                if (wildId) {
+                    params[wildId] = callId;
+                }
+                wildAction = wild(routeAction);
+                if (wildAction) {
+                    params[wildAction] = callAction;
+                }
+
+                &#x2F;&#x2F; if action is wild, or action matches
+                if ((wildAction || (callAction === routeAction)) &amp;&amp;
+                        &#x2F;&#x2F; and if id is wild, or id matches
+                        ((wildId || (callId === routeId))) &amp;&amp;
+                        &#x2F;&#x2F; and if the verb is correct
+                        route.verbs[verb]) {
+
+                    &#x2F;&#x2F; then we can try a param match
+                    match = resolveParams(route, params);
+                    if (match) {
+                        return true;
+                    }
+                }
+            });
+            return match;
+        }
+    };
+
+    Y.namespace(&#x27;mojito&#x27;).RouteMaker = Maker;
+
+}, &#x27;0.1.0&#x27;, {  requires: [
+    &#x27;querystring-stringify-simple&#x27;,
+    &#x27;querystring-parse&#x27;,
+    &#x27;mojito-util&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

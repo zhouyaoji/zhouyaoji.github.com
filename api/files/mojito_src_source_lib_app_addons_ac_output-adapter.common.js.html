@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;addons&#x2F;ac&#x2F;output-adapter.common.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;addons&#x2F;ac&#x2F;output-adapter.common.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+&#x2F;**
+ * @module ActionContextAddon
+ *&#x2F;
+YUI.add(&#x27;mojito-output-adapter-addon&#x27;, function(Y, NAME) {
+
+    var CHARSET = &#x27;charset=utf-8&#x27;,
+        &#x2F;&#x2F; the functions this core addon is going to attach to the
+        &#x2F;&#x2F; ActionContext
+        flush,
+        done,
+        error,
+
+        &#x2F;&#x2F; serializer container
+        serializer,
+        &#x2F;&#x2F; private functions
+        serialize_xml,
+        serialize_json,
+        sanitizeConfigCopy,
+        sanitizeChildren,
+        attachChildViewIdsToMetaChildren;
+
+
+    &#x2F;* see action-context.common.js for docs *&#x2F;
+    flush = function(data, meta) {
+        &#x2F;&#x2F; NOTE: &#x27;this&#x27; is the ActionContext instance
+        return this.done(data, meta, true);
+    };
+
+
+    &#x2F;* see action-context.common.js for docs *&#x2F;
+    done = function(data, meta, more) {
+        &#x2F;&#x2F; NOTE: &#x27;this&#x27; is the ActionContext instance
+        var callbackFunc = more ? &#x27;flush&#x27; : &#x27;done&#x27;,
+            instance = this.command.instance,
+            adapter = this._adapter,
+            action = this.command.action,
+            mojitView,
+            renderer = null,
+            contentType,
+            contentPath;
+
+        if (Y.Lang.isString(meta)) {
+            &#x2F;&#x2F; If the meta string is a serializer set it
+            if (serializer[meta]) {
+                meta = {
+                    serialize: meta
+                };
+            } else {&#x2F;&#x2F; Otherwise we think it is a template name
+                meta = {
+                    view: {name: meta}
+                };
+            }
+        }
+
+        meta = meta || {};
+        meta.assets = meta.assets || {};
+        meta.assets.bottom = meta.assets.bottom || {};
+        meta.assets.bottom.js = meta.assets.bottom.js || [];
+        meta.http = meta.http || {};
+        meta.http.code = meta.http.code || 200;
+        meta.http.headers = meta.http.headers || {};
+        meta.view = meta.view || {};
+
+        &#x2F;&#x2F; Cache all tempates by default
+        meta.view.cacheTemplates = true;
+
+        if (this.app &amp;&amp; this.app.config &amp;&amp; this.app.config.cacheViewTemplates) {
+            meta.view.cacheTemplates = this.app.config.cacheViewTemplates ||
+                false;
+        }
+
+        &#x2F;&#x2F; Check to see we need to serialize the data
+        if (meta.serialize &amp;&amp; serializer[meta.serialize]) {
+            &#x2F;&#x2F; Warning: this metod can change the &quot;meta&quot; object
+            data = serializer[meta.serialize].apply(this, [data, meta]);
+            &#x2F;&#x2F; Once we are done remove the &quot;serialize&quot; option so others don&#x27;t
+            &#x2F;&#x2F; use it by mistake
+            delete meta.serialize;
+        }
+
+        &#x2F;&#x2F; We want to know the view name, id, and binder used later so make sure
+        &#x2F;&#x2F; &quot;meta&quot; is up-to-date
+        meta.view.name = meta.view.name || action;
+        &#x2F;&#x2F; TODO: Use a different binder
+        meta.view.binder = meta.view.binder || meta.view.name;
+        mojitView = instance.views[meta.view.name];
+        if (!meta.view.id) {
+            meta.view.id = Y.guid();
+            &#x2F;&#x2F;DEBUGGING:  meta.view.id += &#x27;-viewId-&#x27; +
+            &#x2F;&#x2F;  this.command.instance.type + &#x27;-&#x27; + this.command.action;
+        }
+
+        &#x2F;&#x2F; If we are given &quot;meta.view[&#x27;content-path&#x27;]&quot; use it over what we got
+        &#x2F;&#x2F; from &quot;instance.views&quot;
+        if (mojitView &amp;&amp; meta.view[&#x27;content-path&#x27;]) {
+            mojitView[&#x27;content-path&#x27;] = meta.view[&#x27;content-path&#x27;];
+        }
+
+        &#x2F;&#x2F; If we are given &quot;meta.view[&#x27;engine&#x27;]&quot; use it over what we got from
+        &#x2F;&#x2F; &quot;instance.views&quot;
+        if (mojitView &amp;&amp; meta.view.engine) {
+            mojitView.engine = meta.view.engine;
+        }
+
+        &#x2F;&#x2F; Here we ask each &quot;thing&quot; attached to the AC if it wants to add view
+        &#x2F;&#x2F; &quot;meta&quot;
+        Y.Object.each(this, function(item) {
+            if (item &amp;&amp; Y.Lang.isFunction(item.mergeMetaInto)) {
+                item.mergeMetaInto(meta);
+            }
+        });
+
+        contentType = meta.http.headers[&#x27;content-type&#x27;];
+
+        attachChildViewIdsToMetaChildren(meta.children, meta.binders);
+
+        if (!meta.binders) {
+            meta.binders = {};
+        }
+
+        &#x2F;&#x2F; Don&#x27;t clobber an existing meta.binders[meta.view.id] entry
+        if (!meta.binders[meta.view.id]) {
+            meta.binders[meta.view.id] = {
+                base: instance.base,
+                action: action,
+                config: sanitizeConfigCopy(instance.config),
+                type: instance.type,
+                viewId: meta.view.id,
+                guid: instance.instanceId, &#x2F;&#x2F; DEPRECATED, use instanceId
+                instanceId: instance.instanceId,
+                &#x2F;&#x2F; We don&#x27;t use the actual config&#x27;s children object, because
+                &#x2F;&#x2F; that might not have been what was actually dispatched. We get
+                &#x2F;&#x2F; the actual children config that was dispatched through the
+                &#x2F;&#x2F; meta object.
+                children: sanitizeChildren(meta.children)
+            };
+        }
+
+        &#x2F;*
+         * Here we provide an easy way to return a string
+         * data == &#x27;a string of chars&#x27;
+         *&#x2F;
+        if (Y.Lang.isString(data)) {
+            &#x2F;&#x2F; if the user didn&#x27;t provided a content type, we&#x27;ll make it plain
+            &#x2F;&#x2F; text
+            if (!contentType) {
+                meta.http.headers[&#x27;content-type&#x27;] = [&#x27;text&#x2F;plain; &#x27; + CHARSET];
+            }
+            &#x2F;&#x2F;Y.log(&#x27;pushing to native adapter&#x27;, &#x27;info&#x27;, NAME);
+            adapter[callbackFunc](data, meta);
+            Y.log(&#x27;dispatch complete for &#x27; + instance.instanceId, &#x27;mojito&#x27;,
+                  &#x27;qeperf&#x27;);
+            return;
+        }
+
+        &#x2F;&#x2F; there may not be a view if this is running on the client
+        if (mojitView) {
+
+            data = data || {}; &#x2F;&#x2F; default null data to empty view template
+
+            &#x2F;&#x2F; Get the YUI Module name of the Binder if we can.
+            if (meta.binders[meta.view.id]) {
+                meta.binders[meta.view.id].name = mojitView[&#x27;binder-module&#x27;];
+                meta.binders[meta.view.id].needs =
+                    mojitView[&#x27;binder-yui-sorted&#x27;];
+            }
+
+            if (!contentType) {
+                meta.http.headers[&#x27;content-type&#x27;] = [&#x27;text&#x2F;html; &#x27; + CHARSET];
+            }
+
+            data.mojit_guid = instance.instanceId;
+            data.mojit_view_id = meta.view.id;
+            data.mojit_assets = this.command.instance.assetsRoot;
+
+            &#x2F;&#x2F; Use engine to compile template view
+            Y.log(&#x27;Rendering &quot;&#x27; + meta.view.name + &#x27;&quot; view for &quot;&#x27; +
+                (instance.id || &#x27;@&#x27; + instance.type) + &#x27;&quot;&#x27;, &#x27;info&#x27;, NAME);
+
+            contentPath = mojitView[&#x27;content-path&#x27;];
+            &#x2F;&#x2F; this is mainly used by html5app
+            if (this.app.config.pathToRoot) {
+                contentPath = this.app.config.pathToRoot + contentPath;
+            }
+
+
+            renderer = new Y.mojito.ViewRenderer(
+                mojitView.engine,
+                meta.view.id
+            );
+            renderer.render(data, instance.type, contentPath, adapter,
+                meta, more);
+        } else {
+
+            if (Y.Lang.isObject(data)) {
+                throw new Error(&quot;Missing view template: &#x27;&quot; + meta.view.name +
+                    &quot;&#x27;&quot;);
+            }
+            adapter[callbackFunc](data, meta);
+        }
+
+        &#x2F;&#x2F; Time marker
+        Y.mojito.perf.mark(&#x27;mojito&#x27;, &#x27;core_action_end[&#x27; + instance.type +
+                &#x27;:&#x27; + action + &#x27;]&#x27;, &#x27;ac.done() completed for Mojit &quot;&#x27; +
+                instance.type + &#x27;&quot; with action &quot;&#x27; + action + &#x27;&quot;&#x27;);
+    };
+
+
+    &#x2F;* see action-context.common.js for docs *&#x2F;
+    error = function(err) {
+        &#x2F;&#x2F; NOTE: &#x27;this&#x27; is the ActionContext instance
+        this._adapter.error(err);
+    };
+
+
+    sanitizeConfigCopy = function(cfg) {
+        var copy;
+        if (!Y.Lang.isObject(cfg)) {
+            return cfg;
+        }
+        copy = Y.mojito.util.copy(cfg);
+        copy.children = sanitizeChildren(copy.children);
+        return copy;
+    };
+
+
+    sanitizeChildren = function(children) {
+        if (!Y.Lang.isObject(children)) {
+            return children;
+        }
+        Y.Object.each(children, function(v, k) {
+            &#x2F;&#x2F; We don&#x27;t want child params to be included within a mojit&#x27;s
+            &#x2F;&#x2F; configuration, because it can leak implemenation details out to
+            &#x2F;&#x2F; other execution environments. For example, the client runtime
+            &#x2F;&#x2F; does not need to have the parameters of the mojits that were used
+            &#x2F;&#x2F; to construct the initial client DOM.
+            delete children[k].params;
+        });
+        return children;
+    };
+
+
+    attachChildViewIdsToMetaChildren = function(children, binders) {
+        if (!children) {
+            return;
+        }
+        Y.Object.each(binders, function(binderData, viewId) {
+            Y.Object.each(children, function(childData) {
+                if (binderData.instanceId === childData.instanceId) {
+                    childData.viewId = viewId;
+                }
+            });
+        });
+    };
+
+
+    &#x2F;*
+     * @method serialize_json
+     * @private
+     * @param {object} data
+     * @param {object} meta
+     * @return {string}
+     *&#x2F;
+    serialize_json = function(data, meta) {
+        meta.http.headers[&#x27;content-type&#x27;] = [&#x27;application&#x2F;json; &#x27; + CHARSET];
+
+        try {
+            return Y.JSON.stringify(data);
+        } catch (err) {
+            throw new Error(&#x27;Expected JSON data, but there was a parse error&#x27; +
+                    &#x27; on the string: \&quot;&#x27; + data);
+        }
+
+    };
+
+
+    &#x2F;*
+     * @method serialize_xml
+     * @private
+     * @param {object} data
+     * @param {object} meta
+     * @return {string}
+     *&#x2F;
+    serialize_xml = function(data, meta) {
+        &#x2F;&#x2F; A dirty XML function I found on the interwebs
+        function simpleXml(js, wraptag) {
+            if (js instanceof Object) {
+                return simpleXml(Object.keys(js).map(function(key) {
+                    return simpleXml(js[key], key);
+                }).join(&#x27;\n&#x27;), wraptag);
+            } else {
+                return ((wraptag) ? &#x27;&lt;&#x27; + wraptag + &#x27;&gt;&#x27; : &#x27;&#x27;) + js +
+                    ((wraptag) ? &#x27;&lt;&#x2F;&#x27; + wraptag + &#x27;&gt;&#x27; : &#x27;&#x27;
+                    );
+            }
+        }
+
+        meta.http.headers[&#x27;content-type&#x27;] = [&#x27;application&#x2F;xml; &#x27; + CHARSET];
+        if (Y.Lang.isObject) {
+            try {
+                return simpleXml(data, &#x27;xml&#x27;);
+            } catch (err) {
+                throw new Error(&#x27;Expected XML data, but there was a parse&#x27; +
+                        &#x27; error on the string: \&quot;&#x27; + data);
+            }
+        }
+
+        return &#x27;&#x27;;
+    };
+
+
+    serializer = {
+        json: serialize_json,
+        xml: serialize_xml
+    };
+
+
+    &#x2F;**
+     * &lt;strong&gt;Access point:&lt;&#x2F;strong&gt; &lt;em&gt;ac.*&lt;&#x2F;em&gt;
+     * The main API point for developers in a Controller. This addon provides
+     * the core functions
+     * of the ActionContext: &lt;em&gt;flush&lt;&#x2F;em&gt;, &lt;em&gt;done&lt;&#x2F;em&gt;, and &lt;em&gt;error&lt;&#x2F;em&gt;.
+     * @class OutputAdapter.common
+     * @private
+     *&#x2F;
+    function Addon(command, adapter, ac) {
+        &#x2F;*
+         * This plugin doesn&#x27;t act the same way as the others. It attaches its
+         * functions directly onto the ActionContext. Each functions is assumed
+         * that &#x27;this&#x27; will be the actual instance of ActionContext, not the
+         * object this constructor is creating.
+         *&#x2F;
+        ac.flush = flush;
+        ac.done = done;
+        ac.error = error;
+    }
+
+    Y.namespace(&#x27;mojito.addons.ac&#x27;).core = Addon;
+
+}, &#x27;0.1.0&#x27;, {requires: [
+    &#x27;json-stringify&#x27;,
+    &#x27;event-custom-base&#x27;,
+    &#x27;mojito-view-renderer&#x27;,
+    &#x27;mojito-util&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

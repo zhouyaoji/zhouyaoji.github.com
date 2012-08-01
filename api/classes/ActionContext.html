@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ActionContext - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>ActionContext Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_action-context.common.js.html#l226"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;action-context.common.js:226</code></a>
+        </div>
+    
+
+    
+        
+            Module: <a href="../modules/ActionContext.html">ActionContext</a>
+        
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>The main point of entry for all mojits into Mojito. The Action Context is
+passed to every mojit action during execution, either on the client or
+server. This object is the API into Mojito, can can have many plugins
+attached the provide extra functionality.</p>
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method__dispatch">_dispatch</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__simulateResponse">_simulateResponse</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__wsRequestFormatter">_wsRequestFormatter</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_destroy">destroy</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_disable">disable</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method deprecated">
+                                <a href="#method_dispatch">dispatch</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_done">done</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_enable">enable</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_error">error</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_execute">execute</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_flush">flush</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setRequestFormatter">setRequestFormatter</a>
+
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setResponseFormatter">setResponseFormatter</a>
+
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__dispatch" class="method item">
+    <h3 class="name"><code>_dispatch</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>command</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>adapter</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_action-context.common.js.html#l101"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;action-context.common.js:101</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This _dispatch function is called one time per Mojito execution. It
+creates a contextualized Y instance for all further internal dispatches
+to use. It also creates the ActionContext for the mojit.</p>
+
+<p>The command has three main parts:  the "instance", the "context", and the
+"params".</p>
+
+<pre>
+ command: {
+     instance: ...see below...
+     context: ...see below...
+     params: ...see below...
+ }
+</pre>
+
+<p>The "instance" is a partial instance with details of the mojit instance.
+See <code>ServerStore.expandInstance()</code> for details of the structure and which
+fields are required.</p>
+
+<p>The "context" is the request context.  It is built by the
+"contextualizer" middleware.</p>
+
+<p>The "params" is a structured set of parameters to pass to the mojit.</p>
+
+<pre>
+ params: {
+     route: {},
+     url: {},
+     body: {},
+     file: {},
+     ...
+ }
+</pre>
+
+<pre>
+adapter: {
+     flush: function(data, meta){},
+     done: function(data, meta){},
+     error: function(err){}
+}
+</pre>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">command</code>
+                        <span class="type">Map</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the "command" describing how to dispatch the mojit.
+    See above.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">adapter</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the output adapter to pass to the mojit. See
+    above.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__simulateResponse" class="method item private">
+    <h3 class="name"><code>_simulateResponse</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>details</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>badcookie</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_io_facade.client-optional.js.html#l102"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;io_facade.client-optional.js:102</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Simulate a server response</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">id</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the id of the transaction.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">details</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the details of the response.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">badcookie</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Optional. If true simulate cookies
+    turned off.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__wsRequestFormatter" class="method item private">
+    <h3 class="name"><code>_wsRequestFormatter</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_request_formatter.client-optional.js.html#l30"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;request_formatter.client-optional.js:30</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Format web service requests using var foo = function() format
+so that reset is easier.</p>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    the formatted request.
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_destroy" class="method item">
+    <h3 class="name"><code>destroy</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_transport.client-optional.js.html#l158"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;transport.client-optional.js:158</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Called by the bean registry whenever this bean is reinitialized</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_disable" class="method item">
+    <h3 class="name"><code>disable</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>queue</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_transport.client-optional.js.html#l51"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;transport.client-optional.js:51</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Disables all Ajax requests for the application.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">queue</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>(Optional) When set to true, queues all
+    requests while disabled.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_dispatch" class="method item deprecated">
+    <h3 class="name"><code>dispatch</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>command</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>adapter</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+        <span class="flag deprecated" title="Use &#x27;ac._dispatch()&#x27; instead. See https:&#x2F;&#x2F;github.com&#x2F;yahoo&#x2F;mojito&#x2F;blob&#x2F;develop&#x2F;DEPRECATIONS.md
+for details.">deprecated</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_action-context.common.js.html#l53"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;action-context.common.js:53</code></a>
+        
+        </p>
+
+
+        
+            <p>Deprecated: Use &#x27;ac._dispatch()&#x27; instead. See https:&#x2F;&#x2F;github.com&#x2F;yahoo&#x2F;mojito&#x2F;blob&#x2F;develop&#x2F;DEPRECATIONS.md
+for details.</p>
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This dispatch function is called one time per Mojito execution. It
+creates a contextualized Y instance for all further internal dispatches
+to use. It also creates the ActionContext for the mojit.</p>
+
+<p>The command has three main parts:  the "instance", the "context", and the
+"params".</p>
+
+<pre>
+ command: {
+     instance: ...see below...
+     context: ...see below...
+     params: ...see below...
+ }
+</pre>
+
+<p>The "instance" is a partial instance with details of the mojit instance.
+See <code>ServerStore.expandInstance()</code> for details of the structure and which
+fields are required.</p>
+
+<p>The "context" is the request context.  It is built by the
+"contextualizer" middleware.</p>
+
+<p>The "params" is a structured set of parameters to pass to the mojit.</p>
+
+<pre>
+ params: {
+     route: {},
+     url: {},
+     body: {},
+     file: {},
+     ...
+ }
+</pre>
+
+<pre>
+adapter: {
+     flush: function(data, meta){},
+     done: function(data, meta){},
+     error: function(err){}
+}
+</pre>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">command</code>
+                        <span class="type">Map</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the "command" describing how to dispatch the mojit.
+    See above.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">adapter</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the output adapter to pass to the mojit. See
+    above.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_done" class="method item">
+    <h3 class="name"><code>done</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>meta</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_action-context.common.js.html#l36"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;action-context.common.js:36</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns data and closes the request.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Object | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The data you want return by the request.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">meta</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Any meta-data required to service the request.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_enable" class="method item">
+    <h3 class="name"><code>enable</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_transport.client-optional.js.html#l62"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;transport.client-optional.js:62</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Enables sending of requests.</p>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_error" class="method item">
+    <h3 class="name"><code>error</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>err</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_action-context.common.js.html#l43"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;action-context.common.js:43</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Programatically report an error to Mojito, which will handle it
+gracefully.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">err</code>
+                        <span class="type">Error</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>A normal JavaScript Error object is expected, but you
+    may add a "code" property to the error if you want the framework to
+    report a certain HTTP status code for the error. For example, if the
+    status code is 404, Mojito will generate a 404 page.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_execute" class="method item private">
+    <h3 class="name"><code>execute</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>url</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>method</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_io_facade.client-optional.js.html#l48"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;io_facade.client-optional.js:48</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Executes an io request.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">url</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Url to access.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The data to send.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">method</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>GET or POST.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_flush" class="method item">
+    <h3 class="name"><code>flush</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>meta</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_action-context.common.js.html#l29"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;action-context.common.js:29</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns data in the request and allows you to carry on execution.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Object | String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The data you want return by the request.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">meta</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Any meta-data required to service the request.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setRequestFormatter" class="method item">
+    <h3 class="name"><code>setRequestFormatter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>requestType</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>formatter</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_transport.client-optional.js.html#l134"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;transport.client-optional.js:134</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the request formatter function for a given request type.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">requestType</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The type of request that the
+    formatter should handle.</p>
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">formatter</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The function to call to format the
+    request.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setResponseFormatter" class="method item">
+    <h3 class="name"><code>setResponseFormatter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>formatter</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                    <p>Provided by the <a href="../modules/ActionContextAddon.html">ActionContextAddon</a> module.</p>
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;mojito_src_source_lib_app_autoload_transport_transport.client-optional.js.html#l147"><code>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;transport&#x2F;transport.client-optional.js:147</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the response formatter function for all responses.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">formatter</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The function to call to format the
+    response object.</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

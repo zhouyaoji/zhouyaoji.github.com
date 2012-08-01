@@ -1,0 +1,144 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Overview - Mojito Intro</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-mojito">
+<h2>What is Mojito?<a class="headerlink" href="#what-is-mojito" title="Permalink to this headline">¶</a></h2>
+<p>Mojito is a <a class="reference external" href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">model-view-controller (MVC)</a> application framework built on YUI 3 that enables agile development of
+Web applications. Mojito allows developers to use a combination of configuration and an MVC architecture to create applications. Because client and server components are both written in JavaScript,
+Mojito can run on the client (browser) or the server (Node.js).</p>
+<p>Mojito offers the following features, some of which are discussed in the next section:</p>
+<ul class="simple">
+<li>Local development environment and tools (Yahoo! independent stack)</li>
+<li>Library for simplifying internationalization &amp; localization</li>
+<li>Integrated unit testing</li>
+<li>Device specific presentation (Hero, Mobile, TV, Web, etc.)</li>
+</ul>
+</div>
+<div class="section" id="why-mojito">
+<h2>Why Mojito?<a class="headerlink" href="#why-mojito" title="Permalink to this headline">¶</a></h2>
+<p>The best way to illustrate why you should use Mojito for creating Web applications is to give an example. Suppose you wanted to create a slideboard application that
+lets users quickly view news articles from various sources. Your application needs to be available on a variety of devices and use the appropriate UI elements of the device.
+For example, the application on the Web should provide rich interaction using the mouse, whereas, the application on a tablet or phone should provide the same rich interaction
+using the touchscreen.</p>
+<p>You also want people from all over to be able to use your slideboard application, so you will need to support internationalization and localization. Users should be able to see the
+application in their local language or choose their preferred language.</p>
+<p>In the following, we will discuss how Mojito makes it easier to create the slideboard application.</p>
+<div class="section" id="one-language">
+<h3>One Language<a class="headerlink" href="#one-language" title="Permalink to this headline">¶</a></h3>
+<p>Your slideboard application will need to fetch articles either through some API or an RSS feed. Most conventional Web applications that need data have both server-side and client-side components.
+The server-side script, written in a language such as Python, Perl, Ruby, PHP, or Java, fetches data and then passes the data to client-side script written in JavaScript. The one Web application
+would have at least two languages and would need to make at least two network calls: one to the data source, and one between the server-side and client-side code to transmit data.</p>
+<p>Because Mojito is written entirely in JavaScript, your application code can run on the server or be deployed to the client. From the client, you can use the <a class="reference external" href="http://yuilibrary.com/yui/docs/yql/">YUI YQL Utility</a>,
+to get all types of Web data, removing the need for the client to fetch data from your server.</p>
+</div>
+<div class="section" id="two-runtimes">
+<h3>Two Runtimes<a class="headerlink" href="#two-runtimes" title="Permalink to this headline">¶</a></h3>
+<p>Your application code can be configured to run on the server or be deployed to the client. If your application is configured to deploy code
+to the client, Mojito will determine whether the client can execute JavaScript before deployment. If the client cannot execute JavaScript,
+your application code will instead execute on the server. You write one code base, configure where code should optimally run, and then let
+Mojito determine at runtime to either deploy the code or run it on the server. Whether running on the client or server, your code can
+use the <a class="reference external" href="http://yuilibrary.com/yui/docs/yql/">YUI YQL Utility</a> to get all types of Web data.</p>
+</div>
+<div class="section" id="views-for-different-devices">
+<h3>Views for Different Devices<a class="headerlink" href="#views-for-different-devices" title="Permalink to this headline">¶</a></h3>
+<p>Your slideboard application is a Web application, but we want users to view it on tablets and smart phones as well. Do you create separate versions of your application? Do you write code logic
+that serves the correct version?</p>
+<p>Mojito can identify the calling device by examining the HTTP header <tt class="docutils literal"><span class="pre">User-Agent</span></tt>. You create custom views for different devices, and Mojito will render and serve the correct
+device-specific views.</p>
+</div>
+<div class="section" id="progressive-enhancement">
+<h3>Progressive Enhancement<a class="headerlink" href="#progressive-enhancement" title="Permalink to this headline">¶</a></h3>
+<p>You want your users to be able to take advantage of the rich features of the device they are using. Users skimming through articles on an iPad should be able to use the touch screen, and Web
+users should have features such as mouseovers and right-clicks. Handling these UI events requires JavaScript, so how do you handle them when the client has disabled JavaScript?</p>
+<p>Mojito allows you to serve code to the client, so that your users can use the rich interactive features of their devices, but Mojito also allows you to handle cases when the client has
+not enabled JavaScript. You can write HTML and CSS so your page functions without JavaScript sure that your application works with just HTML and CSS. Because Mojito runs on <a class="reference external" href="http://nodejs.org/">Node.js</a>
+the code intended to be deployed to the client can instead run on the server.</p>
+</div>
+<div class="section" id="localization-and-internationalization">
+<h3>Localization and Internationalization<a class="headerlink" href="#localization-and-internationalization" title="Permalink to this headline">¶</a></h3>
+<p>Mojito is built on <a class="reference external" href="http://yuilibrary.com/">YUI 3</a>, which has an internationalization utility that allows you to handle monolingual and multilingual applications. Using the <a class="reference external" href="http://yuilibrary.com/yui/docs/intl/">YUI Internationalization
+utility</a> and <a class="reference external" href="http://yuilibrary.com/yui/docs/intl/#yrb">Yahoo! Resource Bundles (YRB)</a>, your slideboard application could use one language for the UI and serve
+the content in a different language.</p>
+</div>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

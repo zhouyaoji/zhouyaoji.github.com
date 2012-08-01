@@ -1,0 +1,788 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Running Dynamically Defined Mojit Instances - Mojito Topics</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="running-dynamically-defined-mojit-instances">
+<h1>Running Dynamically Defined Mojit Instances<a class="headerlink" href="#running-dynamically-defined-mojit-instances" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Mojito allows developer to statically or dynamically define child mojit instances. In the simplest case,
+your parent and its child mojit instances will be statically defined in <tt class="docutils literal"><span class="pre">application.json</span></tt>.
+The parent mojit will run its child mojits and then attach their rendered output to its own view template.
+In more complex cases, your application may need to run a mojit instance or pass data to another mojit instance because of
+some condition, such as a user event or an environment variable. Being self-contained units of execution, mojits can only pass data
+or run mojits that have been defined as children in configuration. If you have not statically defined the child instances
+that you want to run or receive data, you can still dynamically define those child instances in configuration objects at runtime.</p>
+<p>The dynamically defined child instances, however, are only useful if the parent mojit can run them.
+Thus, the Mojito API provides the two methods <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt> or <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> that parent mojits can use to run
+dynamically defined child mojit instances. The parent mojit passes configuration objects that define the child mojit
+instances and any data you want to pass to one of the two methods. Although both the <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt> and <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt>
+methods allow a parent mojit to run a dynamically defined child instance and pass data to that child instance,
+the two methods do have some distinct differences, which are discussed in <a class="reference internal" href="#should-i-use-ac-composite-execute-or-ac-dispatch">Should I Use ac.composite.execute or ac._dispatch?</a>.</p>
+<div class="section" id="ac-composite-execute">
+<h3>ac.composite.execute<a class="headerlink" href="#ac-composite-execute" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference external" href="../../api/classes/Composite.common.html">Composite addon</a> includes the <tt class="docutils literal"><span class="pre">execute</span></tt> method that allows parents to run
+one or more dynamically defined children mojits by passing the <tt class="docutils literal"><span class="pre">children</span></tt> object. The <tt class="docutils literal"><span class="pre">execute</span></tt> method is different than the <tt class="docutils literal"><span class="pre">done</span></tt> method
+of the <tt class="docutils literal"><span class="pre">Composite</span></tt> addon in that the <tt class="docutils literal"><span class="pre">done</span></tt> method runs child mojit instances that are defined in <tt class="docutils literal"><span class="pre">application.json</span></tt>.
+See <a class="reference external" href="./mojito_composite_mojits.html">Composite Mojits</a> to learn how to use the <tt class="docutils literal"><span class="pre">done</span></tt> method of the <tt class="docutils literal"><span class="pre">Composite</span></tt> addon.</p>
+</div>
+<div class="section" id="ac-dispatch">
+<h3>ac._dispatch<a class="headerlink" href="#ac-dispatch" title="Permalink to this headline">¶</a></h3>
+<p>Mojito also provides the <tt class="docutils literal"><span class="pre">dispatch</span></tt> method that can be called from the <tt class="docutils literal"><span class="pre">ActionContext</span></tt> object to run a dynamically defined child mojit.
+The <tt class="docutils literal"><span class="pre">dispatch</span></tt> method also allows you to define your own <tt class="docutils literal"><span class="pre">flush</span></tt>, <tt class="docutils literal"><span class="pre">done</span></tt>, and <tt class="docutils literal"><span class="pre">error</span></tt> functions
+for the child mojit instance.</p>
+</div>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases<a class="headerlink" href="#use-cases" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>A mojit needs to pass data to another mojit.</li>
+<li>A mojit wants to attach the rendered view of the dynamically defined mojit to its view template.</li>
+<li>A mojit binder invokes the controller to run an instance of another mojit. The mojit renders its view, which is then returned it to the binder.</li>
+</ul>
+</div>
+<div class="section" id="should-i-use-ac-composite-execute-or-ac-dispatch">
+<h2>Should I Use ac.composite.execute or ac._dispatch?<a class="headerlink" href="#should-i-use-ac-composite-execute-or-ac-dispatch" title="Permalink to this headline">¶</a></h2>
+<p>If you need fine-grained control over your child instances, you will want to use <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt>.
+In most other cases, and particularly when dynamically defining and running more than one child instance, you will most likely want
+to use <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt> because it is easier to use. Also, in the case of running multiple child instances, <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt>
+keeps track of the configuration and metadata for your child instances; whereas, your parent mojit will need to manage its children
+if <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> was used.</p>
+</div>
+<div class="section" id="using-the-composite-addon">
+<h2>Using the Composite Addon<a class="headerlink" href="#using-the-composite-addon" title="Permalink to this headline">¶</a></h2>
+<p>For a mojit to run dynamically defined mojit instances using the <tt class="docutils literal"><span class="pre">Composite</span></tt> addon, you need to pass a configuration object to <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt>.
+The next sections will look at the configuration object, the controller code, and then the view template of the parent mojit.</p>
+<p>The configuration object passed to <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt> must have the <tt class="docutils literal"><span class="pre">children</span></tt> object to defines one or more mojit instances.
+In the <tt class="docutils literal"><span class="pre">cfg</span></tt> object below, the child mojit instances <tt class="docutils literal"><span class="pre">news</span></tt> and <tt class="docutils literal"><span class="pre">sidebar</span></tt> are defined. You can also specify the action to
+execute and pass configuration information that includes parameters and assets.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">cfg</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;children&quot;</span><span class="o">:</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;news&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;News&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;sidebar&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Sidebar&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;route&quot;</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{},</span>
+        <span class="s2">&quot;file&quot;</span><span class="o">:</span> <span class="p">{}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;assets&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;top&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&quot;/static/sidebar/assets/index.css&quot;</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt> takes two parameters. The first parameter is the configuration object
+discussed in <a href="#id21"><span class="problematic" id="id22">`Configuring Child Instances`_</span></a> that define the child mojit instance or instances. The second parameter is a callback
+that is returned an object containing the rendered data from the child mojit instances and an optional object containing the metadata of
+the children. The metadata contains information about the children&#8217;s binders, assets, configuration, and HTTP headers
+and is required for binders to execute and attach content to the DOM.</p>
+<p>In the example controller below, the child instances <tt class="docutils literal"><span class="pre">header</span></tt>, <tt class="docutils literal"><span class="pre">body</span></tt>, and <tt class="docutils literal"><span class="pre">footer</span></tt> are dynamically defined in <tt class="docutils literal"><span class="pre">cfg</span></tt> and then run with
+<tt class="docutils literal"><span class="pre">actionContext.composite.execute</span></tt>. The rendered views of the child mojits are returned in the callback and then made available to the mojit&#8217;s view template.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;FrameMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">actionContext</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">cfg</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">view</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span> <span class="nx">children</span><span class="o">:</span> <span class="p">{</span> <span class="nx">header</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;HeaderMojit&quot;</span><span class="p">,</span> <span class="nx">action</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">},</span> <span class="nx">body</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;BodyMojit&quot;</span><span class="p">,</span> <span class="nx">action</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span> <span class="p">},</span> <span class="nx">footer</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">&quot;FooterMojit&quot;</span><span class="p">,</span> <span class="nx">action</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span> <span class="p">}}};</span>
+      <span class="c1">// The &#39;meta&#39; object containing metadata about the children&#39;s binders, assets, configuration, and HTTP header</span>
+      <span class="c1">// info is passed to the callback. This &#39;meta&#39; object is required for binders to execute and attach content to the DOM.</span>
+      <span class="nx">actionContext</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">cfg</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){</span>
+        <span class="nx">actionContext</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">);</span>
+     <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">;},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+<p>The rendered output from each of the dynamically defined child mojit instances can be injected into
+the view template of the parent mojit using Mustache tags. If the child mojit instances <tt class="docutils literal"><span class="pre">header</span></tt>, <tt class="docutils literal"><span class="pre">footer</span></tt>,
+and <tt class="docutils literal"><span class="pre">body</span></tt> were defined in the configuration object passed to <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt>, you
+could add the rendered content from those child mojit instances to the parent mojit&#8217;s view template with
+the Mustache tags <tt class="docutils literal"><span class="pre">{{{header}}}</span></tt>, <tt class="docutils literal"><span class="pre">{{{footer}}}</span></tt>, and <tt class="docutils literal"><span class="pre">{{{body}}}</span></tt> as shown in the
+example view template below. The triple mustache tags insert unescaped HTML into the page.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  {{{header}}}
+  {{{body}}}
+  {{{footer}}}
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="controllers">
+<h3>Controllers<a class="headerlink" href="#controllers" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="parentmojit">
+<h4>ParentMojit<a class="headerlink" href="#parentmojit" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;ParentMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+       <span class="kd">var</span> <span class="nx">cfg</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s2">&quot;dynamic_child&quot;</span><span class="o">:</span> <span class="p">{</span>
+             <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;DynamicChildMojit&quot;</span><span class="p">,</span>
+               <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+                 <span class="s2">&quot;caller&quot;</span><span class="o">:</span> <span class="s2">&quot;ParentMojit&quot;</span>
+               <span class="p">}</span>
+             <span class="p">}</span>
+           <span class="p">}</span>
+         <span class="p">};</span>
+         <span class="nx">ac</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">cfg</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){</span>
+           <span class="c1">// The &#39;meta&#39; object containing metadata about the children&#39;s binders, assets, configuration, and HTTP header</span>
+           <span class="c1">// info is passed to the callback. This &#39;meta&#39; object is required for binders to execute and attach content to the DOM.</span>
+           <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">);</span>
+         <span class="p">});</span>
+       <span class="p">}</span>
+     <span class="p">};</span>
+   <span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="dynamicchildmojit">
+<h4>DynamicChildMojit<a class="headerlink" href="#dynamicchildmojit" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;DynamicChildMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">caller</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;caller&quot;</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="s2">&quot;ParentMojit&quot;</span><span class="o">==</span><span class="nx">caller</span><span class="p">){</span>
+        <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span> <span class="s2">&quot;content&quot;</span><span class="o">:</span> <span class="s2">&quot;I have been dynamically defined and run by &quot;</span> <span class="o">+</span> <span class="nx">caller</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">});</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="s2">&quot;content&quot;</span><span class="o">:</span> <span class="s2">&quot;I was called directly and have no parent.&quot;</span> <span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="view-templates">
+<h3>View Templates<a class="headerlink" href="#view-templates" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>DynamicChildMojit<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+   {{{content}}}
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>ParentMojit<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  {{{dynamic_child}}}
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="rendered-views">
+<h3>Rendered Views<a class="headerlink" href="#rendered-views" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">localhost:8666/&#64;ParentMojit/index</span></tt></p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span class="nx">I</span> <span class="nx">have</span> <span class="nx">been</span> <span class="nx">dynamically</span> <span class="nx">defined</span> <span class="nx">and</span> <span class="nx">run</span> <span class="nx">by</span> <span class="nx">ParentMojit</span><span class="p">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><tt class="docutils literal"><span class="pre">localhost:8666/&#64;DynamicChildMojit/index</span></tt></p>
+<blockquote>
+<div><div class="highlight-javascript"><div class="highlight"><pre><span class="nx">I</span> <span class="nx">was</span> <span class="nx">called</span> <span class="nx">directly</span> <span class="nx">and</span> <span class="nx">have</span> <span class="nx">no</span> <span class="nx">parent</span><span class="p">.</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="using-ac-dispatch">
+<h2>Using ac._dispatch<a class="headerlink" href="#using-ac-dispatch" title="Permalink to this headline">¶</a></h2>
+<p>Using <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> not only allows you to run a dynamically defined child mojit instance like
+<tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt>, but you also have more fine-grained control over how the child mojit instance runs.
+The content from the child mojit&#8217;s controller may be passed to its view template or the child mojit&#8217;s rendered view template
+is passed to the parent mojit.</p>
+<p>Two configuration objects are passed to <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt>, each having a different function. The <tt class="docutils literal"><span class="pre">command</span></tt>
+object defines the instance, the action to execute, the context, and any parameters. This lets the
+parent mojit have greater control over its child instances. The <tt class="docutils literal"><span class="pre">adapter</span></tt> object lets you define custom <tt class="docutils literal"><span class="pre">flush</span></tt>,
+<tt class="docutils literal"><span class="pre">done</span></tt>, and <tt class="docutils literal"><span class="pre">error</span></tt> functions for the child mojit instances.</p>
+<p>Although you can also pass the <tt class="docutils literal"><span class="pre">ActionContext</span></tt> object as the <tt class="docutils literal"><span class="pre">adapter</span></tt> to use the default <tt class="docutils literal"><span class="pre">flush</span></tt>, <tt class="docutils literal"><span class="pre">done</span></tt>, and <tt class="docutils literal"><span class="pre">error</span></tt> functions,
+it is not recommended because the <tt class="docutils literal"><span class="pre">ActionContext</span></tt> object contains both parent and child mojit metadata, which could cause unexpected results.</p>
+<div class="section" id="command-object">
+<h3>Command Object<a class="headerlink" href="#command-object" title="Permalink to this headline">¶</a></h3>
+<p>In the <tt class="docutils literal"><span class="pre">command</span></tt> object below, a mojit instance of type <tt class="docutils literal"><span class="pre">MessengerMojit</span></tt> and the action to execute are
+specified. The new mojit instance is also passed parameters.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">command</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;instance&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;MessengerMojit&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;context&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;route&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/message&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;message_type&quot;</span><span class="o">:</span> <span class="s2">&quot;email&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;content&quot;</span><span class="o">:</span> <span class="s2">&quot;Dispatch a mojit&quot;</span> <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adapter-object">
+<h3>Adapter Object<a class="headerlink" href="#adapter-object" title="Permalink to this headline">¶</a></h3>
+<p>In the <tt class="docutils literal"><span class="pre">adapter</span></tt> object below, the <tt class="docutils literal"><span class="pre">ac.done</span></tt>, <tt class="docutils literal"><span class="pre">ac.flush</span></tt>, or <tt class="docutils literal"><span class="pre">ac.error</span></tt> are
+defined and will override those functions in the child mojit instance. See <a class="reference internal" href="#adapter-functions">Adapter Functions</a>
+for more information.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">adapter</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="nx">flush</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){...},</span>
+   <span class="nx">done</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){</span>
+     <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">body</span><span class="p">();</span>
+     <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;data&quot;</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="nx">body</span> <span class="p">};</span>
+     <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>
+   <span class="p">},</span>
+   <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adapter-functions">
+<h3>Adapter Functions<a class="headerlink" href="#adapter-functions" title="Permalink to this headline">¶</a></h3>
+<p>The functions <tt class="docutils literal"><span class="pre">ac.done</span></tt>, <tt class="docutils literal"><span class="pre">ac.flush</span></tt>, and <tt class="docutils literal"><span class="pre">ac.error</span></tt> defined in the <tt class="docutils literal"><span class="pre">adapter</span></tt>
+object are actually implemented by the Mojito framework. For example, before <tt class="docutils literal"><span class="pre">adapter.done</span></tt>
+is executed, Mojito runs the <tt class="docutils literal"><span class="pre">done</span></tt> function defined in
+<a class="reference external" href="http://github.com/yahoo/mojito/source/lib/app/addons/ac/output-adapter.common.js">output-adapter.common.js</a>,
+which collects metadata and configuration.</p>
+<p>The controller of the mojit that is dynamically creating mojit instances defines the mojit
+instance and passes custom versions of <tt class="docutils literal"><span class="pre">done</span></tt>, <tt class="docutils literal"><span class="pre">flush</span></tt>, and <tt class="docutils literal"><span class="pre">error</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre> <span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;MotherlodeMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+
+   <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+
+     <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+       <span class="kd">var</span> <span class="nx">adapter</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="nx">done</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){</span>
+           <span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">body</span><span class="p">();</span>
+           <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;data&quot;</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">body</span> <span class="p">};</span>
+           <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>
+         <span class="p">},</span>
+         <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span> <span class="p">}</span>
+       <span class="p">};</span>
+       <span class="kd">var</span> <span class="nx">command</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s2">&quot;instance&quot;</span> <span class="o">:</span> <span class="p">{</span>
+           <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;MessengerMojit&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;context&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+         <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s2">&quot;route&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/message&quot;</span> <span class="p">},</span>
+           <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;message_type&quot;</span><span class="o">:</span> <span class="s2">&quot;email&quot;</span> <span class="p">},</span>
+           <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;content&quot;</span><span class="o">:</span> <span class="s2">&quot;Dispatch a mojit&quot;</span> <span class="p">}</span>
+         <span class="p">}</span>
+       <span class="p">};</span>
+       <span class="nx">ac</span><span class="p">.</span><span class="nx">_dispatch</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span><span class="nx">adapter</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+<p>The view template that is rendered depends on the <tt class="docutils literal"><span class="pre">adapter</span></tt> object passed to <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt>.
+If you pass the <tt class="docutils literal"><span class="pre">ac</span></tt> object as the <tt class="docutils literal"><span class="pre">adapter</span></tt> parameter, as in <tt class="docutils literal"><span class="pre">ac._dispatch(command,ac)</span></tt>,
+the <tt class="docutils literal"><span class="pre">ac.done</span></tt> in the dynamically defined mojit will execute and its view template will be
+rendered. If you pass a custom <tt class="docutils literal"><span class="pre">adapter</span></tt> object defining <tt class="docutils literal"><span class="pre">done</span></tt>, you can call <tt class="docutils literal"><span class="pre">ac.done</span></tt>
+inside your defined <tt class="docutils literal"><span class="pre">done</span></tt> method to pass data to the parent mojit and render its view template.</p>
+</div>
+<div class="section" id="example-one">
+<h3>Example One<a class="headerlink" href="#example-one" title="Permalink to this headline">¶</a></h3>
+<p>In this example, the mojit <tt class="docutils literal"><span class="pre">CreatorMojit</span></tt> dynamically creates the child mojit instance of
+type <tt class="docutils literal"><span class="pre">SpawnedMojit</span></tt>. The child mojit instance gets data from its parent mojit and then renders its view template.
+The rendered view template is returned to the parent mojit, which inserts the content into its
+own view template.</p>
+<div class="section" id="application-configuration">
+<h4>Application Configuration<a class="headerlink" href="#application-configuration" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;creator&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="s2">&quot;CreatorMojit&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h4>Controllers<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="creatormojit">
+<h5>CreatorMojit<a class="headerlink" href="#creatormojit" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;CreatorMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+
+   <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+
+     <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+       <span class="kd">var</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+       <span class="kd">var</span> <span class="nx">command</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s2">&quot;instance&quot;</span> <span class="o">:</span> <span class="p">{</span>
+           <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;SpawnedMojit&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;context&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+         <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{</span>
+           <span class="s2">&quot;route&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;creator&quot;</span> <span class="p">},</span>
+           <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;path&quot;</span><span class="o">:</span><span class="s2">&quot;/creator&quot;</span> <span class="p">},</span>
+           <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;message&quot;</span><span class="o">:</span><span class="s2">&quot;I have been defined and run by CreatorMojit.&quot;</span> <span class="p">}</span>
+         <span class="p">}</span>
+       <span class="p">};</span>
+       <span class="kd">var</span> <span class="nx">adapter</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s2">&quot;error&quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">childErr</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;-- child error&#39;</span><span class="p">);</span>
+           <span class="nx">ac</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">childErr</span><span class="p">);</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;flush&quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">childData</span><span class="p">,</span> <span class="nx">childMeta</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;-- child flush&#39;</span><span class="p">);</span>
+           <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">childData</span><span class="p">;</span>
+         <span class="p">},</span>
+         <span class="s2">&quot;done&quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">childData</span><span class="p">,</span> <span class="nx">childMeta</span><span class="p">)</span> <span class="p">{</span>
+           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;-- child done&#39;</span><span class="p">);</span>
+           <span class="kd">var</span> <span class="nx">meta</span> <span class="o">=</span> <span class="p">{};</span>
+           <span class="nx">buffer</span> <span class="o">+=</span> <span class="nx">childData</span><span class="p">;</span>
+           <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nx">metaMerge</span><span class="p">(</span><span class="nx">meta</span><span class="p">,</span> <span class="nx">childMeta</span><span class="p">);</span>
+           <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span> <span class="s2">&quot;child_slot&quot;</span><span class="o">:</span> <span class="nx">buffer</span> <span class="p">},</span> <span class="nx">meta</span><span class="p">);</span>
+         <span class="p">}</span>
+       <span class="p">};</span>
+       <span class="nx">ac</span><span class="p">.</span><span class="nx">_dispatch</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span><span class="nx">adapter</span><span class="p">);</span>
+     <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="spawnedmojit">
+<h5>SpawnedMojit<a class="headerlink" href="#spawnedmojit" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;SpawnedMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+
+   <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+
+     <span class="s2">&quot;index&quot;</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+       <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span> <span class="s2">&quot;route&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">route</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">url</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">),</span> <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">body</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">)</span> <span class="p">});</span>
+     <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h4>View Templates<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id5">
+<h5>SpawnedMojit<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3&gt;</span>Child Mojit Instance<span class="nt">&lt;/h3&gt;</span>
+  <span class="nt">&lt;ul&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Route: {{route}}<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Path: {{url}}<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;li&gt;</span>Message: {{body}}<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h5>CreatorMojit<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;h3&gt;</span>Parent Mojit<span class="nt">&lt;/h3&gt;</span>
+  {{{child_slot}}}
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-two">
+<h3>Example Two<a class="headerlink" href="#example-two" title="Permalink to this headline">¶</a></h3>
+<p>In this example, the binder invokes its controller to dynamically define an instance of another mojit.
+The dynamically defined mojit instance renders its view, which is then sent to the binder to
+be attached to the DOM.</p>
+<div class="section" id="id7">
+<h4>Application Configuration<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p><tt class="docutils literal"><span class="pre">application.json</span></tt></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;title&quot;</span> <span class="o">:</span> <span class="s2">&quot;Fun with Dispatch&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;deploy&quot;</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;child&quot;</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;ParentMojit&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">routes.json</span></tt></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;framed&quot;</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verbs&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;get&quot;</span> <span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span> <span class="o">:</span> <span class="s2">&quot;frame.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h4>Controllers<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id9">
+<h5>ParentMojit<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;ParentMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">addCss</span><span class="p">(</span><span class="s2">&quot;/static/parent/assets/index.css&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">);</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="nx">dispatch</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">command</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;instance&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;ChildMojit&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;context&quot;</span> <span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+        <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{}</span>
+      <span class="p">};</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">_dispatch</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">ac</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="childmojit">
+<h5>ChildMojit<a class="headerlink" href="#childmojit" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;ChildMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">assets</span><span class="p">.</span><span class="nx">addCss</span><span class="p">(</span><span class="s2">&quot;/static/child/assets/index.css&quot;</span><span class="p">,</span> <span class="s2">&quot;top&quot;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">10001</span><span class="p">);</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span> <span class="s2">&quot;random_content&quot;</span> <span class="o">:</span> <span class="nx">content</span> <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="binders">
+<h4>Binders<a class="headerlink" href="#binders" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id10">
+<h5>ParentMojit<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;ParentMojitBinderIndex&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito.binders&#39;</span><span class="p">)[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mojitProxy</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">mojitProxy</span> <span class="o">=</span> <span class="nx">mojitProxy</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s2">&quot;#btndispatch&quot;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mojitProxy</span><span class="p">.</span><span class="nx">invoke</span><span class="p">(</span><span class="s2">&quot;dispatch&quot;</span><span class="p">,</span> <span class="p">{},</span> <span class="k">this</span><span class="p">.</span><span class="nx">dispatchCallback</span><span class="p">);</span>
+      <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">dispatchCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;error dispatching mojit :: &quot;</span> <span class="o">+</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">Y</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span><span class="s2">&quot;#output&quot;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito-client&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h5>ChildMojit<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;ChildMojitBinderIndex&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito.binders&#39;</span><span class="p">)[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mojitProxy</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">mojitProxy</span> <span class="o">=</span> <span class="nx">mojitProxy</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="nx">node</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s2">&quot;#btn_remove&quot;</span><span class="p">);</span>
+      <span class="nx">btn</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;click&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">mojitProxy</span><span class="p">.</span><span class="nx">destroySelf</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+      <span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+      <span class="nx">btn</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito-client&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h4>View Templates<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id13">
+<h5>ParentMojit<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;btndispatch&quot;</span><span class="nt">&gt;</span>Dispatch a child<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;output&quot;</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id14">
+<h5>ChildMojit<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h5>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;child&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">&quot;btn_remove&quot;</span><span class="nt">&gt;</span>Remove<span class="nt">&lt;/button&gt;</span>
+  {{random_content}}
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-ac-dispatch-with-ac-composite-execute">
+<h2>Using ac._dispatch with ac.composite.execute<a class="headerlink" href="#using-ac-dispatch-with-ac-composite-execute" title="Permalink to this headline">¶</a></h2>
+<p>You can combine both methods to dynamically define and run a more complex set of mojits. The mojit that initiates the process
+uses <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> to define and run a parent mojit instance that uses <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt> in its controller to define and run child mojit
+instances. This chain of running dynamically defined mojit instances can be extended even further if one or more of the child mojit instances
+is using <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> or <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt>. When running a set of dynamically defined mojits, you should be aware that
+you may run into memory issues.</p>
+<p>Because the configuration, controllers, and view templates are the same when using <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> and <tt class="docutils literal"><span class="pre">ac.composite.execute</span></tt>
+independently or together, please see <a class="reference internal" href="#using-the-composite-addon">Using the Composite Addon</a> and <a class="reference internal" href="#using-ac-dispatch">Using ac._dispatch</a>
+for implementation details.</p>
+<p>In this example, the <tt class="docutils literal"><span class="pre">GrandparentMojit</span></tt> uses <tt class="docutils literal"><span class="pre">ac._dispatch</span></tt> to create a child mojit instance of type <tt class="docutils literal"><span class="pre">ParentMojit</span></tt>, which in
+turn creates a child mojit instance of type <tt class="docutils literal"><span class="pre">GrandchildMojit</span></tt>. The child instance of type <tt class="docutils literal"><span class="pre">GrandchildMojit</span></tt> is executed and its
+rendered view is returned to its parent mojit instance of type <tt class="docutils literal"><span class="pre">ParentMojit</span></tt>. The content is then attached
+to the parent mojit instance&#8217;s view template, which gets rendered and returned as the response.</p>
+<div class="section" id="id15">
+<h3>Application Configuration<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<p><tt class="docutils literal"><span class="pre">application.json</span></tt></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;title&quot;</span> <span class="o">:</span> <span class="s2">&quot;Fun with Dispatch and Execute&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;deploy&quot;</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;child&quot;</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;GrandparentMojit&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;assets&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;css&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="s2">&quot;assets/css/defaults.css&quot;</span>
+          <span class="p">]</span>
+     <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">routes.json</span></tt></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+ <span class="p">{</span>
+   <span class="s2">&quot;settings&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+   <span class="s2">&quot;framed&quot;</span> <span class="o">:</span> <span class="p">{</span>
+     <span class="s2">&quot;verbs&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;get&quot;</span> <span class="p">],</span>
+     <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+     <span class="s2">&quot;call&quot;</span> <span class="o">:</span> <span class="s2">&quot;frame.index&quot;</span>
+   <span class="p">}</span>
+ <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id16">
+<h3>Controllers<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="grandparentmojit">
+<h4>GrandparentMojit<a class="headerlink" href="#grandparentmojit" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;GrandparentMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">command</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;instance&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;ParentMojit&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;context&quot;</span> <span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">context</span><span class="p">,</span>
+        <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;body&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;whoami&quot;</span><span class="o">:</span> <span class="s2">&quot;ParentMojit&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;creator&quot;</span><span class="o">:</span> <span class="s2">&quot;GrandparentMojit&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">_dispatch</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">ac</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id17">
+<h4>ParentMojit<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;ParentMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">params</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">body</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">cfg</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;view&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;child&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;GrandchildMojit&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;index&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;creator&quot;</span><span class="o">:</span> <span class="s2">&quot;ParentMojit&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;whoami&quot;</span><span class="o">:</span> <span class="s2">&quot;GrandchildMojit&quot;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">};</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">execute</span><span class="p">(</span><span class="nx">cfg</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){</span>
+        <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">params</span><span class="p">,</span> <span class="nx">data</span><span class="p">),</span> <span class="nx">meta</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="grandchildmojit">
+<h4>GrandchildMojit<a class="headerlink" href="#grandchildmojit" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;GrandchildMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;creator&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;creator&quot;</span><span class="p">),</span> <span class="s2">&quot;whoami&quot;</span><span class="o">:</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;whoami&quot;</span><span class="p">)</span> <span class="p">};</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id18">
+<h3>View Templates<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id19">
+<h4>GrandchildMojit<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h3&gt;</span>I am the {{whoami}} dynamically defined and run by {{creator}}.<span class="nt">&lt;/h3&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id20">
+<h4>ParentMojit<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/static/multiple_dynamic_mojits/assets/css/index.css&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>I am the {{whoami}} dynamically defined and run by {{creator}}.<span class="nt">&lt;/h2&gt;</span>
+  {{{child}}}
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

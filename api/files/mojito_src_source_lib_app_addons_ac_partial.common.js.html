@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;addons&#x2F;ac&#x2F;partial.common.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;addons&#x2F;ac&#x2F;partial.common.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+&#x2F;**
+ * @module ActionContextAddon
+ *&#x2F;
+YUI.add(&#x27;mojito-partial-addon&#x27;, function(Y, NAME) {
+
+    &#x2F;**
+    * &lt;strong&gt;Access point:&lt;&#x2F;strong&gt; &lt;em&gt;ac.partial.*&lt;&#x2F;em&gt;
+    * Provides methods for working with &quot;actions&quot; and &quot;views&quot; on the current
+    * Mojits.
+    * @class Partial.common
+    *&#x2F;
+    function Addon(command, adapter, ac) {
+        this.command = command;
+        this.dispatch = ac._dispatch;
+        this.ac = ac;
+        this.adapter = adapter;
+    }
+
+
+    Addon.prototype = {
+
+        namespace: &#x27;partial&#x27;,
+
+        &#x2F;**
+         * This method renders the &quot;data&quot; provided into the &quot;view&quot; specified.
+         * The &quot;view&quot; must be the name of one of the files in the current
+         * Mojits &quot;views&quot; folder. Returns via the callback.
+         * @method render
+         * @param {object} data The object to be rendered.
+         * @param {string} view The view name to be used for rendering.
+         * @param {function} cb callback signature is function(error, result).
+         *&#x2F;
+        render: function(data, view, cb) {
+            var renderer,
+                mojitView,
+                instance = this.command.instance,
+                meta = {view: {}};
+
+            if (!instance.views[view]) {
+                cb(&#x27;View &quot;&#x27; + view + &#x27;&quot; not found&#x27;);
+                return;
+            }
+
+            mojitView = instance.views[view];
+            data = data || {}; &#x2F;&#x2F; default null data to empty view template
+            renderer = new Y.mojito.ViewRenderer(mojitView.engine);
+
+            Y.log(&#x27;Rendering &quot;&#x27; + view + &#x27;&quot; view for &quot;&#x27; + (instance.id || &#x27;@&#x27; +
+                instance.type) + &#x27;&quot;&#x27;, &#x27;debug&#x27;, NAME);
+
+            renderer.render(data, instance.type, mojitView[&#x27;content-path&#x27;], {
+                buffer: &#x27;&#x27;,
+
+                flush: function(data) {
+                    this.buffer += data;
+                },
+
+                done: function(data) {
+                    this.buffer += data;
+                    cb(null, this.buffer);
+                }
+            }, meta);
+        },
+
+
+        &#x2F;**
+         * This method calls the current mojit&#x27;s controller with the &quot;action&quot;
+         * given and returns its output via the callback.
+         *
+         * The &lt;em&gt;options&lt;&#x2F;em&gt; parameter is optional and may contain:
+         * &lt;dl&gt;
+         *     &lt;dt&gt;params&lt;&#x2F;dt&gt;&lt;dd&gt;&amp;lt;object&amp;gt; must be broken out explicitly:
+         *     &lt;dl&gt;
+         *      &lt;dt&gt;route&lt;&#x2F;dt&gt;&lt;dd&gt;&amp;lt;object&amp;gt; Map of key&#x2F;value pairs.&lt;&#x2F;dd&gt;
+         *      &lt;dt&gt;url&lt;&#x2F;dt&gt;&lt;dd&gt;&amp;lt;object&amp;gt; Map of key&#x2F;value pairs.&lt;&#x2F;dd&gt;
+         *      &lt;dt&gt;body&lt;&#x2F;dt&gt;&lt;dd&gt;&amp;lt;object&amp;gt; Map of key&#x2F;value pairs.&lt;&#x2F;dd&gt;
+         *      &lt;dt&gt;file&lt;&#x2F;dt&gt;&lt;dd&gt;&amp;lt;object&amp;gt; Map of key&#x2F;value pairs.&lt;&#x2F;dd&gt;
+         *     &lt;&#x2F;dl&gt;&lt;&#x2F;dd&gt;
+         * &lt;&#x2F;dl&gt;
+         * @method invoke
+         * @param {string} action name of the action to invoke.
+         * @param {object} options see above.
+         * @param {function} cb callback function to be called on completion.
+         *&#x2F;
+        invoke: function(action, options, cb) {
+            var command;
+
+            &#x2F;&#x2F; If there are no options use it as the callback
+            if (&#x27;function&#x27; === typeof options) {
+                cb = options;
+                options = {};
+            }
+
+            command = {
+                instance: {
+                    base: this.command.instance.base,
+                    type: this.command.instance.type
+                },
+                action: action,
+                context: this.ac.context,
+                params: options.params || this.ac.params.getAll()
+            };
+
+
+            this.dispatch(command, {
+                data: &#x27;&#x27;,
+
+                meta: {},
+
+                done: function(data, meta, more) {
+                    Y.mojito.util.metaMerge(this.meta, meta);
+                    this.data += data;
+
+                    &#x2F;&#x2F; Remove whatever &quot;content-type&quot; was set
+                    delete meta.http.headers[&#x27;content-type&#x27;];
+
+                    &#x2F;&#x2F; Remove whatever &quot;view&quot; was set
+                    delete meta.view;
+
+                    if (!more) {
+                        cb(null, this.data, this.meta);
+                    }
+                },
+
+                flush: function(data, meta) {
+                    this.done(data, meta, true);
+                }
+            });
+        }
+    };
+
+    Y.namespace(&#x27;mojito.addons.ac&#x27;).partial = Addon;
+
+}, &#x27;0.1.0&#x27;, {requires: [
+    &#x27;mojito-util&#x27;,
+    &#x27;mojito-params-addon&#x27;,
+    &#x27;mojito-view-renderer&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

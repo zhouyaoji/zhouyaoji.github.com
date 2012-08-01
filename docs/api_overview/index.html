@@ -1,0 +1,117 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Mojito API Overview - Mojito API Overview</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="mojito-api-overview">
+<h1>Mojito API Overview<a class="headerlink" href="#mojito-api-overview" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces some of the main features of the Mojito API. Please see the <a class="reference external" href="../../api/">Mojito API documentation</a> that has been built using <a class="reference external" href="http://yuilibrary.com/projects/yuidoc">YUI Doc</a> and is continuously updated.</p>
+<p>The API contains the following five modules:</p>
+<ul class="simple">
+<li><strong>ActionContext</strong> - is a key module of the Mojito framework, giving you access to the frameworks features from within a controller function.</li>
+<li><strong>Addons</strong> - extensions that provide functionality that lives both on the server and/or client. Each addon provides additional functions through a namespace that is attached directly to the <tt class="docutils literal"><span class="pre">Action</span> <span class="pre">Context</span></tt> object available in every controller function.</li>
+<li><strong>CommonLibs</strong> - is a utility library containing methods to handle cookies, access input parameters, and make REST calls.</li>
+<li><strong>MojitoClient</strong> - is the client-side Mojito runtime module containing methods that allow inter-mojit communication through the <tt class="docutils literal"><span class="pre">mojitProxy</span></tt> object.</li>
+<li><strong>MojitServer</strong> - is the module that provides access to the Mojito server.</li>
+</ul>
+<div class="section" id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mojito_action_context.html">Action Context</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mojito_addons.html">Addons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mojito_addons.html#syntax">Syntax</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mojito_addons.html#addon-examples">Addon Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mojito_addons.html#creating-addons">Creating Addons</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mojito_rest_lib.html">REST Library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mojito_rest_lib.html#including-library">Including Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mojito_rest_lib.html#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="mojito_client_obj.html">Client Object</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="mojito_client_obj.html#pausing-mojits">Pausing Mojits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mojito_client_obj.html#resuming-mojits">Resuming Mojits</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

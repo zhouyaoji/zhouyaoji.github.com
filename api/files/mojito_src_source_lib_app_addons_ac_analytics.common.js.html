@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;addons&#x2F;ac&#x2F;analytics.common.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;addons&#x2F;ac&#x2F;analytics.common.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+&#x2F;**
+ * The &lt;strong&gt;Action Context&lt;&#x2F;strong&gt; uses a mechanism called
+ * &lt;strong&gt;&lt;em&gt;Addons&lt;&#x2F;em&gt;&lt;&#x2F;strong&gt; to provide functionality that lives both on
+ * the server and&#x2F;or client. Each Addon provides additional functions through a
+ * namespace that is attached directly to the ac argument available in every
+ * controller function.
+ * @module ActionContextAddon
+ *&#x2F;
+
+
+&#x2F;**
+ * @module ActionContextAddon
+ *&#x2F;
+YUI.add(&#x27;mojito-analytics-addon&#x27;, function(Y, NAME) {
+
+    var ANALYTICS = &#x27;analytics&#x27;;
+
+    &#x2F;**
+     * &lt;strong&gt;Access point:&lt;&#x2F;strong&gt; &lt;em&gt;ac.analytics.*&lt;&#x2F;em&gt;
+     * Provides an easy way to stash analytics information within child mojits
+     * and retrieve them within parent after the children have been executed.
+     * Data handled by this addon, however, cannot be used to augment the
+     * normal data flow. IE: you cannot retrieve analytics data and then call
+     * ac.done().
+     * @class Analytics.common
+     *&#x2F;
+    function AnalyticsAddon(command, adapter, ac) {
+        this.ac = ac;
+        &#x2F;&#x2F; our personal analytics cache
+        this[ANALYTICS] = {};
+        &#x2F;&#x2F; so following addons can override (see comment below)
+        this.mergeFunction = Y.mojito.util.metaMerge;
+    }
+
+
+    AnalyticsAddon.prototype = {
+
+        namespace: &#x27;analytics&#x27;,
+
+        &#x2F;**
+         * Allows a way for addons mixed in after this one to set an alternate
+         * data merge function when analytics from multiple children are
+         * combined. The default merge function is the same one used internally
+         * by Mojito to merge meta data, and will be sufficient for most use
+         * cases.
+         * @method setmergeFunction
+         * @param {function} fn user-defined merge function, which should accept
+         * two objects, the first is &quot;to&quot;, and the second is &quot;from&quot;. this
+         * function should return the merged object.
+         *&#x2F;
+        setMergeFunction: function(fn) {
+            this.mergeFunction = fn;
+        },
+
+
+        &#x2F;**
+         * Store an analytic value. This function can be called multiple times
+         * within a mojit, and uses a merging function to combine objects.
+         * @method store
+         * @param {object} val An object bag full of whatever you wish.
+         *&#x2F;
+        store: function(val) {
+            &#x2F;&#x2F; if you don&#x27;t like using our internal meta merge function,
+            &#x2F;&#x2F; you can supply an AC addon that dependsOn this one, and call
+            &#x2F;&#x2F; ac.analytics.setMergeFunction(fn) within the initializer.
+            this[ANALYTICS] = this.mergeFunction(this[ANALYTICS], val);
+            this.ac.meta.store(ANALYTICS, this[ANALYTICS]);
+        },
+
+
+        &#x2F;**
+         * To retrieve analytics data that has been stored by child mojits, call
+         * this function and provide a function, which will be called once the
+         * children have been dispatched and all their analytics data has been
+         * merged.
+         * @method retrieve
+         * @param {function} cb callback invoked with the analytics object.
+         * @param {object} [optional] scope scope of the callback.
+         *&#x2F;
+        retrieve: function(cb, scope) {
+            &#x2F;&#x2F; mostly just deferring to the meta addon, but specifying that we
+            &#x2F;&#x2F; only want the ANALYTICS stuff off the meta
+            this.ac.meta.retrieve(function(metaStash) {
+                cb.call(this, metaStash[ANALYTICS]);
+            }, scope);
+        }
+    };
+
+    AnalyticsAddon.dependsOn = [&#x27;meta&#x27;];
+
+    Y.namespace(&#x27;mojito.addons.ac&#x27;).analytics = AnalyticsAddon;
+
+}, &#x27;0.1.0&#x27;, {requires: [
+    &#x27;mojito-util&#x27;,
+    &#x27;mojito-meta-addon&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

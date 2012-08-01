@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;resource-store-adapter.common.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;resource-store-adapter.common.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+&#x2F;**
+ * This object is responsible for running mojits.
+ * @class MojitoDispatcher
+ * @constructor
+ * @param {ServerStore} resourceStore the store to use.
+ * @private
+ *&#x2F;
+YUI.add(&#x27;mojito-resource-store-adapter&#x27;, function(Y, NAME) {
+
+    var APP_ROOT_PATH = &#x27;&#x27;,
+        logger;
+
+
+    Y.namespace(&#x27;mojito&#x27;).ResourceStoreAdapter = {
+
+        ENV: &#x27;&#x27;,
+
+
+        init: function(env, resourceStore, globalLogger) {
+
+            &#x2F;&#x2F; must be passed the Mojito logger and use it for consistent
+            &#x2F;&#x2F; logging because the Y.log within this scope has not been mutated
+            &#x2F;&#x2F; yet
+            logger = globalLogger;
+
+            logger.log(&#x27;resource store adapter init&#x27;, &#x27;mojito&#x27;, NAME);
+
+            APP_ROOT_PATH = resourceStore._root;
+
+            this.ENV = env;
+            this.store = resourceStore;
+
+            this._root = resourceStore._root;
+            this._staticURLs = resourceStore._staticURLs;
+
+            return this;
+        },
+
+
+        expandInstance: function(instance, ctx, cb) {
+            &#x2F;&#x2F;logger.log(&#x27;expandInstance&#x27;, &#x27;mojito&#x27;, NAME);
+            return this.expandInstanceForEnv(this.ENV, instance, ctx, cb);
+        },
+
+
+        expandInstanceForEnv: function(env, instance, context, callback) {
+            var base = {},
+                source = {},
+                my = this;
+
+            if (!instance.instanceId) {
+                instance.instanceId = Y.guid();
+                &#x2F;&#x2F;DEBUGGING:  instance.instanceId += &#x27;-instance-common-&#x27; +
+                &#x2F;&#x2F;    [instance.base||&#x27;&#x27;, instance.type||&#x27;&#x27;].join(&#x27;-&#x27;);
+            }
+            &#x2F;&#x2F; DEPRECATED, but kept in case a user is using.
+            instance.guid = instance.instanceId;
+
+            &#x2F;&#x2F; What are being asked to expand?
+            if (instance.base) {
+                source.name = instance.base;
+                source.func = this.getSpec;
+            } else if (instance.type) {
+                source.name = instance.type;
+                source.func = this.getType;
+            } else {
+                &#x2F;&#x2F; We don&#x27;t have any inputs so fail
+                throw new Error(&#x27;There was no info in the &quot;instance&quot; object&#x27;);
+            }
+
+            &#x2F;&#x2F; This contains the app &quot;definition&quot; and app config
+            my.getApp(env, context, function(app) {
+
+                &#x2F;&#x2F; Here we get either the a spec or a type
+                source.func(env, source.name, context, function(err, data) {
+                    if (err) {
+                        callback(err, {});
+                        return;
+                    }
+
+                    &#x2F;&#x2F; Merge the inputs from right to left (right most values
+                    &#x2F;&#x2F; win)
+                    base = my.merge(app, data, instance);
+
+                    &#x2F;&#x2F; Ensure the &quot;instance&quot; has been properly resolved. If
+                    &#x2F;&#x2F; there are no specs in the application.json file, there is
+                    &#x2F;&#x2F; an error below because the instance is invalid. We should
+                    &#x2F;&#x2F; check here for a valid instance object and throw an error
+                    &#x2F;&#x2F; if it is not. This happens because someone could create a
+                    &#x2F;&#x2F; routes.json file with routes that don&#x27;t route to mojit
+                    &#x2F;&#x2F; instances, and the URI router creates invalid commands,
+                    &#x2F;&#x2F; which are passed into the dispatch.
+                    if (!my.validate(base)) {
+                        callback({
+                            message: &#x27;Instance was not valid.&#x27;,
+                            stack: Y.JSON.stringify(base, null, 4)
+                        }, {});
+                        return;
+                    }
+
+                    &#x2F;&#x2F; Add the final &quot;base&quot; to the cache
+                    my.cache(env, instance, context, base);
+
+                    callback(null, base);
+                }, my);
+            });
+        },
+
+
+        getApp: function(env, context, callback) {
+            var obj = {};
+
+            callback(obj);
+        },
+
+
+        getAppPath: function() {
+            return APP_ROOT_PATH;
+        },
+
+
+        getAppConfig: function(context, name) {
+            return this.store.getAppConfig(context, name);
+        },
+
+
+        getSpec: function(env, id, context, callback, scope) {
+
+            if (!scope) {
+                scope = this;
+            }
+
+            scope.store.getSpec(env, id, context, callback);
+        },
+
+
+        getType: function(env, type, context, callback, scope) {
+
+            if (!scope) {
+                scope = this;
+            }
+
+            scope.store.getType(env, type, context, callback);
+        },
+
+
+        merge: function() {
+            var obj = {},
+                i;
+
+            for (i = 0; i &lt; arguments.length; i += 1) {
+                obj = Y.mojito.util.mergeRecursive(obj, arguments[i]);
+            }
+
+            return obj;
+        },
+
+
+        validate: function(base) {
+
+            if (!base.type || !base.yui) {
+                return false;
+            }
+            return true;
+        },
+
+
+        isCached: function(env, instance, context) {
+            return false;
+        },
+
+
+        getCached: function(env, instance, context) {
+            return {};
+        },
+
+
+        cache: function(env, instance, context, obj) {
+            return false;
+        },
+
+
+        getYuiConfigAllMojits: function(env, ctx) {
+            &#x2F;&#x2F;logger.log(&#x27;getYuiConfigAllMojits&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.getYuiConfigAllMojits(env, ctx);
+        },
+
+
+        getYuiConfigApp: function(env, ctx) {
+            &#x2F;&#x2F;logger.log(&#x27;getYuiConfigApp&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.getYuiConfigApp(env, ctx);
+        },
+
+
+        getYuiConfigFw: function(env, ctx) {
+            &#x2F;&#x2F;logger.log(&#x27;getYuiConfigFw&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.getYuiConfigFw(env, ctx);
+        },
+
+
+        serializeClientStore: function(ctx, instances) {
+            &#x2F;&#x2F;logger.log(&#x27;serializeClientStore&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.serializeClientStore(ctx, instances);
+        },
+
+
+        getMojitTypeDetails: function(env, ctx, mojitType, dest) {
+            &#x2F;&#x2F;logger.log(&#x27;getMojitTypeDetails&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.getMojitTypeDetails(env, ctx, mojitType, dest);
+        },
+
+
+        fileFromStaticHandlerURL: function(url) {
+            &#x2F;&#x2F;logger.log(&#x27;fileFromStaticHandlerURL&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.fileFromStaticHandlerURL(url);
+        },
+
+
+        getRoutes: function(ctx) {
+            &#x2F;&#x2F;logger.log(&#x27;getRoutes&#x27;, &#x27;warn&#x27;, NAME);
+            return this.store.getRoutes(ctx);
+        }
+    };
+
+}, &#x27;0.1.0&#x27;, {requires: [
+    &#x27;mojito-util&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

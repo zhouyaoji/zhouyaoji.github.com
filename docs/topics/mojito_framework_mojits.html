@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Framework Mojits - Mojito Topics</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="framework-mojits">
+<h1>Framework Mojits<a class="headerlink" href="#framework-mojits" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Mojito comes with the built-in utility mojits that make developing applications easier. Mojito currently comes with the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> that constructs Web pages
+from the skeleton HTML to the styling and content and the <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt> that allows you to lazily load mojit code. Mojito plans to offer additional framework mojits
+in the future.</p>
+</div>
+<div class="section" id="htmlframemojit">
+<h2>HTMLFrameMojit<a class="headerlink" href="#htmlframemojit" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> builds the HTML skeleton of a Web page. When you use <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> the <tt class="docutils literal"><span class="pre">&lt;html&gt;</span></tt>, <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt>, and <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt> elements are automatically created
+and the content from child mojits are inserted into the <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt> element.  The <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> can also automatically insert assets such as CSS and JavaScript files
+into either the <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> or <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt> elements.</p>
+<p>Because it builds the Web page from the framework to the content and styling, the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> must be the top-level mojit in a Mojito application. As the top-level
+or parent mojit, the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> may have one or more child mojits.</p>
+<p>To create a Mojito application that uses the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt>, see the code examples <a class="reference external" href="../code_exs/htmlframe_view.html">Using the HTML Frame Mojit</a>
+and <a class="reference external" href="../code_exs/framed_assets.html">Attaching Assets with HTMLFrameMojit</a>.</p>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<p>As with defining instances of other mojit types, you define an instance of the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> in <a class="reference external" href="../intro/mojito_configuring.html#configuration-object">configuration object</a>
+of <tt class="docutils literal"><span class="pre">application.json</span></tt>. Because <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> must be the top-level mojit, its instance cannot have a parent instance, but may have one or more child instances.</p>
+<p>In the example <tt class="docutils literal"><span class="pre">application.json</span></tt> below, <tt class="docutils literal"><span class="pre">frame</span></tt> is an instance of <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> that has the <tt class="docutils literal"><span class="pre">child</span></tt> instance of the <tt class="docutils literal"><span class="pre">framed</span></tt> mojit. After the HTML skeleton is created,
+the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> will insert the value of the <tt class="docutils literal"><span class="pre">title</span></tt> property into the <tt class="docutils literal"><span class="pre">&lt;title&gt;</span></tt> element and the content created by the <tt class="docutils literal"><span class="pre">frame</span></tt> mojit into the <tt class="docutils literal"><span class="pre">&lt;body&gt;</span></tt> element.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="s2">&quot;Title of HTML page&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;child&quot;</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;framed&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>To have multiple child instances, the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> instance must use the <tt class="docutils literal"><span class="pre">children</span></tt> object to specify the child instances. In this example <tt class="docutils literal"><span class="pre">application.json</span></tt>,
+the <tt class="docutils literal"><span class="pre">page</span></tt> instance of <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> uses the <tt class="docutils literal"><span class="pre">children</span></tt> object to specify three child instances that can create content for the rendered view.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;page&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;deploy&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="nx">HTMLFrameMojit</span> <span class="nx">Example</span> <span class="kd">with</span> <span class="nx">Children</span><span class="s2">&quot;,</span>
+<span class="s2">          &quot;</span><span class="nx">child</span><span class="s2">&quot;: {</span>
+<span class="s2">            &quot;</span><span class="nx">type</span><span class="s2">&quot;: &quot;</span><span class="nx">Body</span><span class="s2">&quot;,</span>
+<span class="s2">            &quot;</span><span class="nx">config</span><span class="s2">&quot;: {</span>
+<span class="s2">              &quot;</span><span class="nx">children</span><span class="s2">&quot; : {</span>
+<span class="s2">                &quot;</span><span class="nx">nav</span><span class="s2">&quot;: {</span>
+<span class="s2">                  &quot;</span><span class="nx">type</span><span class="s2">&quot;: &quot;&quot;Navigation&quot;</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;content&quot;</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;articleBuilder&quot;</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;footer&quot;</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Footer&quot;</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deploying-to-client">
+<h3>Deploying to Client<a class="headerlink" href="#deploying-to-client" title="Permalink to this headline">¶</a></h3>
+<p>To configure Mojito to deploy code to the client, you set the <tt class="docutils literal"><span class="pre">deploy</span></tt> property of the <a class="reference external" href="../intro/mojito_configuring.html#configuration-object">config</a> object to <tt class="docutils literal"><span class="pre">true</span></tt>
+as shown below.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;deploy&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;child&quot;</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;framed&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<div class="section" id="what-gets-deployed">
+<h4>What Gets Deployed?<a class="headerlink" href="#what-gets-deployed" title="Permalink to this headline">¶</a></h4>
+<p>The following is deployed to the client:</p>
+<ul class="simple">
+<li>Mojito framework</li>
+<li>binders (and their dependencies)</li>
+</ul>
+<p>When a binder invokes its controller, if the controller has the <tt class="docutils literal"><span class="pre">client</span></tt> or <tt class="docutils literal"><span class="pre">common</span></tt> affinity, then the controller and its dependencies are deployed to the client as well.
+If the affinity of the controller is <tt class="docutils literal"><span class="pre">server</span></tt>, the invocation occurs on the server. In either case, the binder is able to transparently invoke the controller.</p>
+</div>
+</div>
+<div class="section" id="adding-assets-with-htmlframemojit">
+<h3>Adding Assets with HTMLFrameMojit<a class="headerlink" href="#adding-assets-with-htmlframemojit" title="Permalink to this headline">¶</a></h3>
+<p>You specify the assets for <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> just as you would specify assets for any mojit. The basic difference is that  <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> will automatically attach <tt class="docutils literal"><span class="pre">&lt;link&gt;</span></tt> elements
+for CSS and <tt class="docutils literal"><span class="pre">&lt;script&gt;</span></tt> elements for JavaScript files to the HTML page. When using assets with other mojits, you have to manually add <tt class="docutils literal"><span class="pre">&lt;link&gt;</span></tt> elements that refer to assets to view templates.
+See <a class="reference external" href="./mojito_assets.html">Assets</a> for general information about using assets in Mojito.</p>
+<p>In the example <tt class="docutils literal"><span class="pre">application.json</span></tt> below, the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> instance <tt class="docutils literal"><span class="pre">frame</span></tt> has one child mojit with a CSS asset. Because the assets are listed in the <tt class="docutils literal"><span class="pre">top</span></tt> object,
+the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> will attach the <tt class="docutils literal"><span class="pre">&lt;link&gt;</span></tt> element pointing to <tt class="docutils literal"><span class="pre">index.css</span></tt> to the <tt class="docutils literal"><span class="pre">&lt;head&gt;</span></tt> element.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;child&quot;</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;framed&quot;</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;assets&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;top&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;css&quot;</span><span class="o">:</span> <span class="p">[</span>
+                <span class="s2">&quot;/static/framed/assets/css/index.css&quot;</span>
+              <span class="p">]</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>The rendered view that was constructed by the <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> should look similar to the HTML below.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="cp">&lt;!DOCTYPE HTML&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span><span class="kd">var</span> <span class="nx">MOJITO_INIT</span><span class="o">=</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span><span class="nt">&lt;/script&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;creator&quot;</span> <span class="na">content=</span><span class="s">&quot;Yahoo! Mojito 0.1.0&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Powered by Mojito 0.1.0<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">type=</span><span class="s">&quot;text/css&quot;</span> <span class="na">href=</span><span class="s">&quot;/static/framed/assets/css/index.css&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;yui_3_3_0_3_131500627867611&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2</span> <span class="na">id=</span><span class="s">&quot;header&quot;</span><span class="nt">&gt;</span>Framed Assets<span class="nt">&lt;/h2&gt;</span>
+      <span class="nt">&lt;p&gt;</span>Page Content<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="lazyloadmojit">
+<h2>LazyLoadMojit<a class="headerlink" href="#lazyloadmojit" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt> allows you to defer the loading of a mojit instance by first dispatching the <tt class="docutils literal"><span class="pre">LazyLoadMoit</span></tt> as a proxy to the client. From the client,
+<tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt> can then request Mojito to load the proxied mojit. This allows your Mojito application to load the page quickly and then lazily load parts of the page.</p>
+<div class="section" id="how-does-it-work">
+<h3>How Does It Work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h3>
+<p>The <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt> is really a proxy mojit that dispatches it&#8217;s binder and an empty DOM node to the client. From the client, the binder sends a request to the controller
+to execute the code of the proxied (original) mojit. The output from the executed mojit is then returned to the binder of the <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt>, which attaches the output
+to the empty DOM node. The binder of <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt> destroys itself, leaving the DOM intact with the new content.</p>
+</div>
+<div class="section" id="configuring-lazy-loading">
+<h3>Configuring Lazy Loading<a class="headerlink" href="#configuring-lazy-loading" title="Permalink to this headline">¶</a></h3>
+<p>To use the <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt>, the <tt class="docutils literal"><span class="pre">application.json</span></tt> must do the following:</p>
+<ul class="simple">
+<li>create a top-level mojit instance of type <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt></li>
+<li>deploy the mojit instance of type <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt> to the client (<tt class="docutils literal"><span class="pre">&quot;deploy&quot;:</span> <span class="pre">true</span></tt>)</li>
+<li>create a container mojit that has children mojit instances (<tt class="docutils literal"><span class="pre">&quot;children&quot;:</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></tt>)</li>
+<li>defer the dispatch of the mojit instance that will be lazily loaded (<tt class="docutils literal"><span class="pre">&quot;defer&quot;:</span> <span class="pre">true</span></tt>)</li>
+</ul>
+<p>In the example <tt class="docutils literal"><span class="pre">application.json</span></tt> below, the child mojit instance <tt class="docutils literal"><span class="pre">myLazyMojit</span></tt> is configured to be lazily loaded. The action (<tt class="docutils literal"><span class="pre">hello</span></tt>) of the proxied mojit is
+also configured to be executed after lazy loading is complete.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;deploy&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;child&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Container&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;myLazyMojit&quot;</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;LazyPants&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;defer&quot;</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;myActiveMojit&quot;</span><span class="o">:</span> <span class="p">{</span>
+                   <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;GoGetter&quot;</span><span class="p">,</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>This example shows you application configuration as well as the code for the parent mojit and the child mojit that is lazy loaded.  If you were to run this lazy load example,
+you would see the content of the parent mojit first and then see the child mojit&#8217;s output loaded in the page.</p>
+<div class="section" id="application-configuration">
+<h4>Application Configuration<a class="headerlink" href="#application-configuration" title="Permalink to this headline">¶</a></h4>
+<p>The application configuration for this example (shown below) meets the requirements for using <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt>:</p>
+<ul class="simple">
+<li>creates the <tt class="docutils literal"><span class="pre">frame</span></tt> mojit instance of type <tt class="docutils literal"><span class="pre">HTMLFrameMojit</span></tt></li>
+<li>sets <tt class="docutils literal"><span class="pre">&quot;deploy&quot;</span></tt> to <tt class="docutils literal"><span class="pre">true</span></tt> for <tt class="docutils literal"><span class="pre">frame</span></tt> so that the code is deployed to the client</li>
+<li>creates the <tt class="docutils literal"><span class="pre">child</span></tt> mojit instance that has the <tt class="docutils literal"><span class="pre">children</span></tt> object specifying child mojit instance</li>
+<li>configures the <tt class="docutils literal"><span class="pre">myLazyMojit</span></tt> instance to defer being dispatched, which causes it to be lazily loaded by <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt></li>
+</ul>
+<p>In this <tt class="docutils literal"><span class="pre">application.json</span></tt>, the <tt class="docutils literal"><span class="pre">parent</span></tt> mojit instance has the one child <tt class="docutils literal"><span class="pre">myLazyMojit</span></tt>. The  <tt class="docutils literal"><span class="pre">myLazyMojit</span></tt> mojit instance of type <tt class="docutils literal"><span class="pre">LazyChild</span></tt> is the mojit that
+will be lazily loaded by <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt>. In a production application, you could configure the application to have many child instances that are lazily loaded after
+the parent mojit instance is already loaded onto the page.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;deploy&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;parent&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;Container&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;config&quot;</span><span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;children&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;myLazyMojit&quot;</span><span class="o">:</span> <span class="p">{</span>
+                  <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;LazyChild&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
+                  <span class="s2">&quot;defer&quot;</span><span class="o">:</span> <span class="kc">true</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="container-mojit">
+<h4>Container Mojit<a class="headerlink" href="#container-mojit" title="Permalink to this headline">¶</a></h4>
+<p>The <tt class="docutils literal"><span class="pre">Container</span></tt> mojit uses <tt class="docutils literal"><span class="pre">ac.composite.done</span></tt> to execute its child mojits.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;Container&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="cm">/**</span>
+<span class="cm">  * Method corresponding to the &#39;index&#39; action.</span>
+<span class="cm">  *</span>
+<span class="cm">  * @param ac {Object} The ActionContext that</span>
+<span class="cm">  * provides access to the Mojito API.</span>
+<span class="cm">  */</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">composite</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+<p>Instead of waiting for the child mojit to execute, the partially rendered view of the <tt class="docutils literal"><span class="pre">Container</span></tt> mojit is immediately sent to the client. After the child mojit is lazily loaded,
+the content of the executed child replaces the mustache tag <tt class="docutils literal"><span class="pre">{{{myLazyChild}}}</span></tt>.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Lazy Loading<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;hr/&gt;</span>
+    {{{myLazyChild}}}
+  <span class="nt">&lt;hr/&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lazychild-mojit">
+<h4>LazyChild Mojit<a class="headerlink" href="#lazychild-mojit" title="Permalink to this headline">¶</a></h4>
+<p>The <tt class="docutils literal"><span class="pre">LazyLoadMojit</span></tt> in the <tt class="docutils literal"><span class="pre">application.json</span></tt> is configured to lazily load the mojit instance <tt class="docutils literal"><span class="pre">myLazyChild</span></tt> and then call the action <tt class="docutils literal"><span class="pre">hello</span></tt>. Thus, the <tt class="docutils literal"><span class="pre">index</span></tt> function
+in the <tt class="docutils literal"><span class="pre">LazyChild</span></tt> mojit below is never called.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;LazyChild&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">hello</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">time</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()});</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="s2">&quot;This is never seen.&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+<p>The view template <tt class="docutils literal"><span class="pre">hello.mu.html</span></tt> is rendered on the server and then lazily loaded to the client.</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>I was lazy-loaded at {{{time}}}.<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

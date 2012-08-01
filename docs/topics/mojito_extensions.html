@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Extending Mojito - Mojito Topics</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="extending-mojito">
+<h1>Extending Mojito<a class="headerlink" href="#extending-mojito" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The Mojito framework lets you add features and extend functionality through addons, libraries, and middleware. This chapter discusses how to create extensions and
+where to place files in the Mojito framework.</p>
+</div>
+<div class="section" id="addons">
+<h2>Addons<a class="headerlink" href="#addons" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the <a class="reference external" href="../../api/classes/ActionContext.html">Action Context</a> addons that Mojito provides, you can create your own addons to add functionality to controller actions.</p>
+<p>Addons allows you to do the following:</p>
+<ul class="simple">
+<li>wrap third-party Node.js libraries and YUI libraries</li>
+<li>inspect the content of the <tt class="docutils literal"><span class="pre">ActionContext</span></tt> object</li>
+<li>call methods on the <tt class="docutils literal"><span class="pre">ActionContext</span></tt> object, which can be references through <tt class="docutils literal"><span class="pre">this.get('host')</span></tt></li>
+</ul>
+<div class="section" id="creating-new-addons">
+<span id="addons-creating"></span><h3>Creating New Addons<a class="headerlink" href="#creating-new-addons" title="Permalink to this headline">¶</a></h3>
+<p>An addon is simply a JavaScript files that contains a YUI module. You can create addons at the application and mojit level. Application-level addons are available to
+all mojits in the application, whereas, mojit-level addons are only available to its mojit.</p>
+<div class="section" id="naming-convention">
+<h4>Naming Convention<a class="headerlink" href="#naming-convention" title="Permalink to this headline">¶</a></h4>
+<p>The name of an addon should have the following syntax where <tt class="docutils literal"><span class="pre">{addon_name}</span></tt> is a unique YUI module name defined by the user and <tt class="docutils literal"><span class="pre">{affinity}</span></tt> is <tt class="docutils literal"><span class="pre">server</span></tt>, <tt class="docutils literal"><span class="pre">common</span></tt>,
+or <tt class="docutils literal"><span class="pre">client</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">{addon_name}.{affinity}.js</span></tt></p>
+</div>
+<div class="section" id="location-of-addons">
+<h4>Location of Addons<a class="headerlink" href="#location-of-addons" title="Permalink to this headline">¶</a></h4>
+<p>Application-level addons should be placed in the following directory:</p>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/addons/ac/</span></tt></p>
+<p>Mojit-level addons should be placed in the following directory:</p>
+<p><tt class="docutils literal"><span class="pre">{mojit_dir}/addons/ac/</span></tt></p>
+</div>
+<div class="section" id="writing-the-addon">
+<h4>Writing the Addon<a class="headerlink" href="#writing-the-addon" title="Permalink to this headline">¶</a></h4>
+<p>The ActionContext is a <a class="reference external" href="http://developer.yahoo.com/yui/3/base/">YUI Base</a> object, and Action Context addons are <a class="reference external" href="http://developer.yahoo.com/yui/3/plugin/">YUI Plugins</a>.
+To create a new addon, you write a new YUI Plugin and register it with Mojito.</p>
+<p>The addon must have the following:</p>
+<ul class="simple">
+<li>registered plugin name, which is the string passed to <tt class="docutils literal"><span class="pre">YUI.add</span></tt></li>
+<li>constructor with a <tt class="docutils literal"><span class="pre">prototype</span></tt> property</li>
+<li>statement assigning the constructor to a namespace of <tt class="docutils literal"><span class="pre">Y.mojito.addons.ac</span></tt>, so Mojito can access your addon</li>
+</ul>
+<p><strong>Optional:</strong> <tt class="docutils literal"><span class="pre">requires</span></tt> array to include other modules.
+The code snippet below shows the skeleton of an addon with the registered plugin name (<tt class="docutils literal"><span class="pre">'addon-ac-cheese'</span></tt>) and the constructor (<tt class="docutils literal"><span class="pre">CheeseAcAddon</span></tt>) with its <tt class="docutils literal"><span class="pre">prototype</span></tt> property:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="c1">// Register the plugin name</span>
+<span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;addon-ac-cheese&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Constructor for addon</span>
+  <span class="kd">function</span> <span class="nx">CheeseAcAddon</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">adapter</span><span class="p">,</span> <span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The &quot;command&quot; is the Mojito internal details</span>
+    <span class="c1">// for the dispatch of the mojit instance.</span>
+    <span class="c1">// The &quot;adapter&quot; is the output adapter, containing</span>
+    <span class="c1">// the &quot;done()&quot;, &quot;error()&quot;, etc, methods.</span>
+    <span class="c1">// The &quot;ac&quot; is the ActionContext object to which</span>
+    <span class="c1">// this addon is about to be attached.</span>
+  <span class="p">}</span>
+  <span class="c1">// Use the prototype property to add</span>
+  <span class="c1">// methods and other properties</span>
+  <span class="nx">CheeseAcAddon</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// Put methods and properties here</span>
+  <span class="p">}</span>
+  <span class="c1">// Assign the constructor of the addon to a</span>
+  <span class="c1">// namespace of Y.mojito.addons.ac</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">ac</span><span class="p">.</span><span class="nx">cheddar</span> <span class="o">=</span> <span class="nx">CheeseAcAddon</span><span class="p">;</span>
+  <span class="c1">// Optional: &#39;requires&#39; array could include other</span>
+  <span class="c1">// YUI modules if needed.</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+<div class="section" id="example-addon">
+<h5>Example Addon<a class="headerlink" href="#example-addon" title="Permalink to this headline">¶</a></h5>
+<p>In this example addon, the <tt class="docutils literal"><span class="pre">YUI.add</span></tt> method registers the <tt class="docutils literal"><span class="pre">addon-ac-cheese</span></tt> plugin. The addon has the namespace <tt class="docutils literal"><span class="pre">cheese</span></tt> and the method <tt class="docutils literal"><span class="pre">cheesify</span></tt>, which is added
+through the <tt class="docutils literal"><span class="pre">prototype</span></tt> property.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;addon-ac-cheese&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">function</span> <span class="nx">CheeseAcAddon</span><span class="p">(</span><span class="nx">command</span><span class="p">,</span> <span class="nx">adapter</span><span class="p">,</span> <span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// The &quot;command&quot; is the Mojito internal details</span>
+    <span class="c1">// for the dispatch of the mojit instance.</span>
+    <span class="c1">// The &quot;adapter&quot; is the output adapter, containing</span>
+    <span class="c1">// the &quot;done()&quot;, &quot;error()&quot;, etc, methods.</span>
+    <span class="c1">// The &quot;ac&quot; is the ActionContext object to which</span>
+    <span class="c1">// this addon is about to be attached.</span>
+  <span class="p">}</span>
+  <span class="nx">CheeseAcAddon</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// The &quot;namespace&quot; is where in the ActionContext</span>
+    <span class="c1">// the user can find this addon.</span>
+    <span class="nx">namespace</span><span class="o">:</span> <span class="s1">&#39;cheese&#39;</span><span class="p">,</span>
+    <span class="nx">cheesify</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">n</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">Y</span><span class="p">.</span><span class="nx">Lang</span><span class="p">.</span><span class="nx">isString</span><span class="p">(</span><span class="nx">obj</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="s1">&#39;cheesy &#39;</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">for</span> <span class="p">(</span><span class="nx">n</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">obj</span><span class="p">[</span><span class="nx">n</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">cheesify</span><span class="p">(</span><span class="nx">obj</span><span class="p">[</span><span class="nx">n</span><span class="p">]);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">obj</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="c1">// If this addon depends on another, that can</span>
+  <span class="c1">// be specified here. Circular dependencies are not</span>
+  <span class="c1">// supported or automatically detected,</span>
+  <span class="c1">// so please be careful.</span>
+  <span class="nx">CheeseAcAddon</span><span class="p">.</span><span class="nx">dependsOn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;http&#39;</span><span class="p">];</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">addons</span><span class="p">.</span><span class="nx">ac</span><span class="p">.</span><span class="nx">cheddar</span> <span class="o">=</span> <span class="nx">CheeseAcAddon</span><span class="p">;</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-your-addon">
+<h4>Using Your Addon<a class="headerlink" href="#using-your-addon" title="Permalink to this headline">¶</a></h4>
+<p>The addon in <a class="reference internal" href="#example-addon">Example Addon</a> registered the plugin <tt class="docutils literal"><span class="pre">addon-ac-cheese</span></tt> and made its constructor available through
+the namespace <tt class="docutils literal"><span class="pre">cheese</span></tt>. The addons are not automatically added to the ActionContext, but to access an addon, your controller needs to
+add the YUI plugin name to the <tt class="docutils literal"><span class="pre">requires</span></tt> array. The YUI plugin name is the string passed to <tt class="docutils literal"><span class="pre">YUI.add</span></tt> in the addon.
+To invoke the addon methods, call the methods from the namespace defined in the <tt class="docutils literal"><span class="pre">prototype</span></tt> property of the addon&#8217;s constructor.
+In our addon, we defined the namespace <tt class="docutils literal"><span class="pre">cheese</span></tt> (<tt class="docutils literal"><span class="pre">&quot;namespace&quot;:</span> <span class="pre">&quot;cheese&quot;</span></tt>).</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Use the type &#39;cheese&#39; and then the</span>
+      <span class="c1">// the addon function &#39;cheesify&#39;</span>
+      <span class="kd">var</span> <span class="nx">cheesy</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">cheese</span><span class="p">.</span><span class="nx">cheesify</span><span class="p">({</span>
+        <span class="nx">food</span><span class="o">:</span> <span class="s2">&quot;nachos&quot;</span><span class="p">,</span>
+        <span class="nx">things</span><span class="o">:</span> <span class="s2">&quot;jokes&quot;</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="c1">// To use your addon, add &#39;addon-ac-cheese&#39; to your</span>
+  <span class="c1">// &#39;requires&#39; array.</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span> <span class="s1">&#39;mojito&#39;</span><span class="p">,</span> <span class="s1">&#39;addon-ac-cheese&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="middleware">
+<h2>Middleware<a class="headerlink" href="#middleware" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Introduction<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Middleware is code that can handle (or modify) the HTTP request in the server. Because Mojito middleware is based on the HTTP middleware <a class="reference external" href="http://senchalabs.github.com/connect/">Connect</a>,
+the code must follow the Connect API. Also, because each piece of middleware is a Node.js module, it should use <tt class="docutils literal"><span class="pre">module.exports</span></tt> to create a function to handle incoming requests.</p>
+</div>
+<div class="section" id="configuring-middleware">
+<h3>Configuring Middleware<a class="headerlink" href="#configuring-middleware" title="Permalink to this headline">¶</a></h3>
+<p>To use middleware, the path to its code must be listed in the <tt class="docutils literal"><span class="pre">middleware</span></tt> array in <tt class="docutils literal"><span class="pre">application.json</span></tt>. The path can be marked as relative to the application by prefixing
+it with &#8221;./&#8221;.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;middleware&quot;</span><span class="o">:</span> <span class="p">[</span>
+      <span class="s2">&quot;./middleware/static.js&quot;</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;hello&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HelloMojit&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="location-of-middleware">
+<h3>Location of Middleware<a class="headerlink" href="#location-of-middleware" title="Permalink to this headline">¶</a></h3>
+<p>We suggest that middleware be located in the directory <tt class="docutils literal"><span class="pre">{app_dir}/middleware/</span></tt>, but this is only a convention and not required. The name of the file is not important.</p>
+</div>
+<div class="section" id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The simple example below of middleware intercepts an HTTP request and lowercases URLs containing the string &#8220;<a href="#id16"><span class="problematic" id="id17">module_</span></a>&#8221; before the
+URLs are received by the server.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">&#39;module_&#39;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">url</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">url</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="nx">next</span><span class="p">();</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="libraries">
+<h2>Libraries<a class="headerlink" href="#libraries" title="Permalink to this headline">¶</a></h2>
+<p>Mojito allows you to use YUI libraries, external libraries, or customized libraries. To use any library in Mojito, you need to specify the module in either the <tt class="docutils literal"><span class="pre">requires</span></tt> array
+in the controller for YUI libraries or using the <tt class="docutils literal"><span class="pre">require</span></tt> method for Node.js modules.</p>
+<div class="section" id="yui-library">
+<h3>YUI Library<a class="headerlink" href="#yui-library" title="Permalink to this headline">¶</a></h3>
+<p>YUI libraries can be made available at the application or the mojit level. Each file can only have one <tt class="docutils literal"><span class="pre">YUI.add</span></tt> statement.
+Other components, such as controllers, models, etc., needing the library should specify the YUI module name in the <tt class="docutils literal"><span class="pre">requires</span></tt> array.</p>
+<div class="section" id="file-naming-convention">
+<h4>File Naming Convention<a class="headerlink" href="#file-naming-convention" title="Permalink to this headline">¶</a></h4>
+<p>The file name of a YUI module should have the following syntax where <tt class="docutils literal"><span class="pre">{yui_mod_name}</span></tt> is a unique YUI module name defined by the user and <tt class="docutils literal"><span class="pre">{affinity}</span></tt> is <tt class="docutils literal"><span class="pre">server</span></tt>, <tt class="docutils literal"><span class="pre">common</span></tt>,
+or <tt class="docutils literal"><span class="pre">client</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">{yui_mod_name}.{affinity}.js</span></tt></p>
+</div>
+<div class="section" id="location-of-yui-modules">
+<h4>Location of YUI Modules<a class="headerlink" href="#location-of-yui-modules" title="Permalink to this headline">¶</a></h4>
+<p>Application-level YUI modules should be placed in the following directory:</p>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/autoload/</span></tt></p>
+<p>Mojit-level YUI modules should be placed in the following directory:</p>
+<p><tt class="docutils literal"><span class="pre">{mojit_dir}/autoload/</span></tt></p>
+</div>
+<div class="section" id="creating-a-yui-module">
+<h4>Creating a YUI Module<a class="headerlink" href="#creating-a-yui-module" title="Permalink to this headline">¶</a></h4>
+<p>To create a YUI module, your code needs to have the following:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">YUI.add</span></tt> statement to add the module to YUI</li>
+<li>constructor for the module</li>
+<li>methods created through the <tt class="docutils literal"><span class="pre">prototype</span></tt> object</li>
+</ul>
+<div class="section" id="adding-the-module-to-yui">
+<h5>Adding the Module to YUI<a class="headerlink" href="#adding-the-module-to-yui" title="Permalink to this headline">¶</a></h5>
+<p>Your YUI module must have a <tt class="docutils literal"><span class="pre">YUI.add</span></tt> statement that adds the module to YUI. Below is the basic syntax of the <tt class="docutils literal"><span class="pre">YUI.add</span></tt> statement:</p>
+<p><tt class="docutils literal"><span class="pre">YUI.add('{module-name',</span> <span class="pre">function(Y){</span> <span class="pre">...</span> <span class="pre">}</span></tt></p>
+<p>For example, the <tt class="docutils literal"><span class="pre">send-photos</span></tt> YUI module would use the following:</p>
+<p><tt class="docutils literal"><span class="pre">YUI.add('send-photos',</span> <span class="pre">function(Y){</span> <span class="pre">...</span> <span class="pre">}</span></tt></p>
+</div>
+<div class="section" id="constructor">
+<h5>Constructor<a class="headerlink" href="#constructor" title="Permalink to this headline">¶</a></h5>
+<p>The constructor of a YUI module is basically a new namespace that is assigned a function. The new namespace is created with the following syntax:</p>
+<p><tt class="docutils literal"><span class="pre">Y.namespace('mojito').{constructor_name}</span> <span class="pre">=</span> <span class="pre">function()</span> <span class="pre">{</span> <span class="pre">...</span> <span class="pre">}</span></tt></p>
+<p>For example, to create the constructor <tt class="docutils literal"><span class="pre">HELLO</span></tt> for a YUI module, you would could use the following:</p>
+<p><tt class="docutils literal"><span class="pre">Y.namespace('mojito').HELLO</span> <span class="pre">=</span> <span class="pre">function()</span> <span class="pre">{</span> <span class="pre">this.greeting=&quot;hello&quot;;</span> <span class="pre">}</span></tt></p>
+</div>
+<div class="section" id="id2">
+<h5>Example<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h5>
+<p>In the code example below, the <tt class="docutils literal"><span class="pre">create_id</span></tt> function becomes the constructor for the <tt class="docutils literal"><span class="pre">UID</span></tt> namespace. This will let you create an instance, and the <tt class="docutils literal"><span class="pre">prototype</span></tt> object
+then allows you to access the method <tt class="docutils literal"><span class="pre">log</span></tt> from that instance.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;hello-uid&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">){</span>
+  <span class="kd">function</span> <span class="nx">create_id</span><span class="p">(){</span>
+    <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="o">*</span><span class="mi">10000000</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">uid</span> <span class="o">=</span> <span class="nx">uid</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">create_id</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">log</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user_name</span><span class="p">){</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user_name</span> <span class="o">+</span> <span class="s2">&quot;&#39;s UID is &quot;</span> <span class="o">+</span> <span class="s1">&#39;[&#39;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">uid</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito&#39;</span><span class="p">).</span><span class="nx">UID</span> <span class="o">=</span> <span class="nx">create_id</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-the-yui-module">
+<h4>Using the YUI Module<a class="headerlink" href="#using-the-yui-module" title="Permalink to this headline">¶</a></h4>
+<p>In the example mojit controller below, the YUI module <tt class="docutils literal"><span class="pre">hello-uid</span></tt> is loaded because the module is in the <tt class="docutils literal"><span class="pre">requires</span></tt> array. An instance of the module is created and
+saved in the <tt class="docutils literal"><span class="pre">init</span></tt> function. With the saved instance, the <tt class="docutils literal"><span class="pre">log</span></tt> method from the <tt class="docutils literal"><span class="pre">hello-uid</span></tt> module can be called:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;HelloMojit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controller</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">uid</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">UID</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">user_name</span> <span class="o">=</span> <span class="nx">ac</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">getFromMerged</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="s2">&quot;User&quot;</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">uid</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user_name</span><span class="p">);</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;hello-uid&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="other-libraries">
+<h3>Other Libraries<a class="headerlink" href="#other-libraries" title="Permalink to this headline">¶</a></h3>
+<p>Non-YUI libraries can also be used at either the application or mojit level. Because Node.js and <strong>not</strong> Mojito will read the contents of the library files,
+you need to use <tt class="docutils literal"><span class="pre">require()</span></tt> to include the library. Mojito will only confirm that the files exist.</p>
+<div class="section" id="location-of-non-yui-libraries">
+<h4>Location of Non-YUI Libraries<a class="headerlink" href="#location-of-non-yui-libraries" title="Permalink to this headline">¶</a></h4>
+<p>Application-level libraries should be placed in the following directory:</p>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/libs/</span></tt></p>
+<p>Mojit-level libraries should be placed in the following directory:</p>
+<p><tt class="docutils literal"><span class="pre">{mojit_dir}/libs</span></tt></p>
+</div>
+</div>
+</div>
+<div class="section" id="view-engines">
+<h2>View Engines<a class="headerlink" href="#view-engines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="overview">
+<h3>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h3>
+<p>A view engine is the piece of code that takes the data returned by a controller and applies it to a view. This is most often done by interpreting the view as a template.
+View engines in Mojito can be at either the application or mojit level. Application-level view engines are available to all mojits.</p>
+<p>The view engine consists of an addon that we will refer to as the view engine addon to differentiate it from other addons. The view engine addon can include code that renders templates
+or use a rendering engine such as  <a class="reference external" href="http://mustache.github.com/mustache.1.html">Mustache</a> and <a class="reference external" href="http://handlebarsjs.com/">Handlebars</a> to render view templates.
+In the latter case, the view engine addon acts as an interface between the Mojito framework and the rendering engine.
+In the following sections, we will be discussing how to create a view engine addon that relies on a rendering engine, not how to write code that renders templates.</p>
+<div class="section" id="terminology">
+<h4>Terminology<a class="headerlink" href="#terminology" title="Permalink to this headline">¶</a></h4>
+<p>The following list may help clarify the meaning of commonly used terms in this section.</p>
+<ul class="simple">
+<li><strong>view engine</strong> - The code used to apply data to a view. In Mojito, the view engine consists of a view engine addon.</li>
+<li><strong>view engine addon</strong> - The Mojito addon that compiles and renders templates. The addon typically relies on a rendering engine to compile and render view templates, but may
+include code to do the compilation and rendering.</li>
+<li><strong>rendering engine</strong> - The rendering engine is typically an off-the-shelf technology, such as
+<a class="reference external" href="http://mustache.github.com/mustache.1.html">Mustache</a>, <a class="reference external" href="http://handlebarsjs.com/">Handlebars</a>, <a class="reference external" href="http://jade-lang.com/">Jade</a>, or <a class="reference external" href="http://embeddedjs.com/">EJS</a>,
+that renders the template into markup for an HTML page.</li>
+<li><strong>view template</strong> - The template file (chosen by the controller) that contains tags and HTML that is rendered into markup for an HTML page.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="general-steps-for-creating-view-engines">
+<h3>General Steps for Creating View Engines<a class="headerlink" href="#general-steps-for-creating-view-engines" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Use <tt class="docutils literal"><span class="pre">npm</span></tt> to install the rendering engine into your Mojito application or copy it into a directory such as <tt class="docutils literal"><span class="pre">{app_dir}/libs</span></tt>.</li>
+<li>Create a view engine addon that references the rendering engine with a <tt class="docutils literal"><span class="pre">require</span></tt> statement and meets the <a class="reference internal" href="#reqs-ve-addon"><em>requirements of the view engine addon</em></a>.</li>
+<li>Create view templates using the templates for the rendering engine and place them in <tt class="docutils literal"><span class="pre">{mojit_dir}/views</span></tt>.</li>
+</ol>
+</div>
+<div class="section" id="file-naming-conventions">
+<h3>File Naming Conventions<a class="headerlink" href="#file-naming-conventions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="view-engine-addon">
+<h4>View Engine Addon<a class="headerlink" href="#view-engine-addon" title="Permalink to this headline">¶</a></h4>
+<p>The name of the addon should have the following syntax where <tt class="docutils literal"><span class="pre">{view_engine_name}</span></tt> is the view engine and <tt class="docutils literal"><span class="pre">{affinity}</span></tt>
+is <tt class="docutils literal"><span class="pre">server</span></tt>, <tt class="docutils literal"><span class="pre">common</span></tt>, or <tt class="docutils literal"><span class="pre">client</span></tt>.</p>
+<p><tt class="docutils literal"><span class="pre">{view_engine_name}.{affinity}.js</span></tt></p>
+</div>
+<div class="section" id="view-template">
+<h4>View Template<a class="headerlink" href="#view-template" title="Permalink to this headline">¶</a></h4>
+<p>The name of the view template should have the following syntax where <tt class="docutils literal"><span class="pre">{view_engine_name}</span></tt> should
+be the same as the <tt class="docutils literal"><span class="pre">{view_engine_name}</span></tt> in the file name of the view engine addon.</p>
+<p><tt class="docutils literal"><span class="pre">{view}.{view_engine_name}.html</span></tt></p>
+</div>
+</div>
+<div class="section" id="file-locations">
+<h3>File Locations<a class="headerlink" href="#file-locations" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="application-level-view-engine-addons">
+<h4>Application-Level View Engine Addons<a class="headerlink" href="#application-level-view-engine-addons" title="Permalink to this headline">¶</a></h4>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/addons/view-engines</span></tt></p>
+</div>
+<div class="section" id="mojit-level-view-engine-addons">
+<h4>Mojit-Level View Engine Addons<a class="headerlink" href="#mojit-level-view-engine-addons" title="Permalink to this headline">¶</a></h4>
+<p><tt class="docutils literal"><span class="pre">{mojit_dir}/addons/view-engines</span></tt></p>
+</div>
+<div class="section" id="rendering-engines">
+<h4>Rendering Engines<a class="headerlink" href="#rendering-engines" title="Permalink to this headline">¶</a></h4>
+<p>Mojito does not require rendering engines to be in a specific location. The recommended practice is to use <tt class="docutils literal"><span class="pre">npm</span></tt> to install
+rendering engines into the <tt class="docutils literal"><span class="pre">node_modules</span></tt> directory or copy the rendering engine into the <tt class="docutils literal"><span class="pre">libs</span></tt> directory as shown below:</p>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/node_modules/{rendering_engine}</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/libs/{rendering_engine}</span></tt></p>
+<p><tt class="docutils literal"><span class="pre">{mojit_dir}/libs/{rendering_engine}}</span></tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you are using mojit-level view engine addons, the rendering engine should be at the mojit level as well, such as <tt class="docutils literal"><span class="pre">{mojit_dir}/libs/{rendering_engine}</span></tt>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="requirements-of-the-view-engine-addon">
+<span id="reqs-ve-addon"></span><h3>Requirements of the View Engine Addon<a class="headerlink" href="#requirements-of-the-view-engine-addon" title="Permalink to this headline">¶</a></h3>
+<p>The view engine addon must have the following:</p>
+<ul class="simple">
+<li>a <tt class="docutils literal"><span class="pre">YUI.add</span></tt> statement to register the addon. For example:</li>
+</ul>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;addons-viewengine-hb&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+
+ <span class="c1">// The addon name &#39;addons-viewengine-hb&#39; is registered by YUI.add</span>
+
+<span class="p">},</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>an object that is assigned to <tt class="docutils literal"><span class="pre">Y.mojito.addons.viewEngines.{view_engine_name}</span></tt> as seen below:</li>
+</ul>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">...</span>
+
+  <span class="kd">function</span> <span class="nx">HbAdapter</span><span class="p">(</span><span class="nx">viewId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">viewId</span> <span class="o">=</span> <span class="nx">viewId</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="p">...</span>
+   <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito.addons.viewEngines&#39;</span><span class="p">).</span><span class="nx">hb</span> <span class="o">=</span> <span class="nx">HbAdapter</span><span class="p">;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>a prototype of the object has the following two methods <tt class="docutils literal"><span class="pre">render</span></tt> and <tt class="docutils literal"><span class="pre">compiler</span></tt> as shown below:</li>
+</ul>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">...</span>
+
+  <span class="nx">HbAdapter</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">mojitType</span><span class="p">,</span> <span class="nx">tmpl</span><span class="p">,</span> <span class="nx">adapter</span><span class="p">,</span> <span class="nx">meta</span><span class="p">,</span> <span class="nx">more</span><span class="p">)</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">},</span>
+    <span class="nx">compiler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">)</span> <span class="p">{</span>
+      <span class="p">...</span>
+    <span class="p">}</span>
+    <span class="p">...</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="methods-for-the-view-engine-addon">
+<h3>Methods for the View Engine Addon<a class="headerlink" href="#methods-for-the-view-engine-addon" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="render">
+<h4>render<a class="headerlink" href="#render" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="description">
+<h5>Description<a class="headerlink" href="#description" title="Permalink to this headline">¶</a></h5>
+<p>Sends a rendered template as the first argument to the methods <tt class="docutils literal"><span class="pre">adapter.flush</span></tt> or <tt class="docutils literal"><span class="pre">adapter.done</span></tt>.</p>
+</div>
+<div class="section" id="signature">
+<h5>Signature<a class="headerlink" href="#signature" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">render(data,</span> <span class="pre">mojitType,</span> <span class="pre">tmpl,</span> <span class="pre">adapter,</span> <span class="pre">meta,</span> <span class="pre">more)</span></tt></p>
+</div>
+<div class="section" id="parameters">
+<h5>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">data</span></tt> (Object) - the data to render.</li>
+<li><tt class="docutils literal"><span class="pre">mojitType</span></tt> (String) - the mojit whose view is being rendered.</li>
+<li><tt class="docutils literal"><span class="pre">tmpl</span></tt> - (String) - path to template to render.</li>
+<li><tt class="docutils literal"><span class="pre">adapter</span></tt> (Object) - the output adapter to use.</li>
+<li><tt class="docutils literal"><span class="pre">meta</span></tt> (Object) - the metadata that should be passed as the second argument to <tt class="docutils literal"><span class="pre">adapter.flush</span></tt> or <tt class="docutils literal"><span class="pre">adapter.done</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">more</span></tt> (Boolean) - if <tt class="docutils literal"><span class="pre">true</span></tt>, the addon should call the method <tt class="docutils literal"><span class="pre">adapter.flush</span></tt>, and if <tt class="docutils literal"><span class="pre">false</span></tt>, call the method <tt class="docutils literal"><span class="pre">adapter.done</span></tt>.</li>
+</ul>
+</div>
+<div class="section" id="return">
+<h5>Return<a class="headerlink" href="#return" title="Permalink to this headline">¶</a></h5>
+<p>None</p>
+</div>
+</div>
+<div class="section" id="compiler">
+<h4>compiler<a class="headerlink" href="#compiler" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id5">
+<h5>Description<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h5>
+<p>Returns the compiled template. The <tt class="docutils literal"><span class="pre">compiler</span></tt> method is only used when you run the following command: <tt class="docutils literal"><span class="pre">mojito</span> <span class="pre">compile</span> <span class="pre">views</span></tt></p>
+</div>
+<div class="section" id="id6">
+<h5>Signature<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">compile(tmpl)</span></tt></p>
+</div>
+<div class="section" id="id7">
+<h5>Parameters<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">tmpl</span></tt> (String) - path to the template that is to be rendered</li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h5>Return<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">String</span></tt> - compiled template</p>
+</div>
+</div>
+</div>
+<div class="section" id="view-engine-addon-and-its-view">
+<h3>View Engine Addon and Its View<a class="headerlink" href="#view-engine-addon-and-its-view" title="Permalink to this headline">¶</a></h3>
+<p>A naming convention associates a view engine and its view templates. For example, the view engine <tt class="docutils literal"><span class="pre">{mojit_dir}/addons/view-engines/big_engine.server.js</span></tt> will
+be used to render the view template <tt class="docutils literal"><span class="pre">{mojit_dir}/views/foo.big_engine.html</span></tt>. Having two view templates that only differ by the view engine will cause an error
+because Mojito will not be able to decide which view engine to use (which to prioritize above the other) to render the view template.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id9">
+<h4>Mustache<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>The following example is of the <a class="reference external" href="http://mustache.github.com/mustache.1.html">Mustache view engine</a> that comes with Mojito.
+This built-in view engine uses the prescribed location and file naming convention, and  meets the view engine addon requirements.</p>
+<div class="section" id="mustache-rendering-engine">
+<h5>Mustache Rendering Engine<a class="headerlink" href="#mustache-rendering-engine" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/libs/Mulib/Mu</span></tt></p>
+</div>
+<div class="section" id="id10">
+<h5>View Engine Addon<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/addons/view-engines/mu.server.js</span></tt></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;mojito-mu&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// Create an instance of the Mustache rendering engine</span>
+  <span class="kd">var</span> <span class="nx">mu</span> <span class="o">=</span> <span class="nx">YUI</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/../../libs/Mulib/Mu&#39;</span><span class="p">),</span>
+    <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Class text.</span>
+<span class="cm">  * @class MuAdapterServer</span>
+<span class="cm">  * @private</span>
+<span class="cm">  */</span>
+  <span class="kd">function</span> <span class="nx">MuAdapter</span><span class="p">(</span><span class="nx">viewId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">viewId</span> <span class="o">=</span> <span class="nx">viewId</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">MuAdapter</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="cm">/**</span>
+<span class="cm">    * Renders the Mustache template using the data provided.</span>
+<span class="cm">    * @method render</span>
+<span class="cm">    * @param {object} data The data to render.</span>
+<span class="cm">    * @param {string} mojitType The name of the mojit type.</span>
+<span class="cm">    * @param {string} tmpl The name of the template to render.</span>
+<span class="cm">    * @param {object} adapter The output adapter to use.</span>
+<span class="cm">    * @param {object} meta Optional metadata.</span>
+<span class="cm">    * @param {boolean} more Whether there will be more content later.</span>
+<span class="cm">    */</span>
+    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">mojitType</span><span class="p">,</span> <span class="nx">tmpl</span><span class="p">,</span> <span class="nx">adapter</span><span class="p">,</span> <span class="nx">meta</span><span class="p">,</span> <span class="nx">more</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
+      <span class="nx">handleRender</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">output</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">adapter</span><span class="p">.</span><span class="nx">flush</span><span class="p">(</span><span class="nx">c</span><span class="p">,</span> <span class="nx">meta</span><span class="p">);</span>
+        <span class="p">});</span>
+        <span class="nx">output</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">more</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;render complete for view &quot;&#39;</span> <span class="o">+</span> <span class="nx">me</span><span class="p">.</span><span class="nx">viewId</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;mojito&#39;</span><span class="p">,</span> <span class="s1">&#39;qeperf&#39;</span><span class="p">);</span>
+            <span class="nx">adapter</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nx">meta</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">});</span>
+      <span class="p">};</span>
+
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Rendering template &quot;&#39;</span> <span class="o">+</span> <span class="nx">tmpl</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;mojito&#39;</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">);</span>
+      <span class="nx">mu</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="p">{</span><span class="nx">cached</span><span class="o">:</span> <span class="nx">meta</span><span class="p">.</span><span class="nx">view</span><span class="p">.</span><span class="nx">cacheTemplates</span><span class="p">},</span> <span class="nx">handleRender</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">compiler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">));</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito.addons.viewEngines&#39;</span><span class="p">).</span><span class="nx">mu</span> <span class="o">=</span> <span class="nx">MuAdapter</span><span class="p">;</span>
+<span class="p">},</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h5>View Template<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/mojits/{mojit_name}/views/foo.mu.html</span></tt></p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dl&gt;</span>
+    <span class="nt">&lt;dt&gt;</span>status<span class="nt">&lt;/dt&gt;</span>
+    <span class="nt">&lt;dd</span> <span class="na">id=</span><span class="s">&quot;dd_status&quot;</span><span class="nt">&gt;</span>{{status}}<span class="nt">&lt;/dd&gt;</span>
+    <span class="nt">&lt;dt&gt;</span>data<span class="nt">&lt;/dt&gt;</span>
+    <span class="nt">&lt;dd</span> <span class="na">id=</span><span class="s">&quot;dd_data&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;b&gt;</span>some:<span class="nt">&lt;/b&gt;</span> {{#data}}{{some}}{{/data}}
+    <span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;/dl&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id12">
+<h4>Handlebars<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<p>This examples shows how to use another popular templating system called <a class="reference external" href="http://handlebarsjs.com/">Handlebars</a>, which is also compatible with
+Mustache.</p>
+<div class="section" id="handlebars-rendering-engine">
+<h5>Handlebars Rendering Engine<a class="headerlink" href="#handlebars-rendering-engine" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/node_modules/handlebars</span></tt></p>
+</div>
+<div class="section" id="id14">
+<h5>View Engine Addon<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/addons/view-engines/hb.server.js</span></tt></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;addons-viewengine-hb&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="kd">var</span> <span class="nx">hb</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;handlebars&#39;</span><span class="p">),</span>
+    <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+
+  <span class="cm">/**</span>
+<span class="cm">  * Class text.</span>
+<span class="cm">  * @class HandleBars</span>
+<span class="cm">  * @private</span>
+<span class="cm">  */</span>
+  <span class="kd">function</span> <span class="nx">HbAdapter</span><span class="p">(</span><span class="nx">viewId</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">viewId</span> <span class="o">=</span> <span class="nx">viewId</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">HbAdapter</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="cm">/**</span>
+<span class="cm">    * Renders the Handlebars template using the data provided.</span>
+<span class="cm">    * @method render</span>
+<span class="cm">    * @param {object} data The data to render.</span>
+<span class="cm">    * @param {string} mojitType The name of the mojit type.</span>
+<span class="cm">    * @param {string} tmpl The name of the template to render.</span>
+<span class="cm">    * @param {object} adapter The output adapter to use.</span>
+<span class="cm">    * @param {object} meta Optional metadata.</span>
+<span class="cm">    * @param {boolean} more Whether there will be more content later.</span>
+<span class="cm">    */</span>
+    <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">mojitType</span><span class="p">,</span> <span class="nx">tmpl</span><span class="p">,</span> <span class="nx">adapter</span><span class="p">,</span> <span class="nx">meta</span><span class="p">,</span> <span class="nx">more</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Rendering template &quot;&#39;</span> <span class="o">+</span> <span class="nx">tmpl</span> <span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;mojito&#39;</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">);</span>
+      <span class="k">try</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="nx">hb</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">compiler</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">));</span>
+        <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">template</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+      <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+        <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">e</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nx">adapter</span><span class="p">.</span><span class="nx">flush</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span><span class="nx">meta</span><span class="p">);</span>
+      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">more</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">adapter</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="nx">meta</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="nx">compiler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">tmpl</span><span class="p">,</span> <span class="s1">&#39;utf8&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito.addons.viewEngines&#39;</span><span class="p">).</span><span class="nx">hb</span> <span class="o">=</span> <span class="nx">HbAdapter</span><span class="p">;</span>
+
+<span class="p">},</span> <span class="s1">&#39;0.1.0&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id15">
+<h5>View Template<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h5>
+<p><tt class="docutils literal"><span class="pre">{app_dir}/mojits/{mojit_name}/views/foo.hb.html</span></tt></p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;dl&gt;</span>
+    <span class="nt">&lt;dt&gt;</span>status<span class="nt">&lt;/dt&gt;</span>
+    <span class="nt">&lt;dd</span> <span class="na">id=</span><span class="s">&quot;dd_status&quot;</span><span class="nt">&gt;</span>{{status/text}}<span class="nt">&lt;/dd&gt;</span>
+    <span class="nt">&lt;dt&gt;</span>data<span class="nt">&lt;/dt&gt;</span>
+    <span class="nt">&lt;dd</span> <span class="na">id=</span><span class="s">&quot;dd_data&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;b&gt;</span>See the <span class="nt">&lt;/b&gt;</span>{{{link &quot;following&quot; data.url}}}
+    <span class="nt">&lt;/dd&gt;</span>
+  <span class="nt">&lt;/dl&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

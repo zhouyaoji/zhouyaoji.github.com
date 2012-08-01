@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;util.common.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;autoload&#x2F;util.common.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true*&#x2F;
+&#x2F;*global YUI*&#x2F;
+
+
+YUI.add(&#x27;mojito-util&#x27;, function(Y) {
+
+    var META_AUTOCLOBBER = [&#x27;content-type&#x27;],
+        META_EXCLUDE = [&#x27;view&#x27;],
+        META_ATOMIC = [&#x27;content-type&#x27;];
+
+
+    function arrayContainsLowerCase(a, obj) {
+        var i = a.length,
+            selector = obj.toLowerCase();
+
+        i -= 1;
+        while (i &gt;= 0) {
+            if (a[i].toLowerCase() === selector) {
+                return true;
+            }
+            i -= 1;
+        }
+        return false;
+    }
+
+
+    function shouldAutoClobber(k) {
+        return arrayContainsLowerCase(META_AUTOCLOBBER, k);
+    }
+
+
+    function isExcluded(k) {
+        return arrayContainsLowerCase(META_EXCLUDE, k);
+    }
+
+
+    function isAtomic(k) {
+        return arrayContainsLowerCase(META_ATOMIC, k);
+    }
+
+
+    Y.namespace(&#x27;mojito&#x27;).util = {
+
+        array: {
+
+            remove: function(arr, from, to) {
+                var rest = arr.slice((to || from) + 1 || arr.length);
+
+                arr.length = from &lt; 0 ? arr.length + from : from;
+                return this.push.apply(arr, rest);
+            },
+
+            contains: function(a, obj) {
+                var i = a.length;
+
+                i -= 1;
+                while (i &gt;= 0) {
+                    if (a[i] === obj) {
+                        return true;
+                    }
+                    i -= 1;
+                }
+                return false;
+            }
+        },
+
+
+        &#x2F;**
+         * Unicode escapes the &quot;Big 5&quot; HTML characters (&lt;, &gt;, &#x27;, &quot;, and &amp;). Note
+         * that only strings are escaped by this routine. If you want to ensure
+         * that an entire object or array is escaped use the util.cleanse() call.
+         * @param {Object} obj The object to encode&#x2F;escape.
+         *&#x2F;
+        htmlEntitiesToUnicode: function(obj) {
+
+            &#x2F;&#x2F; Note that we convert to an &quot;escaped&quot; unicode representation here
+            &#x2F;&#x2F; which ensures that when the JSON string we&#x27;re ultimately creating
+            &#x2F;&#x2F; hits a browser it&#x27;s not interpreted as the original character.
+            if (Y.Lang.isString(obj)) {
+                return obj.replace(&#x2F;&lt;&#x2F;g, &#x27;\\u003C&#x27;).
+                    replace(&#x2F;&gt;&#x2F;g, &#x27;\\u003E&#x27;).
+                    replace(&#x2F;&amp;&#x2F;g, &#x27;\\u0026&#x27;).
+                    replace(&#x2F;&#x27;&#x2F;g, &#x27;\\u0027&#x27;).
+                    replace(&#x2F;&quot;&#x2F;g, &#x27;\\u0022&#x27;);
+            }
+
+            return obj;
+        },
+
+
+        &#x2F;**
+         * Converts unicode escapes for the HTML characters (&lt;, &gt;, &#x27;, &quot;, and &amp;)
+         * back into their original HTML form. Note that only strings are
+         * escaped by this routine. If you want to ensure that an entire object
+         * or array is escaped use the util.cleanse() call.
+         * @param {Object} obj The object to encode&#x2F;escape.
+         *&#x2F;
+        unicodeToHtmlEntities: function(obj) {
+
+            &#x2F;&#x2F; Note we convert the form produced by htmlEntitiesToUnicode.
+            if (Y.Lang.isString(obj)) {
+                return obj.replace(&#x2F;\\u003C&#x2F;g, &#x27;&lt;&#x27;).
+                    replace(&#x2F;\\u003E&#x2F;g, &#x27;&gt;&#x27;).
+                    replace(&#x2F;\\u0026&#x2F;g, &#x27;&amp;&#x27;).
+                    replace(&#x2F;\\u0027&#x2F;g, &#x27;\&#x27;&#x27;).
+                    replace(&#x2F;\\u0022&#x2F;g, &#x27;&quot;&#x27;);
+            }
+
+            return obj;
+        },
+
+
+        &#x2F;**
+         * Cleanses string keys and values in an object, returning a new object
+         * whose strings are escaped using the escape function provided. The
+         * default escape function is the util.htmlEntitiesToUnicode function.
+         * @param {Object} obj The object to cleanse.
+         * @param {Function} escape The escape function to run. Default is
+         *     util.htmlEntitiesToUnicode.
+         * @return {Object} The cleansed object.
+         *&#x2F;
+        cleanse: function(obj, escape) {
+            var func,
+                clean,
+                len,
+                i;
+
+            &#x2F;&#x2F; Confirm we got a valid escape function, or default properly.
+            if (escape) {
+                if (typeof escape === &#x27;function&#x27;) {
+                    func = escape;
+                } else {
+                    throw new Error(&#x27;Invalid escape function: &#x27; + escape);
+                }
+            }
+            func = func || this.htmlEntitiesToUnicode;
+
+            &#x2F;&#x2F; How we proceed depends on what type of object we received. If we
+            &#x2F;&#x2F; got a String or RegExp they&#x27;re not strictly mutable, but we can
+            &#x2F;&#x2F; quickly escape them and return. If we got an Object or Array
+            &#x2F;&#x2F; we&#x27;ll need to iterate, but in different ways since their content
+            &#x2F;&#x2F; is found via different indexing models. If we got anything else
+            &#x2F;&#x2F; we can just return it.
+
+            if (Y.Lang.isString(obj)) {
+                return func(obj);
+            }
+
+            if (Y.Lang.isArray(obj)) {
+                clean = [];
+                len = obj.length;
+                for (i = 0; i &lt; len; i += 1) {
+                    clean.push(this.cleanse(obj[i], func));
+                }
+                return clean;
+            }
+
+            if (Y.Lang.isObject(obj)) {
+                clean = {};
+                for (i in obj) {
+                    if (obj.hasOwnProperty(i)) {
+                        clean[this.cleanse(i, func)] =
+                            this.cleanse(obj[i], func);
+                    }
+                }
+                return clean;
+            }
+
+            return obj;
+        },
+
+
+        &#x2F;**
+         * Uncleanses string keys and values in an object, returning a new
+         * object whose strings are unescaped via the unicodeToHtmlEntities
+         * routine. 
+         * @param {Object} obj The object to cleanse.
+         * @return {Object} The cleansed object.
+         *&#x2F;
+        uncleanse: function(obj) {
+            return this.cleanse(obj, this.unicodeToHtmlEntities);
+        },
+
+
+        copy: function(obj) {
+            var temp = null,
+                key = &#x27;&#x27;;
+
+            if (!obj || typeof obj !== &#x27;object&#x27;) { return obj; }
+            temp = new obj.constructor();
+            for (key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    temp[key] = Y.mojito.util.copy(obj[key]);
+                }
+            }
+            return temp;
+        },
+
+
+        heir: function(o) {
+            function F() {}
+            F.prototype = o;
+            return new F();
+        },
+
+
+        &#x2F;**
+         * Recursively merge properties of two objects
+         * @method mergeRecursive
+         * @param {object} dest The destination object.
+         * @param {object} src The source object.
+         * @param {boolean} typeMatch Only replace if src and dest types are
+         *     the same type if true.
+         *&#x2F;
+        mergeRecursive: function(dest, src, typeMatch) {
+            var p,
+                arr;
+
+            if (Y.Lang.isArray(src)) {
+                if (!Y.Lang.isArray(dest)) {
+                    throw new Error(&#x27;Type mismatch for object merge.&#x27;);
+                }
+
+                &#x2F;&#x2F; Not particularly performant, but we need to avoid duplicates
+                &#x2F;&#x2F; as much as possible. Unfortunately, the YUI unique calls
+                &#x2F;&#x2F; don&#x27;t have an option to work in-place so we have even more
+                &#x2F;&#x2F; overhead here :(.
+
+                &#x2F;&#x2F; copy destination array.
+                arr = dest.slice(0);
+
+                &#x2F;&#x2F; unroll src elements into our copy via apply.
+                arr.push.apply(arr, src);
+
+                &#x2F;&#x2F; unique the src and destination items.
+                arr = Y.Array.unique(arr);
+
+                &#x2F;&#x2F; truncate destination and unroll uniqued elements into it.
+                dest.length = 0;
+                dest.push.apply(dest, arr);
+            } else {
+                for (p in src) {
+                    if (src.hasOwnProperty(p)) {
+                        &#x2F;&#x2F; Property in destination object set; update its value.
+                        &#x2F;&#x2F; TODO: lousy test. Constructor matches don&#x27;t always work.
+                        if (src[p] &amp;&amp; src[p].constructor === Object) {
+                            if (!dest[p]) {
+                                dest[p] = {};
+                            }
+                            dest[p] = this.mergeRecursive(dest[p], src[p]);
+                        } else {
+                            if (dest[p] &amp;&amp; typeMatch) {
+                                if (typeof dest[p] === typeof src[p]) {
+                                    dest[p] = src[p];
+                                }
+                            } else if (typeof src[p] !== &#x27;undefined&#x27;) {
+                                &#x2F;&#x2F; only copy values that are not undefined, null and
+                                &#x2F;&#x2F; falsey values should be copied
+                                &#x2F;&#x2F; for null sources, we only want to copy over
+                                &#x2F;&#x2F; values that are undefined
+                                if (src[p] === null) {
+                                    if (typeof dest[p] === &#x27;undefined&#x27;) {
+                                        dest[p] = src[p];
+                                    }
+                                } else {
+                                    dest[p] = src[p];
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return dest;
+        },
+
+
+        &#x2F;**
+         * Used to merge meta objects into each other. Special consideration for
+         * certain headers values like &#x27;content-type&#x27;.
+         * @method metaMerge
+         * @private
+         * @param {object} to The target object.
+         * @param {object} from The source object.
+         * @param {boolean} clobber True to overwrite existing properties.
+         *&#x2F;
+        metaMerge: function(to, from, clobber, __internal) {
+            var k,
+                tv,
+                fv,
+                internal = __internal;
+
+            for (k in from) {
+                if (from.hasOwnProperty(k)) {
+                    if (internal || !isExcluded(k)) {
+                        fv = from[k];
+                        tv = to[k];
+                        if (!tv) {
+                            &#x2F;&#x2F; Y.log(&#x27;adding &#x27; + k);
+                            to[k] = fv;
+                        } else if (Y.Lang.isArray(fv)) {
+                            &#x2F;&#x2F; Y.log(&#x27;from array &#x27; + k);
+                            if (!Y.Lang.isArray(tv)) {
+                                throw new Error(&#x27;Meta merge error.&#x27; +
+                                    &#x27; Type mismatch between mojit metas.&#x27;);
+                            }
+                            &#x2F;&#x2F; Largely used for content-type, but could be other
+                            &#x2F;&#x2F; key values in the future.
+                            if (shouldAutoClobber(k)) {
+                                if (isAtomic(k)) {
+                                    &#x2F;&#x2F; Note the choice to use the last item of
+                                    &#x2F;&#x2F; the inbound array, not the first.
+                                    &#x2F;&#x2F; Y.log(&#x27;atomizing &#x27; + k);
+                                    to[k] = [fv[fv.length - 1]];
+                                } else {
+                                    &#x2F;&#x2F; Not &quot;atomic&quot; but clobbering means we&#x27;ll
+                                    &#x2F;&#x2F; completely replace any existing array
+                                    &#x2F;&#x2F; value in the slot.
+                                    &#x2F;&#x2F; Y.log(&#x27;clobbering &#x27; + k);
+                                    to[k] = fv;
+                                }
+                            } else {
+                                &#x2F;&#x2F; A simple push() here would work, but it
+                                &#x2F;&#x2F; doesn&#x27;t unique the values so it may cause an
+                                &#x2F;&#x2F; array to grow without bounds over time even
+                                &#x2F;&#x2F; when no truly new content is added.
+                                Y.mojito.util.mergeRecursive(tv, fv);
+                            }
+                        } else if (Y.Lang.isObject(fv)) {
+                            &#x2F;&#x2F; Y.log(&#x27;from object &#x27; + k);
+                            if (Y.Lang.isObject(tv)) {
+                                &#x2F;&#x2F; Y.log(&#x27;merging &#x27; + k);
+                                to[k] = Y.mojito.util.metaMerge(tv, fv, clobber,
+                                    true);
+                            } else if (Y.Lang.isNull(tv) ||
+                                    Y.Lang.isUndefined(tv)) {
+                                to[k] = fv;
+                            } else {
+                                throw new Error(&#x27;Meta merge error.&#x27; +
+                                    &#x27; Type mismatch between mojit metas.&#x27;);
+                            }
+                        } else if (clobber) {
+                            &#x2F;&#x2F; Y.log(&#x27;clobbering &#x27; + k);
+                            to[k] = fv;
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+
+
+        &#x2F;*
+         * TODO: [Issue 79] I&#x27;m sure we can do this better.
+         *
+         * This function trys to make the given URL relative to the
+         * folder the iOS UIWebView is running in.
+         *&#x2F;
+        iOSUrl: function(url) {
+
+            &#x2F;&#x2F; If we are not in a DOM, return
+            if (typeof window === &#x27;undefined&#x27;) {
+                return url;
+            }
+
+            &#x2F;&#x2F; Now we do some bad stuff for iOS
+            &#x2F;&#x2F; Basically if we are in a UIWebView and its location is a
+            &#x2F;&#x2F; file:&#x2F;&#x2F; on the device we have to make our URL relative to the
+            &#x2F;&#x2F; file that was opened
+            if (window.location.href.indexOf(&#x27;file:&#x2F;&#x2F;&#x27;) === 0 &amp;&amp;
+                    window.location.href.indexOf(&#x27;&#x2F;Applications&#x2F;&#x27;) &gt; 0 &amp;&amp;
+                    window.location.href.indexOf(&#x27;.app&#x2F;&#x27;) &gt; 0) {
+                if (url.charAt(0) === &#x27;&#x2F;&#x27;) {
+                    url = url.slice(1);
+                }
+            }
+            return url;
+        }
+    };
+
+}, &#x27;0.1.0&#x27;, {requires: [
+    &#x27;array-extras&#x27;,
+    &#x27;mojito&#x27;
+]});
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

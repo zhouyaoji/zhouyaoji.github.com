@@ -1,0 +1,14 @@
+{
+  "name": "Mojito API",
+  "description": "This is the API documentation for the Yahoo! Mojito Presentation Framework.",
+  "version": "0.3.8",
+  "url": "http://developer.yahoo.com/cocktails/mojito/",
+  "logo": "assets/img/mojito-logo-white-bkg.png",
+  "options": {
+    "paths": ["../../open_mojito/trunk/source/lib"],
+    "ignorePaths": [ "tests", "node_modules","archetypes","artifacts", "libs", "management", "middleware","view-engines"], 
+    "outdir": "./out",
+    "linkNatives": "true",
+    "attributesEmit": "true"
+  }
+}

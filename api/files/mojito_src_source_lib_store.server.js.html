@@ -1,0 +1,4568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;store.server.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;store.server.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+&#x2F;*jslint
+    anon:true, sloppy:true, regexp: true, continue: true, nomen:true, node:true
+*&#x2F;
+
+
+var libfs = require(&#x27;fs&#x27;),
+    libglob = require(&#x27;glob&#x27;),
+    libpath = require(&#x27;path&#x27;),
+    libqs = require(&#x27;querystring&#x27;),
+    libvm = require(&#x27;vm&#x27;),
+    libwalker = require(&#x27;.&#x2F;package-walker.server&#x27;),
+    libycb = require(&#x27;.&#x2F;libs&#x2F;ycb&#x27;),
+
+    isPositiveInt = &#x2F;^[0-9]+$&#x2F;,
+    isSpaceOpencurly = &#x2F; \{&#x2F;g,
+    isSpaceClosecurly = &#x2F; \}&#x2F;g,
+    isNotAlphaNum = &#x2F;[^a-zA-Z0-9]&#x2F;,
+
+    &#x2F;&#x2F; fallback logger
+    &#x2F;&#x2F; This is the logger that is used until setLogger() is called.
+    logger = {
+        log: function(msg, lvl, who) {
+            var log = console.log;
+
+            if (lvl === &#x27;warn&#x27; || lvl === &#x27;error&#x27;) {
+                &#x2F;&#x2F; console.warn provides unbuffered output and avoids message
+                &#x2F;&#x2F; truncation when process.exit() is called after logging
+                log = console.warn;
+            }
+            log(&#x27;[&#x27; + lvl + &#x27;] &#x27; + who + &#x27;: &#x27; + msg);
+        }
+    },
+
+    &#x2F;&#x2F; nodejs-yui3 has global state about which modules are loaded. Use
+    &#x2F;&#x2F; multiple require()&#x27;d instances as a wall to prevent cross-contamination
+    &#x2F;&#x2F; when using loader for dependency calculations.
+    utilYUI = require(&#x27;yui&#x27;).YUI,
+    serverYUI = require(&#x27;yui&#x27;).YUI,
+    clientYUI = require(&#x27;yui&#x27;).YUI,
+
+    Y = utilYUI({ useSync: true }).use(&#x27;intl&#x27;, &#x27;json-parse&#x27;, &#x27;json-stringify&#x27;),
+
+    mojitoRoot = __dirname,
+
+    NAME = &#x27;MojitoServer&#x27;;
+
+&#x2F;&#x2F; TODO: move string constants here.
+
+
+&#x2F;&#x2F; The Affinity object is to manage the use of the affinity string in
+&#x2F;&#x2F; filenames.  Some files have affinities that have multiple parts
+&#x2F;&#x2F; (e.g. &quot;server-tests&quot;).
+function Affinity(affinity) {
+    this._init(affinity);
+}
+
+
+Affinity.prototype = {
+    _init: function(aff) {
+        var parts;
+
+        if (aff.indexOf(&#x27;-&#x27;) === -1) {
+            this.affinity = aff;
+        } else {
+            parts = aff.split(&#x27;-&#x27;);
+            this.affinity = parts[0];
+            this.type = parts[1];
+        }
+    },
+    toString: function() {
+        return this.affinity;
+    }
+};
+
+
+
+&#x2F;**
+ * The Resource Store manages information about the &quot;resources&quot; in a Mojito
+ * application.  These resources are things that have representation on the
+ * filesystem.
+ *
+ * Each resource can have many different versions.  This is not talking about
+ * revisions, which is how the resource changes over time.  It is instead
+ * talking about how there can be a version of the resource just for iphones,
+ * one just for android, a fallback, etc.
+ *
+ * There are various types of resources:
+ * &lt;pre&gt;
+ *   config      -- a piece of configuration, sometimes for another resource
+ *   controller  -- the controller for a mojit
+ *   model       -- a model for a mojit
+ *   view        -- a view for a mojit
+ *   binder      -- a binder for a mojit
+ *   action      -- an action to augment the controller
+ *   asset       -- an asset (css, js, image, etc)
+ *   addon       -- an addon to the mojito system
+ *   spec        -- the configuration for a mojit instance
+ *   yui-lang    -- a YUI3 language bundle
+ *   yui-module  -- a YUI3 module (that isn&#x27;t one of the above)
+ * &lt;&#x2F;pre&gt;
+ *
+ * The metadata kept about each resource is &quot;normalized&quot; to the follow keys:
+ *   (not all resources will have all keys)
+ *   (some types will have additional keys)
+ *
+ * &lt;pre&gt;
+ *   - id
+ *       context-insensitive ID of the resource
+ *       said another way, all versions of a resource have the same ID
+ *
+ *   - type
+ *       see above
+ *
+ *   - fsPath
+ *       the path on the filesystem
+ *
+ *   - staticHandlerURL
+ *       the URL that will cause the asset handler to serve the resource
+ *       for resources that can be deployed by reference to the client
+ *
+ *   - name
+ *       specific to type
+ *
+ *   - configType
+ *       for type=config
+ *       the type of the configuration
+ *
+ *   - viewEngine
+ *       for type=view
+ *       &#x60;mu&#x60;, &#x60;dust&#x60;, etc
+ *
+ *   - viewOutputFormat
+ *       for type=view
+ *       output format that the view will generate
+ *       &#x60;xml&#x60;, &#x60;html&#x60;, etc
+ *
+ *   - assetType
+ *       for type=asset
+ *       &#x60;css&#x60;, &#x60;js&#x60;, &#x60;png&#x60;, &#x60;swf&#x60;, etc
+ *
+ *   - addonType
+ *       for type=addon
+ *       the mojito subsystem to which the addon should be added
+ *
+ *   - yuiModuleName
+ *       for any resource delivered as a YUI3 module
+ *       the YUI3 module name
+ *
+ *   - yuiModuleVersion
+ *       for any resource delivered as a YUI3 module
+ *       the YUI3 module version
+ *
+ *   - yuiModuleMeta
+ *       for any resource delivered as a YUI3 module
+ *       the YUI3 module metadata
+ *       (requires, langs, etc)
+ *
+ *   - yuiSortedPaths
+ *       for any resource delivered as a YUI3 module
+ *       a list of YUI modules required by the module,
+ *       with transitive dependencies resolved
+ *       format:  { yui-module-name: URL-to-load-yui-module }
+ * &lt;&#x2F;pre&gt;
+ *
+ * @module MojitoServer
+ * @class ResourceStore.server
+ * @constructor
+ * @param root {string} directory where application is found
+ * @param libs {object} dependent libraries -- this param is mainly used
+ *                      during unit testing
+ *&#x2F;
+function ServerStore(root, libs) {
+    &#x2F;&#x2F;logger.log(&#x27;ctor(&#x27; + root + &#x27;)&#x27;);
+    this._root = root;
+    this._version = &#x27;0.1.0&#x27;;
+    this._shortRoot = libpath.basename(root);
+    this._libs = libs || {};
+
+    &#x2F;&#x2F; the static version of the appConfig (application.json)
+    &#x2F;&#x2F; It&#x27;s &quot;static&quot; because it&#x27;s determined at server-start time, and doesn&#x27;t
+    &#x2F;&#x2F; change after that.
+    this._appConfigStatic = null;
+
+    &#x2F;&#x2F; full paths to routes files, to aid detection
+    this._preload_routes = {};
+
+    &#x2F;&#x2F; Each of these is a complex datastructure, the first key of which is the
+    &#x2F;&#x2F; resource ID (&quot;resid&quot;).  (For mojitMeta, the first key is the mojit type
+    &#x2F;&#x2F; and the second key is resid.)
+    &#x2F;&#x2F; Under resid the next key is the affinity (&quot;client&quot;, &quot;server&quot;, or
+    &#x2F;&#x2F; &quot;common&quot;.)
+    &#x2F;&#x2F; Under affinity is a datastructure that tracks all versions of the resource.
+    &#x2F;&#x2F; There is a special key &quot;contexts&quot; which lists all the contexts that the
+    &#x2F;&#x2F; resource has been specialized for.  &quot;contexts&quot; is an object.  The key is a
+    &#x2F;&#x2F; string that identifies the context, and the value is a partial context that
+    &#x2F;&#x2F; describes the specialization.  (An example might be &quot;device=iphone&quot; for
+    &#x2F;&#x2F; the key and { device:&#x27;iphone&#x27; } for the value.)
+    &#x2F;&#x2F; The rest of the keys are the context strings (as found in &quot;contexts&quot;), and
+    &#x2F;&#x2F; the values are the metadata about the resource versions.
+    &#x2F;&#x2F;      [resid][affinity].contexts
+    &#x2F;&#x2F;      [resid][affinity][ctxKey] = { metadata }
+    &#x2F;&#x2F; (These are mostly populated by the _preloadResource() method.)
+    this._preload = {
+        appMeta:    {}, &#x2F;&#x2F; application-level
+        sharedMeta: {}, &#x2F;&#x2F; shared between each mojit
+        mojitMeta:  {}  &#x2F;&#x2F; individual to each mojit
+    };
+
+    &#x2F;&#x2F; These are similar to the _preload above, except the affinity has been resolved
+    &#x2F;&#x2F; down for each environment (&quot;client&quot; or &quot;server&quot;).  Also, the ctxKey has been
+    &#x2F;&#x2F; moved above resid to optimize lookup during runtime.
+    this._appMetaNC = {};           &#x2F;&#x2F; [resid] = { parts }
+    this._appMeta = {};             &#x2F;&#x2F; [env][ctxKey][resid] = { parts }
+    this._sharedMeta = {};          &#x2F;&#x2F; [env][ctxKey][resid] = { parts }
+    this._mojitMeta = {};           &#x2F;&#x2F; [env][type][ctxKey][resid] = { parts }
+    this._mojitYuiRequired = {};    &#x2F;&#x2F; [env][type][ctxKey] = [ YUI module names ]
+    this._mojitYuiSorted = {};      &#x2F;&#x2F; [env][type][ctxKey] = [ YUI module names ]
+    this._mojitYuiSortedPaths = {}; &#x2F;&#x2F; [env][type][ctxKey][module] = path
+
+    this._jsonCache = {};           &#x2F;&#x2F; fullpath: contents as JSON object
+    this._ycbCache = {};            &#x2F;&#x2F; fullpath: context: YCB config object
+
+    this._staticURLs = {};      &#x2F;&#x2F; url =&gt; fullpath
+    this._dynamicURLs = {};     &#x2F;&#x2F; url =&gt; dynamic content
+    this._mojitAssetRoots = {}; &#x2F;&#x2F; mojitType =&gt; URL prefix
+    this._mojitLangs = {};      &#x2F;&#x2F; mojitType =&gt; [en-US,en-GB,en]
+    this._mojitPaths = {};      &#x2F;&#x2F; mojitType =&gt; filesystem directory of mojit
+
+    this._expandInstanceCache = {   &#x2F;&#x2F; [env][cacheKey] = instance
+        client: {},
+        server: {}
+    };
+
+    &#x2F;&#x2F; TODO: bake this into the refactoring work.
+    &#x2F;&#x2F; this stuff is mainly so that we can send mocks during testing
+    if (!this._libs.fs) {
+        this._libs.fs = libfs;
+    }
+    if (!this._libs.path) {
+        this._libs.path = libpath;
+    }
+    if (libycb &amp;&amp; (!this._libs.ycb)) {
+        this._libs.ycb = libycb;
+    }
+}
+
+
+ServerStore.prototype = {
+
+    &#x2F;&#x2F; ===========================================
+    &#x2F;&#x2F; ================== PUBLIC =================
+
+
+    &#x2F;**
+     * Preloads everything in the app, and as well pertinent parts of
+     * the framework.
+     *
+     * @method preload
+     * @param {object} appContext the base context for reading configuration.
+     * @param {object} appConfig overrides for the app config.
+     * @return {nothing}
+     *&#x2F;
+    preload: function(appContext, appConfig) {
+        &#x2F;&#x2F;logger.log(&#x27;preload()&#x27;);
+        var type,
+            ctxKey,
+            resid,
+            res,
+            n;
+
+        if (!this._preload) {
+            &#x2F;&#x2F; we&#x27;ve already been preloaded
+            &#x2F;&#x2F; This situation mainly happens in the commandline scripts.
+            return;
+        }
+
+        this._fwConfig = this._readConfigJSON(libpath.join(mojitoRoot,
+            &#x27;config.json&#x27;));
+        this._ycbDims = this._readYcbDimensions();
+        this._validYCBDims = this._precalcValidYCBDimensions(
+            this._ycbDims[0].dimensions
+        );
+        this._defaultYCBContext = appContext || {};
+
+        &#x2F;&#x2F; need to read the statically configured appConfig now so that values
+        &#x2F;&#x2F; are available during generation of the static URLs
+        this._appConfigStatic = this._readAppConfigStatic();
+
+        &#x2F;&#x2F; generates URL&#x27;s about each spec in application.json
+        this._urlsForAppSpecs();
+
+        &#x2F;&#x2F; merge app configuration overrides
+        if (appConfig) {
+            for (n in appConfig) {
+                if (appConfig.hasOwnProperty(n)) {
+                    logger.log(&#x27;overriding application config value: &#x27; + n,
+                        &#x27;warn&#x27;);
+                    this._appConfigStatic[n] = appConfig[n];
+                }
+            }
+        }
+
+        &#x2F;&#x2F; generates metadata about each resource
+        this._preloadMeta();
+
+        &#x2F;&#x2F; takes the preloaded info about each resource and resolves
+        &#x2F;&#x2F; version priority (.server. more specific that .common. etc)
+        this._cookdown();
+
+        &#x2F;&#x2F; preread configs
+        this._prereadConfigs(this._appMeta.server);
+        for (type in this._mojitMeta.server) {
+            if (this._mojitMeta.server.hasOwnProperty(type)) {
+                this._prereadConfigs(this._mojitMeta.server[type]);
+            }
+        }
+
+        &#x2F;&#x2F; We need to run this function even for &quot;ondemand&quot;, since it calculates
+        &#x2F;&#x2F; additional implied dependencies, such as a binder on MojitoClient,
+        &#x2F;&#x2F; or a controller on the view-engine needed to render its views.
+        this._precalcYuiDependencies();
+
+        &#x2F;&#x2F; binders are client-side-only resources, yet we need to know about
+        &#x2F;&#x2F; them when talking about the &#x27;server&#x27; environment
+        for (type in this._mojitMeta.client) {
+            if (this._mojitMeta.client.hasOwnProperty(type)) {
+
+                for (ctxKey in this._mojitMeta.client[type]) {
+                    if (this._mojitMeta.client[type].hasOwnProperty(ctxKey)) {
+
+                        for (resid in this._mojitMeta.client[type][ctxKey]) {
+                            if (this._mojitMeta.client[type][ctxKey].
+                                    hasOwnProperty(resid)) {
+                                res = this._mojitMeta.client[type
+                                    ][ctxKey][resid];
+                                if (res.type !== &#x27;binder&#x27;) {
+                                    continue;
+                                }
+                                this._mojitMeta.server[type
+                                    ][ctxKey][resid] = res;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+
+    &#x2F;**
+     * Sets the logger object.
+     *
+     * @method setLogger
+     * @param l {object} object containing a log(message,level,source) function
+     * @return {nothing}
+     *&#x2F;
+    setLogger: function(l) {
+        logger = l;
+    },
+
+
+    &#x2F;**
+     * Returns, via callback, the fully expanded mojit instance specification.
+     *
+     * @method getSpec
+     * @param env {string} either &quot;client&quot; or &quot;server&quot;
+     * @param id {string} the ID of the spec to return
+     * @param context {object} the runtime context for the spec
+     * @param callback {function(err,spec)} callback used to return the results (or error)
+     * @return {nothing} results returned via the callback parameter
+     *&#x2F;
+    getSpec: function(env, id, context, callback) {
+
+        this.expandInstanceForEnv(env, {base: id}, context, function(err, obj) {
+            if (err) {
+                callback(err);
+                return;
+            }
+
+            if (env === &#x27;client&#x27; &amp;&amp; obj) {
+                delete obj.assets;
+            }
+
+            callback(null, obj);
+        });
+    },
+
+
+    &#x2F;**
+     * Returns, via callback, the details of the mojit type.
+     *
+     * @method getType
+     * @param env {string} either &quot;client&quot; or &quot;server&quot;
+     * @param type {string} the mojit type
+     * @param context {object} the runtime context for the spec
+     * @param callback {function(err,spec)} callback used to return the results (or error)
+     * @return {nothing} results returned via the callback parameter
+     *&#x2F;
+    getType: function(env, type, context, callback) {
+
+        this.expandInstanceForEnv(env, {type: type}, context, function(err,
+                                                                       obj) {
+            if (err) {
+                callback(err);
+                return;
+            }
+
+            if (env === &#x27;client&#x27; &amp;&amp; obj) {
+                delete obj.assets;
+            }
+
+            callback(null, obj);
+        });
+    },
+
+    &#x2F;**
+     * This just calls expandInstanceForEnv() with &#x60;env&#x60; set to &#x60;server&#x60;.
+     *
+     * @method expandInstance
+     * @param instance {map} Partial instance to expand.
+     * @param ctx {object} The request context.
+     * @param cb {function(err,instance)} callback used to return the results (or error)
+     * @return {nothing} results returned via the callback parameter
+     *&#x2F;
+    expandInstance: function(instance, ctx, cb) {
+        this.expandInstanceForEnv(&#x27;server&#x27;, instance, ctx, cb);
+        return;
+    },
+
+
+    &#x2F;**
+     * This method takes a partial instance and expands it to all details needed
+     * to run the mojit.
+     *
+     * Only &#x60;base&#x60; or &#x60;type&#x60; fields are required. You should only specify one.
+     *
+     * &lt;pre&gt;
+     *  instance: {
+     *      base: string
+     *          &#x2F;&#x2F; specifies a &quot;base&quot; instance which this instance will extend
+     *          &#x2F;&#x2F; the value refers to a key of &#x60;specs&#x60; in &#x60;application.json&#x60;
+     *      type: string
+     *          &#x2F;&#x2F; specifies the mojit type
+     *      action: &quot;&quot;,
+     *          &#x2F;&#x2F; specifies a default action if the instance isn&#x27;t dispatched
+     *          &#x2F;&#x2F; with a specific one.
+     *      config: object
+     *          &#x2F;&#x2F; the config for the mojit
+     *          &#x2F;&#x2F; this will be augmented (appropriately) with the mojit type
+     *          &#x2F;&#x2F; defaults found in the type&#x27;s &#x60;defaults.json&#x60;
+     *      appConfig: object
+     *          &#x2F;&#x2F; the application config (appropriate for the context)
+     *      assetRoot: &quot;&quot;,
+     *          &#x2F;&#x2F; path to directory containing assets
+     *          &#x2F;&#x2F; the path will be a URL if &#x60;env&#x60; is &#x60;client&#x60; otherwise it&#x27;s a
+     *          &#x2F;&#x2F; filesystem path
+     *      definition: object
+     *          &#x2F;&#x2F; the body of the &#x60;defintion.json&#x60; for the mojit type
+     *      defaults: object
+     *          &#x2F;&#x2F; the body of the &#x60;defaults.json&#x60; for the mojit type
+     *      yui: {
+     *          &#x2F;&#x2F; details for generating a YUI sandbox for this instance
+     *          config: {
+     *              &#x2F;&#x2F; configuration details for the YUI.GlobalConfig.groups (or
+     *              &#x2F;&#x2F; an equivalent).
+     *              &#x2F;&#x2F; The module paths are given as &#x60;fullpath&#x60; and contain
+     *              &#x2F;&#x2F; either a URL if &#x60;env&#x27; is &#x60;client&#x60; or a filesystem path if
+     *              &#x2F;&#x2F; &#x60;env&#x60; is &#x60;server&#x60;
+     *          },
+     *          requires: []
+     *              &#x2F;&#x2F; list of YUI modules that this instance requires
+     *      }
+     *      actions: array
+     *          &#x2F;&#x2F; list of paths to the YUI modules containing actions
+     *      controller: string
+     *          &#x2F;&#x2F; path to controller
+     *          &#x2F;&#x2F; the path will be a URL if &#x60;env&#x60; is &#x60;client&#x60; otherwise it&#x27;s a
+     *          &#x2F;&#x2F; filesystem path
+     *      lang:
+     *          &#x2F;&#x2F; path to YUI module of the language bundle
+     *          &#x2F;&#x2F; the path will be a URL if &#x60;env&#x60; is &#x60;client&#x60; otherwise it&#x27;s a
+     *          &#x2F;&#x2F; filesystem path
+     *      models: object
+     *          &#x2F;&#x2F; list of models used by the mojit type
+     *          &#x2F;&#x2F; the key is the model name, and the value is the path to the
+     *          &#x2F;&#x2F; model file
+     *          &#x2F;&#x2F; the path will be a URL if &#x60;env&#x60; is &#x60;client&#x60; otherwise it&#x27;s a
+     *          &#x2F;&#x2F; filesystem path
+     *      views: {
+     *          &#x2F;&#x2F; list of views in the mojit type
+     *          &#x2F;&#x2F; the key is the view name, and the value is details about the
+     *          &#x2F;&#x2F; view
+     *          view-name: {
+     *              &quot;content-path&quot;: &quot;&quot;,
+     *                  &#x2F;&#x2F; the path to use to load the body of the view
+     *                  &#x2F;&#x2F; the path will be a URL if &#x60;env&#x60; is &#x60;client&#x60; otherwise
+     *                  &#x2F;&#x2F; it&#x27;s a filesystem path
+     *              &quot;engine&quot;: &quot;&quot;,
+     *                  &#x2F;&#x2F; which engine is used to render the view
+     *              &quot;binder-path&quot;: &quot;&quot;,
+     *                  &#x2F;&#x2F; the path to the binder
+     *                  &#x2F;&#x2F; the path will be a URL if &#x60;env&#x60; is &#x60;client&#x60; otherwise
+     *                  &#x2F;&#x2F; it&#x27;s a filesystem path
+     *              &quot;binder-module&quot;: &quot;&quot;
+     *                  &#x2F;&#x2F; the YUI module name of the binder
+     *          }
+     *      }
+     *  }
+     * &lt;&#x2F;pre&gt;
+     *
+     * @method expandInstanceForEnv
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param instance {object} partial instance to expand
+     * @param ctx {object} the runtime context for the instance
+     * @param cb {function(err,instance)} callback used to return the results (or error)
+     * @return {nothing} results returned via the callback parameter
+     *&#x2F;
+    expandInstanceForEnv: function(env, instance, ctx, cb) {
+        &#x2F;&#x2F;logger.log(&#x27;expandInstanceForEnv(&#x27; + env + &#x27;,&#x27; +
+        &#x2F;&#x2F;    (instance.id||&#x27;@&#x27;+instance.type) + &#x27;)&#x27;);
+        var self = this,
+            base,
+            appConfig = this.getAppConfig(ctx, &#x27;application&#x27;),
+            cacheKey = Y.JSON.stringify(instance) + Y.JSON.stringify(
+                this._getValidYCBContext(ctx)
+            ),
+            cacheValue = this._expandInstanceCache[env][cacheKey];
+
+        if (cacheValue) {
+            cb(null, this._cloneObj(cacheValue));
+            return;
+        }
+
+        function gotBase(out, fromBase) {
+            var spec;
+
+            &#x2F;&#x2F; type details rebuilt every time
+            delete out.actions;
+            delete out.assetsRoot;
+            delete out.assets;
+            delete out.controller;
+            delete out.defaults;
+            delete out.definition;
+            delete out.models;
+            delete out.views;
+            delete out.yui;
+
+            out.config = out.config || {};
+            out.action = out.action || &#x27;index&#x27;;
+            if (!out.instanceId) {
+                out.instanceId = Y.guid();
+                &#x2F;&#x2F;DEBUGGING:  out.instanceId += &#x27;-instance-server-&#x27; + out.type;
+            }
+            &#x2F;&#x2F; DEPRECATED, kept in case a user is using it.
+            out.guid = out.instanceId;
+
+            try {
+                self.getMojitTypeDetails(env, ctx, out.type, out);
+            } catch (err) {
+                return cb(err);
+            }
+
+            &#x2F;&#x2F; apply type defaults to config
+            if ((!fromBase) &amp;&amp; out.defaults &amp;&amp; out.defaults.config) {
+                spec = self._cloneObj(out.defaults.config);
+                self._mergeRecursive(spec, out.config);
+                out.config = spec;
+            }
+
+            if (!out.appConfig) {
+                out.appConfig = appConfig;
+                delete out.appConfig.specs;
+            }
+            self._expandInstanceCache[env][cacheKey] = self._cloneObj(out);
+            cb(null, out);
+        }
+
+        if (instance.base) {
+            if (appConfig.specs) {
+                base = appConfig.specs[instance.base];
+            }
+            if (!base) {
+                return cb(new Error(&#x27;Unknown &quot;base&quot; of &quot;&#x27; + instance.base +
+                    &#x27;&quot;&#x27;));
+            }
+            &#x2F;&#x2F; The base will need to carry it&#x27;s ID with it.
+            base.id = instance.base;
+            this.expandInstanceForEnv(env, base, ctx, function(err,
+                                                               baseInstance) {
+                if (err) {
+                    return cb(err);
+                }
+                var temp = baseInstance;
+                self._mergeRecursive(temp, instance);
+                gotBase(temp, true);
+            });
+        } else {
+            gotBase(this._cloneObj(instance), false);
+        }
+    },
+
+
+    &#x2F;**
+     * gets application configuration
+     *
+     * @method getAppConfig
+     * @param ctx {object} the runtime context under which to load the config
+     * @param name {string} type of config to read:
+     *     - definition:  reads .&#x2F;application.json
+     *     - package:  reads .&#x2F;package.json
+     *     - routes:  reads .&#x2F;routes.json (or whatever was configured in
+     *                  appConfig(&#x27;definition&#x27;).routesFiles)
+     * @return {object} config object
+     *&#x2F;
+    getAppConfig: function(ctx, name) {
+        &#x2F;&#x2F;logger.log(&#x27;getAppConfig(&#x27;+name+&#x27;)&#x27;);
+        var resid,
+            res,
+            ycb;
+
+        if (&#x27;application&#x27; === name &amp;&amp; (!ctx || !Object.keys(ctx).length)) {
+            return this._cloneObj(this._appConfigStatic);
+        }
+
+        resid = &#x27;config-&#x27; + name;
+        res = this._getContextualizedResource(this._appMeta.server, ctx, resid);
+        if (!res) {
+            return {};
+        }
+        ycb = this._readConfigYCB(ctx, res.fsPath, true);
+        return this._cloneObj(ycb);
+    },
+
+
+    &#x2F;**
+     * Returns the routes configured in the application.
+     *
+     * @method getRoutes
+     * @param ctx {object} runtime context under which to load the routes
+     * @return {object} routes
+     *&#x2F;
+    getRoutes: function(ctx) {
+        &#x2F;&#x2F;logger.log(&#x27;getRoutes()&#x27;);
+        var ress,
+            resid,
+            res,
+            r,
+            routes = {};
+
+        &#x2F;&#x2F; TODO: [Issue 100] trapped this error. It only appears when there is
+        &#x2F;&#x2F; no application.json
+        try {
+            ress = this._getResourceListForContext(this._appMeta.server, ctx);
+        } catch (err) {
+            &#x2F;&#x2F;logger.log(err);
+            ress = {};
+        }
+
+        for (resid in ress) {
+            if (ress.hasOwnProperty(resid)) {
+                res = ress[resid];
+                if (&#x27;routes&#x27; !== res.configType) {
+                    continue;
+                }
+                r = this._readConfigYCB(ctx, res.fsPath);
+                this._mergeRecursive(routes, r);
+            }
+        }
+        if (!Object.keys(routes).length) {
+            routes = this._cloneObj(this._fwConfig.defaultRoutes);
+        }
+        return routes;
+    },
+
+
+    &#x2F;**
+     * Returns the filesystem location of the static URL.
+     * Returns undefined if given URL isn&#x27;t part of the app.
+     *
+     * @method fileFromStaticHandlerURL
+     * @param url {string} static URL
+     * @return {string} path on filesystem of specified URL, or undefined
+     *&#x2F;
+    fileFromStaticHandlerURL: function(url) {
+        &#x2F;&#x2F;logger.log(&#x27;fileFromStaticHandlerURL(&#x27;+url+&#x27;)&#x27;);
+        return this._staticURLs[url];
+    },
+
+
+    &#x2F;**
+     * Returns the YUI configuration object which tells YUI about the
+     * YUI modules in all the mojits.
+     *
+     * @method getYuiConfigAllMojits
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context for YUI configuration
+     * @return {object} YUI configuration for all mojits
+     *&#x2F;
+    getYuiConfigAllMojits: function(env, ctx) {
+        &#x2F;&#x2F; TODO: use getMojitTypeDetails() to generate this.
+        &#x2F;&#x2F;logger.log(&#x27;getYuiConfigAllMojits(&#x27;+env+&#x27;)&#x27;);
+        var modules = {},
+            type,
+            ress,
+            resid,
+            res,
+            ctxKey;
+
+        for (type in this._mojitMeta[env]) {
+            if (this._mojitMeta[env].hasOwnProperty(type)) {
+                ress = this._getResourceListForContext(
+                    this._mojitMeta[env][type],
+                    ctx
+                );
+                for (resid in ress) {
+                    if (ress.hasOwnProperty(resid)) {
+                        res = ress[resid];
+                        if (!res.yuiModuleName) {
+                            continue;
+                        }
+                        if (res.sharedMojit) {
+                            continue;
+                        }
+                        modules[res.yuiModuleName] = {
+                            fullpath: (&#x27;client&#x27; === env) ?
+                                    res.staticHandlerURL :
+                                    res.fsPath,
+                            requires: res.yuiModuleMeta.requires
+                        };
+                    }
+                }
+
+                &#x2F;&#x2F; add all langs
+                ress = this._getLangList(this._mojitMeta[env][type]);
+                for (resid in ress) {
+                    if (ress.hasOwnProperty(resid)) {
+                        res = ress[resid];
+                        modules[res.yuiModuleName] = {
+                            fullpath: (&#x27;client&#x27; === env) ?
+                                    res.staticHandlerURL :
+                                    res.fsPath,
+                            requires: res.yuiModuleMeta.requires
+                        };
+                    }
+                }
+            }
+        }
+
+        return {modules: modules};
+    },
+
+
+    &#x2F;**
+     * Returns the YUI configuration object which tells YUI about the
+     * YUI modules in the Mojito framework.
+     *
+     * @method getYuiConfigFw
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context for YUI configuration
+     * @return {object} YUI configuration for Mojito framework
+     *&#x2F;
+    getYuiConfigFw: function(env, ctx) {
+        &#x2F;&#x2F;logger.log(&#x27;getYuiConfigFw(&#x27;+env+&#x27;)&#x27;);
+        var modules = {},
+            ress,
+            resid,
+            res;
+
+        if (!this._sharedMeta[env]) {
+            return {modules: {}};
+        }
+        ress = this._getResourceListForContext(this._sharedMeta[env], ctx);
+        for (resid in ress) {
+            if (ress.hasOwnProperty(resid)) {
+                res = ress[resid];
+                if (!res.yuiModuleName) {
+                    continue;
+                }
+                if (&#x27;mojito&#x27; !== res.pkg.name) {
+                    continue;
+                }
+                modules[res.yuiModuleName] = {
+                    fullpath: (&#x27;client&#x27; === env) ?
+                            res.staticHandlerURL :
+                            res.fsPath,
+                    requires: res.yuiModuleMeta.requires
+                };
+            }
+        }
+        return {modules: modules};
+    },
+
+
+    &#x2F;**
+     * Returns the YUI configuration object which tells YUI about the
+     * YUI modules in the application (which aren&#x27;t part of a mojit).
+     *
+     * @method getYuiConfigApp
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context for YUI configuration
+     * @return {object} YUI configuration for the app-level modules
+     *&#x2F;
+    getYuiConfigApp: function(env, ctx) {
+        &#x2F;&#x2F;logger.log(&#x27;getYuiConfigApp(&#x27;+env+&#x27;)&#x27;);
+        var modules = {},
+            ress,
+            resid,
+            res;
+
+        if (!this._sharedMeta[env]) {
+            return {modules: {}};
+        }
+        ress = this._getResourceListForContext(this._sharedMeta[env], ctx);
+        for (resid in ress) {
+            if (ress.hasOwnProperty(resid)) {
+                res = ress[resid];
+                if (!res.yuiModuleName) {
+                    continue;
+                }
+                if (&#x27;mojito&#x27; === res.pkg.name) {
+                    continue;
+                }
+                modules[res.yuiModuleName] = {
+                    fullpath: (&#x27;client&#x27; === env) ?
+                            res.staticHandlerURL :
+                            res.fsPath,
+                    requires: res.yuiModuleMeta.requires
+                };
+            }
+        }
+        return {modules: modules};
+    },
+
+
+    &#x2F;**
+     * returns a serializeable object used to initialize Mojito on the client
+     *
+     * FUTURE: [Issue 105] Cache the output of this function
+     * cache key:  all of ctx
+     *
+     * @method serializeClientStore
+     * @param context {object} runtime context
+     * @param instance {array} DEPRECATED:  list of instances to deploy to the client
+     *                  (only instances with IDs will be deployable)
+     * @return {object} object that should be serialized and used to initialize the MojitoClient
+     *&#x2F;
+    serializeClientStore: function(ctx, instances) {
+        &#x2F;&#x2F;logger.log(&#x27;serializeClientStore()&#x27;);
+        var i,
+            id,
+            instance,
+            type,
+            types = {},
+            out = {
+                appConfig: {},
+                specs: {},  &#x2F;&#x2F; instance details
+                mojits: {}, &#x2F;&#x2F; type details
+                routes: {}
+            };
+
+        out.appConfig = this.getAppConfig(ctx, &#x27;application&#x27;);
+
+        for (i = 0; i &lt; instances.length; i += 1) {
+            instance = instances[i];
+            types[instance.type] = true;
+            id = instance.id;
+            if (id) {
+                out.specs[id] = out.appConfig.specs[id];
+            }
+        }
+
+        for (type in types) {
+            if (types.hasOwnProperty(type)) {
+                out.mojits[type] = {};
+                this.getMojitTypeDetails(&#x27;client&#x27;, ctx, type, out.mojits[type]);
+            }
+        }
+
+        out.routes = this.getRoutes(ctx);
+
+        &#x2F;&#x2F; these aren&#x27;t needed on the client
+        delete out.appConfig.mojitsDirs;
+        delete out.appConfig.routesFiles;
+        delete out.appConfig.specs;
+
+        return out;
+    },
+
+
+    &#x2F;**
+     * Returns a list of all mojit types in the application.
+     *
+     * @method listAllMojits
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @return {array} list of mojit types
+     *&#x2F;
+    listAllMojits: function(env) {
+        var mojitType,
+            list = [];
+
+        for (mojitType in this._mojitMeta[env]) {
+            if (this._mojitMeta[env].hasOwnProperty(mojitType)) {
+                list.push(mojitType);
+            }
+        }
+        return list;
+    },
+
+
+    &#x2F;**
+     * Returns details about all mojits in the application.
+     *
+     * @method getAllMojits
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context
+     * @return {object} keys are mojit type names, values are details about each mojit
+     *&#x2F;
+    getAllMojits: function(env, ctx) {
+
+        var mojits,
+            mojit,
+            list = {};
+
+        if (!ctx) {
+            ctx = {};
+        }
+
+        mojits = this.listAllMojits(env);
+
+        for (mojit in mojits) {
+            if (mojits.hasOwnProperty(mojit)) {
+                list[mojits[mojit]] =
+                    this.getMojitTypeDetails(env, ctx, mojits[mojit]);
+            }
+        }
+
+        return list;
+    },
+
+
+    &#x2F;**
+     * Given a set of known contexts, finds the best match for a runtime context.
+     * Gives special consideration to the &quot;lang&quot; key in the contexts.
+     *
+     * @method _findBestContext
+     * @param currentContext {object} runtime context
+     * @param contexts {object} a mapping of context key to context
+     * @return {string} null or the context key of the best match
+     * @private
+     *&#x2F;
+    _findBestContext: function(currentContext, contexts) {
+        var availableLangs = [],
+            bestCtxKey,
+            bestLang,
+            context,
+            ctxKey,
+            i,
+            matchingKeys = [];
+
+        &#x2F;&#x2F; Collect languages from matching contexts
+        &#x2F;&#x2F; We&#x27;re done if we find an exact match
+        for (ctxKey in contexts) {
+            if (contexts.hasOwnProperty(ctxKey)) {
+                context = contexts[ctxKey];
+                if (this._matchContext(currentContext, context)) {
+                    if (context.lang) {
+                        if (currentContext.lang === context.lang) {
+                            bestCtxKey = ctxKey;
+                            break;
+                        }
+                        availableLangs.push(context.lang);
+                    }
+                    matchingKeys.push(ctxKey);
+                }
+            }
+        }
+
+        &#x2F;&#x2F; If no exact match, find the next best language
+        if (!bestCtxKey &amp;&amp; availableLangs &amp;&amp; availableLangs.length &amp;&amp;
+                currentContext &amp;&amp; currentContext.lang) {
+            bestLang = Y.Intl.lookupBestLang(currentContext.lang,
+                availableLangs);
+            if (bestLang) {
+                for (i = 0; i &lt; matchingKeys.length; i += 1) {
+                    if (contexts[matchingKeys[i]].lang === bestLang) {
+                        bestCtxKey = matchingKeys[i];
+                        break;
+                    }
+                }
+            }
+        }
+
+        return bestCtxKey ||
+            (matchingKeys.length &amp;&amp; matchingKeys[0]) ||
+            null;
+    },
+
+
+    &#x2F;**
+     * Returns details about a mojit type.
+     *
+     * @method getMojitTypeDetails
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context
+     * @param mojitType {string} mojit type
+     * @param dest {object} object in which to place the results
+     * @return {object} returns the &quot;dest&quot; parameter, which has had details added to it
+     *&#x2F;
+    getMojitTypeDetails: function(env, ctx, mojitType, dest) {
+        &#x2F;&#x2F;logger.log(&#x27;getMojitTypeDetails(&#x27;+env+&#x27;,ctx,&#x27;+mojitType+&#x27;)&#x27;);
+        var ress,
+            resid,
+            res,
+            name,
+            engine,
+            engines = {},
+            ctxKey,
+            assumeRollups = this._appConfigStatic.assumeRollups,
+            usePrecomputed = -1 !== this._appConfigStatic.yui.
+                dependencyCalculations.indexOf(&#x27;precomputed&#x27;),
+            useOnDemand = -1 !== this._appConfigStatic.yui.
+                dependencyCalculations.indexOf(&#x27;ondemand&#x27;),
+            module,
+            lddf,       &#x2F;&#x2F; lang&#x2F;datatype-date-format
+            lddfPath;
+
+        if (!usePrecomputed) {
+            useOnDemand = true;
+        }
+
+        if (!dest) {
+            dest = {};
+        }
+
+        if (!dest.actions) {
+            dest.actions = [];
+        }
+        if (!dest.assets) {
+            dest.assets = {};
+        }
+        if (!dest.models) {
+            dest.models = {};
+        }
+        if (!dest.modelYUIModuleNames) {
+            dest.modelYUIModuleNames = {};
+        }
+        if (!dest.views) {
+            dest.views = {};
+        }
+        if (!dest.yui) {
+            dest.yui = {config: {}, requires: []};
+        }
+        if (!dest.yui.config) {
+            dest.yui.config = {modules: {}};
+        }
+        if (!dest.yui.config.modules) {
+            dest.yui.config.modules = {};
+        }
+        if (!dest.yui.requires) {
+            dest.yui.requires = [];
+        }
+        if (!dest.yui.langs) {
+            dest.yui.langs = {};
+        }
+
+        if (usePrecomputed) {
+            ctxKey = this._findBestContext(ctx,
+                this._mojitYuiSorted[env][mojitType].contexts);
+            dest.yui.requires =
+                this._mojitYuiRequired[env][mojitType][ctxKey] || [];
+            dest.yui.sorted =
+                this._cloneObj(
+                    this._mojitYuiSorted[env][mojitType][ctxKey] || []
+                );
+            dest.yui.sortedPaths =
+                this._cloneObj(
+                    this._mojitYuiSortedPaths[env][mojitType][ctxKey] || {}
+                );
+        }
+
+        dest.assetsRoot = this._mojitAssetRoots[mojitType];
+        dest.definition = this._getMojitConfig(&#x27;server&#x27;, ctx, mojitType,
+            &#x27;definition&#x27;);
+        dest.defaults = this._getMojitConfig(&#x27;server&#x27;, ctx, mojitType,
+            &#x27;defaults&#x27;);
+
+        ress = this._getResourceListForContext(this._mojitMeta[env][mojitType],
+            ctx);
+        for (resid in ress) {
+            if (ress.hasOwnProperty(resid)) {
+
+                res = ress[resid];
+
+                if (res.type === &#x27;action&#x27;) {
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.actions.push(res.rollupURL);
+                        } else {
+                            dest.actions.push(res.staticHandlerURL);
+                        }
+                    } else {
+                        dest.actions.push(res.fsPath);
+                    }
+                }
+
+                if (res.type === &#x27;asset&#x27;) {
+                    name = res.name;
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.assets[name] = res.rollupURL;
+                        } else {
+                            dest.assets[name] = res.staticHandlerURL;
+                        }
+                    } else {
+                        dest.assets[name] = res.fsPath;
+                    }
+                }
+
+                if (res.type === &#x27;binder&#x27;) {
+                    if (!dest.views[res.name]) {
+                        dest.views[res.name] = {};
+                    }
+                    dest.views[res.name][&#x27;binder-url&#x27;] = res.staticHandlerURL;
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.views[res.name][&#x27;binder-path&#x27;] = res.rollupURL;
+                        } else {
+                            dest.views[res.name][&#x27;binder-path&#x27;] =
+                                res.staticHandlerURL;
+                        }
+                    } else {
+                        dest.views[res.name][&#x27;binder-path&#x27;] = res.fsPath;
+                    }
+                    dest.views[res.name][&#x27;binder-module&#x27;] = res.yuiModuleName;
+                    dest.views[res.name][&#x27;binder-yui-sorted&#x27;] =
+                        res.yuiSortedPaths;
+                    if (&#x27;server&#x27; === env) {
+                        &#x2F;&#x2F; don&#x27;t do any other type of server-side processing for
+                        &#x2F;&#x2F; the binder ESPECIALLY don&#x27;t add it to dest.yui.*
+                        continue;
+                    }
+                }
+
+                if (res.type === &#x27;controller&#x27;) {
+                    &#x2F;&#x2F; We need the YUI Module name of the contoller so we can
+                    &#x2F;&#x2F; select a language for it
+                    dest.controllerModuleName = res.yuiModuleName;
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.controller = res.rollupURL;
+                        } else {
+                            dest.controller = res.staticHandlerURL;
+                        }
+                    } else {
+                        dest.controller = res.fsPath;
+                    }
+                }
+
+                if (res.type === &#x27;model&#x27;) {
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.models[res.name] = res.rollupURL;
+                        } else {
+                            dest.models[res.name] = res.staticHandlerURL;
+                        }
+                    } else {
+                        dest.models[res.name] = res.fsPath;
+                    }
+                    if (res.yuiModuleName) {
+                        dest.modelYUIModuleNames[res.yuiModuleName] = true;
+                        &#x2F;&#x2F;logger.log(&quot;Processing Models:&quot; + res.name  + &quot;:&quot; +
+                        &#x2F;&#x2F;    res.yuiModuleName, &#x27;mojito&#x27;, NAME);
+                    }
+                }
+
+                if (res.type === &#x27;view&#x27;) {
+                    if (!dest.views[res.name]) {
+                        dest.views[res.name] = {};
+                    }
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.views[res.name][&#x27;content-path&#x27;] =
+                                res.rollupURL;
+                        } else {
+                            dest.views[res.name][&#x27;content-path&#x27;] =
+                                res.staticHandlerURL;
+                        }
+                    } else {
+                        dest.views[res.name][&#x27;content-path&#x27;] = res.fsPath;
+                    }
+                    dest.views[res.name].engine = res.viewEngine;
+                    engines[res.viewEngine] = true;
+                }
+
+                if (res.type === &#x27;yui-lang&#x27;) {
+                    dest.yui.langs[res.langCode] = res.yuiModuleName;
+                }
+
+                if (res.yuiModuleName) {
+                    if (res.addonType === &#x27;view-engines&#x27;) {
+                        &#x2F;&#x2F; we&#x27;ll only load the viewEngines that we need
+                        continue;
+                    }
+                    if (useOnDemand) {
+                        dest.yui.requires.push(res.yuiModuleName);
+                    }
+                    if (res.sharedMojit) {
+                        continue;
+                    }
+                    dest.yui.config.modules[res.yuiModuleName] = {
+                        fullpath: undefined,
+                        requires: res.yuiModuleMeta.requires || []
+                    };
+                    if (env === &#x27;client&#x27;) {
+                        if (assumeRollups) {
+                            dest.yui.config.modules[res.yuiModuleName
+                                ].fullpath = res.rollupURL;
+                        } else {
+                            dest.yui.config.modules[res.yuiModuleName
+                                ].fullpath = res.staticHandlerURL;
+                        }
+                    } else {
+                        dest.yui.config.modules[res.yuiModuleName].fullpath =
+                            res.fsPath;
+                    }
+
+                    &#x2F;&#x2F; If we have &quot;lang&quot; use it
+                    if (this._mojitLangs[res.yuiModuleName]) {
+                        this._mojitLangs[res.yuiModuleName].sort();
+                        dest.yui.config.modules[res.yuiModuleName].lang =
+                            this._mojitLangs[res.yuiModuleName];
+                    }
+                }
+            }
+        }
+        for (engine in engines) {
+            if (engines.hasOwnProperty(engine)) {
+                resid = &#x27;addon-view-engines-&#x27; + engine;
+                res = this._getContextualizedResource(
+                    this._mojitMeta[env][mojitType],
+                    ctx,
+                    resid
+                );
+                dest.yui.config.modules[res.yuiModuleName] = {
+                    fullpath: (&#x27;client&#x27; === env) ?
+                            res.staticHandlerURL :
+                            res.fsPath,
+                    requires: res.yuiModuleMeta.requires || []
+                };
+                if (useOnDemand) {
+                    dest.yui.requires.push(res.yuiModuleName);
+                }
+            }
+        }
+
+        &#x2F;&#x2F; We need to include -all- the langs since we don&#x27;t know which will
+        &#x2F;&#x2F; actually be used.  dispatch() will cull that down to the right one.
+        if (usePrecomputed) {
+            for (name in dest.yui.langs) {
+                if (dest.yui.langs.hasOwnProperty(name)) {
+                    module = dest.yui.langs[name];
+                    lddf = &#x27;lang&#x2F;datatype-date-format_&#x27; + (name || &#x27;en&#x27;);
+                    if (dest.yui.sortedPaths[lddf]) {
+                        lddfPath = dest.yui.sortedPaths[lddf].replace(&#x27;_&#x27; +
+                            name, &#x27;_MOJITOPLACEHOLDER&#x27;);
+                    }
+                    if (!dest.yui.sortedPaths[module]) {
+                        dest.yui.sorted.push(module);
+                        dest.yui.sortedPaths[module] =
+                            dest.yui.config.modules[module].fullpath;
+                    }
+                }
+            }
+            if (lddfPath) {
+                for (name in dest.yui.langs) {
+                    if (dest.yui.langs.hasOwnProperty(name)) {
+                        lddf = &#x27;lang&#x2F;datatype-date-format_&#x27; + (name || &#x27;en&#x27;);
+                        if (!dest.yui.sortedPaths[lddf]) {
+                            dest.yui.sorted.push(lddf);
+                            dest.yui.sortedPaths[lddf] =
+                                lddfPath.replace(&#x27;MOJITOPLACEHOLDER&#x27;,
+                                        (name || &#x27;en&#x27;));
+                        }
+                    }
+                }
+            }
+        }
+
+        return dest;
+    },
+
+
+    &#x2F;**
+     * Returns details on how to make rollups for app-level resources.
+     *
+     * @method getRollupsApp
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context
+     * @return {object} object describing where to put the rollup and what it should contain
+     *&#x2F;
+    getRollupsApp: function(env, ctx) {
+        var dest = libpath.join(this._root, &#x27;rollup.&#x27; + env + &#x27;.js&#x27;),
+            srcs = [],
+            ress,
+            resid,
+            res;
+
+        ress = this._getResourceListForContext(this._sharedMeta[env], ctx);
+        for (resid in ress) {
+            if (ress.hasOwnProperty(resid)) {
+                res = ress[resid];
+                if (!res.yuiModuleName) {
+                    continue;
+                }
+                srcs.push(res.fsPath);
+            }
+        }
+        return {
+            dest: dest,
+            srcs: srcs
+        };
+    },
+
+
+    &#x2F;**
+     * Returns details on how to make rollups for mojit-level resources.
+     *
+     * This example comes from GSG5.
+     * { FlickrDetail:
+     *      dest: &#x27;&#x2F;blah&#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;rollup.client.js&#x27;
+     *      srcs: [
+     *          &#x27;&#x2F;blah&#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;controller.common.js&#x27;,
+     *          &#x27;&#x2F;blah&#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;binders&#x2F;index.js&#x27;,
+     *          &#x27;&#x2F;blah&#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;lang&#x2F;FlickrDetail_de.js&#x27;,
+     *          &#x27;&#x2F;blah&#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;lang&#x2F;FlickrDetail_en-US.js&#x27;
+     *      ]
+     * }
+     *
+     * @method getRollupsMojits
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context
+     * @return {object} object describing where to put the rollup and what it should contain
+     *&#x2F;
+    getRollupsMojits: function(env, ctx) {
+        var mojitName,
+            ress,
+            resid,
+            res,
+            dest,
+            srcs,
+            rollups = {},
+            mojitoMojits = libpath.join(mojitoRoot, &#x27;mojits&#x27;);
+
+        for (mojitName in this._mojitMeta[env]) {
+            if (this._mojitMeta[env].hasOwnProperty(mojitName)) {
+                srcs = [];
+                ress = this._getResourceListForContext(
+                    this._mojitMeta[env][mojitName],
+                    ctx
+                );
+                for (resid in ress) {
+                    if (ress.hasOwnProperty(resid)) {
+                        res = ress[resid];
+                        if (res.sharedMojit) {
+                            continue;
+                        }
+                        if (!res.yuiModuleName) {
+                            continue;
+                        }
+                        srcs.push(res.fsPath);
+                    }
+                }
+                dest = libpath.join(this._mojitPaths[mojitName], &#x27;rollup.&#x27; +
+                    env + &#x27;.js&#x27;);
+                if (dest.indexOf(mojitoMojits) === 0) {
+                    &#x2F;&#x2F; we shouldn&#x27;t write to the mojits that ship with Mojito
+                    dest = false;
+                }
+                if (dest &amp;&amp; srcs.length) {
+                    rollups[mojitName] = {
+                        dest: dest,
+                        srcs: srcs
+                    };
+                }
+            }
+        }
+        return rollups;
+    },
+
+
+    &#x2F;**
+     * Returns details on how to make inline CSS for mojits.
+     *
+     * This example comes from (a modified) GSG5.
+     * [ {
+     *      context: { device: &#x27;iphone&#x27; },
+     *      mojitName: &#x27;FlickrDetail&#x27;,
+     *      yuiModuleName: &#x27;inlinecss&#x2F;FlickrDetail&#x27;,
+     *      dest: &#x27;&#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;autoload&#x2F;compiled&#x27; +
+     *          &#x27;&#x2F;css.iphone.client.js&#x27;,
+     *      srcs: {
+     *          &#x27;&#x2F;static&#x2F;FlickrDetail&#x2F;assets&#x2F;index.css&#x27;:
+     *          &#x27;    &#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;assets&#x2F;index.iphone.css&#x27;,
+     *          &#x27;&#x2F;static&#x2F;FlickrDetail&#x2F;assets&#x2F;message.css&#x27;:
+     *          &#x27;    &#x2F;blah&#x2F;mojits&#x2F;FlickrDetail&#x2F;assets&#x2F;message.css&#x27;
+     *   }
+     * ]
+     *
+     * @method getInlineCssMojits
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctxFilter {object} (optional) runtime context to restrict results to
+     * @return {array} object describing where to put the inline CSS file and what it should contain
+     *&#x2F;
+    getInlineCssMojits: function(env, ctxFilter) {
+        var mojitName,
+            ctxKey,
+            ctx,
+            ress,
+            resid,
+            res,
+            selector,
+            dest,
+            srcs,
+            inlines = [],
+            mojitoMojits = libpath.join(mojitoRoot, &#x27;mojits&#x27;);
+
+        &#x2F;&#x2F; This will make our test later a little easier.
+        if (typeof ctxFilter === &#x27;object&#x27; &amp;&amp; !Object.keys(ctxFilter).length) {
+            ctxFilter = null;
+        }
+
+        for (mojitName in this._mojitMeta[env]) {
+            if (this._mojitMeta[env].hasOwnProperty(mojitName)) {
+                for (ctxKey in this._mojitMeta[env][mojitName].contexts) {
+                    if (this._mojitMeta[env][mojitName
+                            ].contexts.hasOwnProperty(ctxKey)) {
+                        ctx = this._mojitMeta[env][mojitName].contexts[ctxKey];
+                        if (ctxFilter &amp;&amp; !this._matchContext(ctx, ctxFilter)) {
+                            continue;
+                        }
+
+                        ress = this._cloneObj(this._mojitMeta[env
+                            ][mojitName][&#x27;*&#x27;]);
+                        if (&#x27;*&#x27; !== ctxKey) {
+                            ress = this._mergeRecursive(ress,
+                                this._mojitMeta[env][mojitName][ctxKey]);
+                        }
+                        srcs = [];
+                        for (resid in ress) {
+                            if (ress.hasOwnProperty(resid)) {
+                                res = ress[resid];
+                                if ((res.type !== &#x27;asset&#x27;) ||
+                                        (res.assetType !== &#x27;css&#x27;)) {
+                                    continue;
+                                }
+                                srcs[res.staticHandlerURL] = res.fsPath;
+                            }
+                        }
+                        selector = this._selectorFromContext(ctx);
+                        dest = &#x27;autoload&#x2F;compiled&#x2F;inlinecss&#x27; + (selector ? &#x27;.&#x27; +
+                            selector : &#x27;&#x27;) + &#x27;.common.js&#x27;;
+                        dest = libpath.join(this._mojitPaths[mojitName], dest);
+                        if (dest.indexOf(mojitoMojits) === 0) {
+                            &#x2F;&#x2F; we shouldn&#x27;t write to the mojits that ship with
+                            &#x2F;&#x2F; Mojito
+                            continue;
+                        }
+                        if (Object.keys(srcs).length) {
+                            inlines.push({
+                                context: ctx,
+                                mojitName: mojitName,
+                                yuiModuleName: &#x27;inlinecss&#x2F;&#x27; + mojitName,
+                                dest: dest,
+                                srcs: srcs
+                            });
+                        }
+
+                    } &#x2F;&#x2F; has
+                } &#x2F;&#x2F; foreach ctxKey
+            } &#x2F;&#x2F; has
+        } &#x2F;&#x2F; foreach mojit
+        return inlines;
+    },
+
+
+    &#x2F;&#x2F; ===========================================
+    &#x2F;&#x2F; ================= PRIVATE =================
+
+    &#x2F;**
+     * the &quot;static&quot; version of the application.json is the version that has
+     * the context applied that was given at server-start time.
+     *
+     * @method _readAppConfigStatic
+     * @return {object} static config
+     * @private
+     *&#x2F;
+    _readAppConfigStatic: function() {
+        var path = libpath.join(this._root, &#x27;application.json&#x27;),
+            config = this._cloneObj(this._fwConfig.appConfigBase),
+            appConfig;
+
+        if (this._libs.path.existsSync(path)) {
+            appConfig = this._readConfigYCB({}, path);
+            this._mergeRecursive(config, appConfig);
+        }
+
+        return config;
+    },
+
+
+    &#x2F;**
+     * Read the application&#x27;s dimensions.json file for YCB processing. If not
+     * available, fall back to the framework&#x27;s default dimensions.json.
+     *
+     * @method _readYcbDimensions
+     * @return {array} contents of the dimensions.json file
+     * @private
+     *&#x2F;
+    _readYcbDimensions: function() {
+        var libpath = this._libs.path,
+            path = libpath.join(this._root, &#x27;dimensions.json&#x27;),
+            dims;
+
+        if (!libpath.existsSync(path)) {
+            path = libpath.join(mojitoRoot, &#x27;dimensions.json&#x27;);
+        }
+
+        dims = this._readConfigJSON(path);
+        if (!this._isValidYcbDimensions(dims)) {
+            throw new Error(&#x27;Invalid dimensions.json: &#x27; + path);
+        }
+        return dims;
+    },
+
+
+    &#x2F;**
+     * Perform some light validation for YCB dimensions JSON objects. It should
+     * look something like this:
+     * [{
+     *     &quot;dimensions&quot;: [
+     *         &quot;dim1&quot;: {},
+     *         &quot;dim2&quot;: {},
+     *         ...
+     *     ]
+     * }]
+     *
+     * @method _isValidYcbDimensions
+     * @param {array} dimensions
+     * @return {boolean}
+     * @private
+     *&#x2F;
+    _isValidYcbDimensions: function(dims) {
+        var isArray = Y.Lang.isArray;
+
+        return isArray(dims) &amp;&amp;
+            dims.length === 1 &amp;&amp;
+            isArray(dims[0].dimensions) &amp;&amp;
+            dims[0].dimensions.length &gt; 0;
+    },
+
+
+    &#x2F;**
+     * preload metadata about all resources in the application (and Mojito framework)
+     *
+     * @method _preloadMeta
+     * @return {nothing} work down via other called methods
+     * @private
+     *&#x2F;
+    _preloadMeta: function() {
+        var me = this,
+            walker,
+            walkedMojito = false,
+            dir,
+            info;
+        walker = new libwalker.BreadthFirst(this._root);
+        walker.walk(function(err, info) {
+            if (err) {
+                throw err;
+            }
+            if (&#x27;mojito&#x27; === info.pkg.name) {
+                walkedMojito = true;
+            }
+            me._preloadPackage(info);
+        });
+
+        &#x2F;&#x2F; user might not have installed mojito as a dependency of their
+        &#x2F;&#x2F; application.  (they -should- have but might not have.)
+        if (!walkedMojito) {
+            dir = libpath.join(mojitoRoot, &#x27;..&#x27;);
+            info = {
+                depth: 999,
+                parents: [],
+                dir: dir
+            };
+            info.pkg = this._readMojitConfigFile(libpath.join(dir, &#x27;package.json&#x27;), false);
+
+            &#x2F;&#x2F; special case for weird packaging situations
+            if (!Object.keys(info.pkg).length) {
+                info.dir = mojitoRoot;
+                info.pkg = {
+                    name: &#x27;mojito&#x27;,
+                    version: &#x27;0.666.666&#x27;,
+                    yahoo: {
+                        mojito: {
+                            type: &#x27;bundle&#x27;,
+                            location: &#x27;app&#x27;
+                        }
+                    }
+                };
+            }
+
+            this._preloadPackage(info);
+        }
+    },
+
+
+    &#x2F;**
+     * preloads metadata about resources in the application directory
+     * (but not node_modules&#x2F;)
+     *
+     * @method _preloadApp
+     * @param pkg {object} metadata (name and version) about the app&#x27;s package
+     * @return {nothing} work down via other called methods
+     * @private
+     *&#x2F;
+    _preloadApp: function(pkg) {
+        var i,
+            path;
+
+        &#x2F;&#x2F; mark routes, to aid in detecting them later
+        for (i = 0; i &lt; this._appConfigStatic.routesFiles.length; i += 1) {
+            path = this._appConfigStatic.routesFiles[i];
+            if (&#x27;&#x2F;&#x27; !== path.charAt(0)) {
+                path = libpath.join(this._root, path);
+            }
+            if (!libpath.existsSync(path)) {
+                logger.log(&#x27;missing routes file. skipping &#x27; + path, &#x27;warn&#x27;, NAME);
+                continue;
+            }
+            this._preload_routes[path] = true;
+        }
+
+        this._preloadDirBundle(this._root, pkg, true);
+
+        &#x2F;&#x2F; load mojitsDirs
+        for (i = 0; i &lt; this._appConfigStatic.mojitsDirs.length; i += 1) {
+            path = this._appConfigStatic.mojitsDirs[i];
+            this._preloadDirMojits(path, pkg);
+        }
+
+        &#x2F;&#x2F; load mojitDirs
+        if (this._appConfigStatic.mojitDirs) {
+            for (i = 0; i &lt; this._appConfigStatic.mojitDirs.length; i += 1) {
+                path = this._appConfigStatic.mojitDirs[i];
+                this._preloadDirMojit(path, pkg, path);
+            }
+        }
+    },
+
+
+    &#x2F;**
+     * preloads metadata about resources in a package
+     * (but not subpackages in its node_modules&#x2F;)
+     *
+     * @method _preloadPackage
+     * @param info {object} metadata about the package
+     * @return {nothing} work down via other called methods
+     * @private
+     *&#x2F;
+    _preloadPackage: function(info) {
+        var dir,
+            pkg;
+        &#x2F;&#x2F; FUTURE:  use info.inherit to scope mojit dependencies
+        &#x2F;*
+        console.log(&#x27;--PACKAGE-- &#x27; + info.depth + &#x27; &#x27; + info.pkg.name + &#x27;@&#x27; + info.pkg.version
+                + &#x27; \t&#x27; + (info.pkg.yahoo &amp;&amp; info.pkg.yahoo.mojito &amp;&amp; info.pkg.yahoo.mojito.type)
+                + &#x27; \t[&#x27; + info.parents.join(&#x27;,&#x27;) + &#x27;]&#x27;
+        &#x2F;&#x2F;      + &#x27; \t-- &#x27; + Y.JSON.stringify(info.inherit)
+        );
+        *&#x2F;
+        pkg = {
+            name: info.pkg.name,
+            version: info.pkg.version
+        };
+        if (0 === info.depth) {
+            &#x2F;&#x2F; the actual application is handled specially
+            this._preloadApp(pkg);
+            return;
+        }
+        if (!info.pkg.yahoo || !info.pkg.yahoo.mojito) {
+            return;
+        }
+        switch (info.pkg.yahoo.mojito.type) {
+        case &#x27;bundle&#x27;:
+            dir = libpath.join(info.dir, info.pkg.yahoo.mojito.location);
+            this._preloadDirBundle(dir, pkg, false);
+            this._preloadDirMojits(libpath.join(dir, &#x27;mojits&#x27;), pkg);
+            break;
+        case &#x27;mojit&#x27;:
+            dir = libpath.join(info.dir, info.pkg.yahoo.mojito.location);
+            this._preloadDirMojit(dir, pkg, info.dir);
+            break;
+        default:
+            logger.log(&#x27;Unknown package type &quot;&#x27; + info.pkg.yahoo.mojito.type + &#x27;&quot;&#x27;, &#x27;warn&#x27;, NAME);
+            break;
+        }
+    },
+
+
+    &#x2F;**
+     * preloads metadata about resource in a directory
+     *
+     * @method _preloadDirBundle
+     * @param dir {string} directory path
+     * @param pkg {object} metadata (name and version) about the package
+     * @param loadConfig {boolean} whether to also preload metadata about the configuration files
+     * @return {nothing} work down via other called methods
+     * @private
+     *&#x2F;
+    _preloadDirBundle: function(dir, pkg, loadConfig) {
+        var i,
+            res,
+            resources;
+        resources = this._findResourcesByConvention(dir, pkg, &#x27;shared&#x27;);
+        for (i = 0; i &lt; resources.length; i += 1) {
+            res = resources[i];
+            switch (res.type) {
+            case &#x27;config&#x27;:
+                if (!loadConfig) {
+                    if (&#x27;package&#x27; !== res.name) {
+                        logger.log(&#x27;config file &quot;&#x27; + res.shortPath + &#x27;&quot; not used here. skipping.&#x27;, &#x27;warn&#x27;, NAME);
+                    }
+                    break;
+                }
+                this._preloadResource(res, null);
+                break;
+
+            &#x2F;&#x2F; app-level
+            case &#x27;archetype&#x27;:
+            case &#x27;command&#x27;:
+            case &#x27;middleware&#x27;:
+                this._preloadResource(res, null);
+                break;
+
+            &#x2F;&#x2F; mojit-level
+            case &#x27;action&#x27;:
+            case &#x27;addon&#x27;:
+            case &#x27;asset&#x27;:
+            case &#x27;binder&#x27;:
+            case &#x27;controller&#x27;:
+            case &#x27;model&#x27;:
+            case &#x27;spec&#x27;:
+            case &#x27;view&#x27;:
+            case &#x27;yui-lang&#x27;:
+            case &#x27;yui-module&#x27;:
+                this._preloadResource(res, &#x27;shared&#x27;);
+                break;
+
+            default:
+                logger.log(&#x27;unknown resource type &quot;&#x27; + res.type + &#x27;&quot;. skipping &#x27; + res.fsPath, &#x27;warn&#x27;, NAME);
+                break;
+            } &#x2F;&#x2F; switch
+        } &#x2F;&#x2F; for each resource
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceArchetype
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceArchetype: function(res, subtype) {
+        var dir,
+            ext,
+            file;
+
+        &#x2F;&#x2F; archetypes don&#x27;t support our &quot;.affinity.&quot; or &quot;.selector.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+
+        res.name = libpath.join(dir, file);
+        res.type = &#x27;archetype&#x27;;
+        res.subtype = subtype;
+        res.id = &#x27;archetype-&#x27; + res.subtype + &#x27;-&#x27; + res.name;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceCommand
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceCommand: function(res) {
+        var dir,
+            ext,
+            file;
+
+        &#x2F;&#x2F; commands don&#x27;t support our &quot;.affinity.&quot; or &quot;.selector.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+
+        res.name = libpath.join(dir, file);
+        res.type = &#x27;command&#x27;;
+        res.id = &#x27;command-&#x27; + res.name;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceMiddleware
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceMiddleware: function(res) {
+        var dir,
+            ext,
+            file;
+
+        &#x2F;&#x2F; middleware doesn&#x27;t support our &quot;.affinity.&quot; or &quot;.selector.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+
+        res.name = libpath.join(dir, file);
+        res.type = &#x27;middleware&#x27;;
+        res.id = &#x27;middleware-&#x27; + res.name;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceConfig
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceConfig: function(res, mojitType) {
+        var dir,
+            ext,
+            file,
+            pathParts;
+
+        &#x2F;&#x2F; configs don&#x27;t support our &quot;.affinity.&quot; or &quot;.selector.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+        pathParts = {
+            affinity: new Affinity(&#x27;server&#x27;),
+            contextKey: &#x27;*&#x27;,
+            contextParts: {},
+            ext: ext
+        };
+
+        if (&#x27;.json&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+        if (this._preload_routes[res.fsPath]) {
+            res.configType = &#x27;routes&#x27;;
+        }
+        res.name = libpath.join(dir, file);
+        res.type = &#x27;config&#x27;;
+        res.id = &#x27;config-&#x27; + res.name;
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceAction
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceAction: function(res, mojitType) {
+        var pathParts = this._parsePath(res, &#x27;server&#x27;);
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+        res.name = libpath.join(libpath.dirname(res.shortPath), pathParts.shortFile);
+        res.type = &#x27;action&#x27;;
+        res.id = &#x27;action-&#x27; + res.name;
+        this._precalcYuiModule(res);
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceAddon
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceAddon: function(res, mojitType, subtype) {
+        var pathParts = this._parsePath(res, &#x27;server&#x27;);
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+        res.name = libpath.join(libpath.dirname(res.shortPath), pathParts.shortFile);
+        res.type = &#x27;addon&#x27;;
+        res.addonType = subtype;
+        res.id = &#x27;addon-&#x27; + res.addonType + &#x27;-&#x27; + res.name;
+        this._precalcYuiModule(res);
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceAsset
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceAsset: function(res, mojitType) {
+        var dir,
+            ext,
+            file,
+            fileParts,
+            pathParts;
+
+        &#x2F;&#x2F; binders don&#x27;t support our &quot;.affinity.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+        fileParts = file.split(&#x27;.&#x27;);
+
+        pathParts = {
+            affinity: new Affinity(&#x27;common&#x27;),
+            contextKey: &#x27;*&#x27;,
+            contextParts: {},
+            ext: ext
+        };
+        if (fileParts.length &gt;= 2) {
+            pathParts.contextParts.device = fileParts.pop();
+            pathParts.contextKey = libqs.stringify(pathParts.contextParts);
+        }
+        pathParts.shortFile = fileParts.join(&#x27;.&#x27;);
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+
+        res.name = libpath.join(dir, pathParts.shortFile) + pathParts.ext;
+        res.type = &#x27;asset&#x27;;
+        res.assetType = pathParts.ext.substr(1);
+        res.id = &#x27;asset-&#x27; + res.name;
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceBinder
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceBinder: function(res, mojitType) {
+        var dir,
+            ext,
+            file,
+            fileParts,
+            pathParts;
+
+        &#x2F;&#x2F; binders don&#x27;t support our &quot;.affinity.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+        fileParts = file.split(&#x27;.&#x27;);
+
+        pathParts = {
+            affinity: new Affinity(&#x27;client&#x27;),
+            contextKey: &#x27;*&#x27;,
+            contextParts: {},
+            ext: ext
+        };
+        if (fileParts.length &gt;= 2) {
+            pathParts.contextParts.device = fileParts.pop();
+            pathParts.contextKey = libqs.stringify(pathParts.contextParts);
+        }
+        pathParts.shortFile = fileParts.join(&#x27;.&#x27;);
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+
+        res.name = libpath.join(libpath.dirname(res.shortPath), pathParts.shortFile);
+        res.type = &#x27;binder&#x27;;
+        res.id = &#x27;binder-&#x27; + res.name;
+        this._precalcYuiModule(res);
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceController
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceController: function(res, mojitType) {
+        var pathParts = this._parsePath(res, &#x27;server&#x27;);
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+        res.name = &#x27;controller&#x27;;
+        res.type = &#x27;controller&#x27;;
+        res.id = &#x27;controller&#x27;;
+        this._precalcYuiModule(res);
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceModel
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceModel: function(res, mojitType) {
+        var pathParts = this._parsePath(res, &#x27;server&#x27;);
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+        res.name = libpath.join(libpath.dirname(res.shortPath), pathParts.shortFile);
+        res.type = &#x27;model&#x27;;
+        res.id = &#x27;model-&#x27; + res.name;
+        this._precalcYuiModule(res);
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceSpec
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceSpec: function(res, mojitType) {
+        var dir,
+            ext,
+            file,
+            pathParts,
+            appConfig,
+            prefix;
+
+        &#x2F;&#x2F; specs don&#x27;t support our &quot;.affinity.&quot; or &quot;.selector.&quot; filename syntax
+        dir = libpath.dirname(res.shortPath);
+        ext = libpath.extname(res.shortPath);
+        file = libpath.basename(res.shortPath, ext);
+        pathParts = {
+            affinity: new Affinity(&#x27;server&#x27;),
+            contextKey: &#x27;*&#x27;,
+            contextParts: {},
+            ext: ext
+        };
+        pathParts.shortFile = file;
+        if (&#x27;.json&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+
+        res.name = libpath.join(libpath.dirname(res.shortPath), pathParts.shortFile);
+        res.type = &#x27;spec&#x27;;
+        res.id = &#x27;spec-&#x27; + res.name;
+
+        appConfig = this._appConfigStatic.staticHandling || {};
+        prefix = &#x27;&#x2F;static&#x27;;
+        if (typeof appConfig.prefix !== &#x27;undefined&#x27;) {
+            prefix = appConfig.prefix ? &#x27;&#x2F;&#x27; + appConfig.prefix : &#x27;&#x27;;
+        }
+
+        &#x2F;&#x2F; namespaced by mojitType
+        res.specName = mojitType;
+        if (res.name !== &#x27;default&#x27;) {
+            res.specName += &#x27;:&#x27; + res.name;
+        }
+
+        res.dynamicHandlerURL = prefix + &#x27;&#x2F;&#x27; + mojitType + &#x27;&#x2F;specs&#x2F;&#x27; + res.shortPath;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceView
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceView: function(res, mojitType) {
+        var pathParts,
+            fileParts;
+        &#x2F;&#x2F; views don&#x27;t support our &quot;.affinity.&quot; filename syntax
+        pathParts = {
+            affinity: new Affinity(&#x27;common&#x27;),
+            contextKey: &#x27;*&#x27;,
+            contextParts: {},
+            ext: libpath.extname(res.shortPath)
+        };
+        fileParts = libpath.basename(res.shortPath).split(&#x27;.&#x27;);
+        res.viewOutputFormat = fileParts.pop();
+        res.viewEngine = fileParts.pop();
+        if (fileParts.length &gt;= 2) {
+            pathParts.contextParts.device = fileParts.pop();
+            pathParts.contextKey = libqs.stringify(pathParts.contextParts);
+        }
+        pathParts.shortFile = fileParts.join(&#x27;.&#x27;);
+
+        if (fileParts.length !== 1) {
+            logger.log(&#x27;invalid view filename. skipping &#x27; + res.fsPath, &#x27;warn&#x27;, NAME);
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+
+        res.name = libpath.join(libpath.dirname(res.shortPath), pathParts.shortFile);
+        res.type = &#x27;view&#x27;;
+        res.id = &#x27;view-&#x27; + res.name;
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceYuiLang
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceYuiLang: function(res, mojitType) {
+        var pathParts,
+            shortName;
+        &#x2F;&#x2F; language bundles don&#x27;t support our &quot;.affinity.&quot; filename syntax
+        pathParts = {
+            affinity: new Affinity(&#x27;common&#x27;),
+            contextKey: &#x27;*&#x27;,
+            contextParts: {},
+            ext: libpath.extname(res.shortPath)
+        };
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+        pathParts.shortFile = libpath.basename(res.shortPath, pathParts.ext);
+        if (pathParts.shortFile === mojitType) {
+            res.langCode = &#x27;&#x27;;
+        } else if (mojitType === pathParts.shortFile.substr(0, mojitType.length)) {
+            res.langCode = pathParts.shortFile.substr(mojitType.length + 1);
+        } else {
+            logger.log(&#x27;invalid YUI lang file format. skipping &#x27; + res.fsPath, &#x27;error&#x27;, NAME);
+            return;
+        }
+        if (res.langCode) {
+            pathParts.contextParts.lang = res.langCode;
+            pathParts.contextKey = libqs.stringify(pathParts.contextParts);
+        }
+
+        res.name = res.langCode;
+        res.type = &#x27;yui-lang&#x27;;
+        res.id = &#x27;yui-lang-&#x27; + res.langCode;
+
+        if (!this._mojitLangs[mojitType]) {
+            this._mojitLangs[mojitType] = [];
+        }
+        if (res.langCode) {
+            this._mojitLangs[mojitType].push(res.langCode);
+        }
+
+        this._precalcYuiModule(res);
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * @method _parseResourceYuiModule
+     * @param res {object} partial resource
+     * @return {object|null} parsed resource, or null if shouldn&#x27;t be used
+     * @private
+     *&#x2F;
+    _parseResourceYuiModule: function(res, mojitType) {
+        var pathParts = this._parsePath(res);
+        if (&#x27;.js&#x27; !== pathParts.ext) {
+            return;
+        }
+        if (this._skipBadPath(pathParts)) {
+            return;
+        }
+
+        if (pathParts.affinity.type) {
+            &#x2F;&#x2F; This allows the app config to specify that some &quot;client&quot; affinity
+            &#x2F;&#x2F; code should not be deployed if it has an &quot;optional&quot; subtype
+            if (this._appConfigStatic.deferAllOptionalAutoloads &amp;&amp;
+                    pathParts.affinity.type === &#x27;optional&#x27;) {
+                pathParts.affinity = &#x27;none&#x27;;
+            } else if (pathParts.affinity.type === &#x27;tests&#x27; &amp;&amp;
+                    this._appConfigStatic.env !== &#x27;test&#x27;) {
+                &#x2F;&#x2F; this filters tests from being included with deployed
+                &#x2F;&#x2F; applications
+                pathParts.affinity = &#x27;none&#x27;;
+            }
+        }
+        if (&#x27;none&#x27; === pathParts.affinity) {
+            return;
+        }
+
+        this._precalcYuiModule(res);
+        res.name = res.yuiModuleName;
+        res.type = &#x27;yui-module&#x27;;
+        res.id = &#x27;yui-module-&#x27; + res.name;
+        this._precalcStaticURL(res, mojitType);
+        res.pathParts = pathParts;
+        return res;
+    },
+
+
+    &#x2F;**
+     * preloads a directory containing many mojits
+     *
+     * @method _preloadDirMojits
+     * @param dir {string} directory path
+     * @param pkg {object} metadata (name and version) about the package
+     * @return {nothing} work down via other called methods
+     * @private
+     *&#x2F;
+    _preloadDirMojits: function(dir, pkg) {
+        var i,
+            realDirs,
+            children,
+            childName,
+            childPath;
+
+        if (&#x27;&#x2F;&#x27; !== dir.charAt(0)) {
+            dir = libpath.join(this._root, dir);
+        }
+
+        &#x2F;&#x2F; handle globbing
+        if (dir.indexOf(&#x27;*&#x27;) &gt;= 0) {
+            realDirs = libglob.sync(dir, {});
+            if (!realDirs.length) {
+                logger.log(&#x27;Failed to find any mojitsDirs matching &#x27; + dir, &#x27;error&#x27;, NAME);
+                return;
+            }
+            for (i = 0; i &lt; realDirs.length; i += 1) {
+                this._preloadDirMojits(realDirs[i], pkg);
+            }
+            return;
+        }
+
+        if (!this._libs.path.existsSync(dir)) {
+            return;
+        }
+
+        children = this._sortedReaddirSync(dir);
+        for (i = 0; i &lt; children.length; i += 1) {
+            childName = children[i];
+            if (&#x27;.&#x27; === childName.substring(0, 1)) {
+                continue;
+            }
+            childPath = libpath.join(dir, childName);
+            this._preloadDirMojit(childPath, pkg, childPath);
+        }
+    },
+
+
+    &#x2F;**
+     * preloads a directory that represents a single mojit
+     *
+     * @method _preloadDirMojit
+     * @param dir {string} directory path
+     * @param pkg {object} metadata (name and version) about the package
+     * @param pkgDir {string} directory of the packaging for this mojit
+     * @return {nothing} work down via other called methods
+     * @private
+     *&#x2F;
+    _preloadDirMojit: function(dir, pkg, pkgDir) {
+        var i,
+            realDirs,
+            resources,
+            res,
+            mojitType,
+            packageJson,
+            definitionJson,
+            appConfig,
+            prefix,
+            url;
+
+        if (&#x27;&#x2F;&#x27; !== dir.charAt(0)) {
+            dir = libpath.join(this._root, dir);
+        }
+
+        &#x2F;&#x2F; handle globbing
+        if (dir.indexOf(&#x27;*&#x27;) &gt;= 0) {
+            realDirs = libglob.sync(dir, {});
+            if (!realDirs.length) {
+                logger.log(&#x27;Failed to find any mojitDirs matching &#x27; + dir, &#x27;error&#x27;, NAME);
+                return;
+            }
+            for (i = 0; i &lt; realDirs.length; i += 1) {
+                this._preloadDirMojit(realDirs[i], pkg, pkgDir);
+            }
+            return;
+        }
+
+        if (!this._libs.path.existsSync(dir)) {
+            return;
+        }
+
+        mojitType = libpath.basename(dir);
+        packageJson = this._readMojitConfigFile(libpath.join(pkgDir, &#x27;package.json&#x27;), false);
+        if (packageJson) {
+            if (packageJson.name) {
+                mojitType = packageJson.name;
+            }
+            if (pkg.name !== &#x27;mojito&#x27;) {
+                &#x2F;&#x2F; TODO:  deprecate.  NPM &quot;engine&quot; is better
+                if (!this._mojitoVersionMatch(packageJson, this._version)) {
+                    logger.log(&#x27;Mojito version mismatch: mojit skipped in &quot;&#x27; +
+                        dir + &#x27;&quot;&#x27;, &#x27;warn&#x27;, NAME);
+                    return;
+                }
+
+                this._mojitPackageAsAsset(dir, mojitType, packageJson);
+            }
+        }
+        this._mojitPaths[mojitType] = dir;
+
+        definitionJson = this._readMojitConfigFile(libpath.join(dir, &#x27;definition.json&#x27;), true);
+        if (definitionJson.appLevel) {
+            mojitType = &#x27;shared&#x27;;
+        }
+
+        if (&#x27;shared&#x27; !== mojitType) {
+            &#x2F;&#x2F; TODO: [Issue 109] re-use logic from _precalcStaticURL() for
+            &#x2F;&#x2F; prefix (so that all options are supported)
+            appConfig = this._appConfigStatic.staticHandling || {};
+            prefix = &#x27;&#x2F;static&#x27;;
+            if (typeof appConfig.prefix !== &#x27;undefined&#x27;) {
+                prefix = appConfig.prefix ? &#x27;&#x2F;&#x27; + appConfig.prefix : &#x27;&#x27;;
+            }
+            url = prefix + &#x27;&#x2F;&#x27; + mojitType + &#x27;&#x2F;definition.json&#x27;;
+            this._dynamicURLs[url] = libpath.join(dir, &#x27;definition.json&#x27;);
+        }
+
+        resources = this._findResourcesByConvention(dir, pkg, mojitType);
+        for (i = 0; i &lt; resources.length; i += 1) {
+            res = resources[i];
+            switch (res.type) {
+            &#x2F;&#x2F; app-level
+            case &#x27;archetype&#x27;:
+            case &#x27;command&#x27;:
+            case &#x27;middleware&#x27;:
+                logger.log(&#x27;app-level resources not allowed here. skipping &#x27; + res.fsPath, &#x27;warn&#x27;, NAME);
+                this._preloadResource(res, mojitType);
+                break;
+
+            &#x2F;&#x2F; mojit-level
+            case &#x27;action&#x27;:
+            case &#x27;addon&#x27;:
+            case &#x27;asset&#x27;:
+            case &#x27;binder&#x27;:
+            case &#x27;controller&#x27;:
+            case &#x27;model&#x27;:
+            case &#x27;spec&#x27;:
+            case &#x27;view&#x27;:
+            case &#x27;yui-lang&#x27;:
+            case &#x27;yui-module&#x27;:
+                this._preloadResource(res, mojitType);
+                break;
+            case &#x27;config&#x27;:
+                if (&#x27;shared&#x27; !== mojitType) {
+                    this._preloadResource(res, mojitType);
+                }
+                break;
+
+            default:
+                logger.log(&#x27;unknown resource type &quot;&#x27; + res.type + &#x27;&quot;. skipping &#x27; + res.fsPath, &#x27;warn&#x27;, NAME);
+                break;
+            } &#x2F;&#x2F; switch
+        }
+    },
+
+
+    &#x2F;**
+     * Finds resources based on our conventions
+     * -doesn&#x27;t- load mojits or their contents.  That&#x27;s done elsewhere.
+     *
+     * actions&#x2F;{name}.**.js
+     * addons&#x2F;{subtype}&#x2F;{name}.**.js
+     * archetypes&#x2F;{subtype}&#x2F;{name}&#x2F;
+     * assets&#x2F;{everything}
+     * binders&#x2F;{name}.**.js
+     * commands&#x2F;{name}.js
+     * controller.**.js
+     * lang&#x2F;{name}.**.js
+     * middleware&#x2F;{name}.js
+     * models&#x2F;{name}.**.js
+     * views&#x2F;{name}.**.{ext}
+     * yui_modules&#x2F;{name}.**.js
+     *
+     * @method _findResourcesByConvention
+     * @param dir {string} directory from which to find resources
+     * @param pkg {object} metadata (name and version) about the package
+     * @param mojitType {string|null} name of mojit to which the resource belongs
+     * @return {array} list of resources
+     * @private
+     *&#x2F;
+    _findResourcesByConvention: function(dir, pkg, mojitType) {
+        var me = this,
+            resources = [];
+        &#x2F;&#x2F;console.log(&#x27;-- FIND RESOURCES BY CONVENTION -- &#x27; + pkg.name + &#x27;@&#x27; + pkg.version + &#x27; -- &#x27; + mojitType);
+
+        this._walkDirRecursive(dir, function(error, subdir, file, isFile) {
+            var pathParts,
+                fileParts,
+                ext,
+                subtype,
+                res;
+
+            if (&#x27;node_modules&#x27; === file) {
+                return false;
+            }
+            if (&#x27;libs&#x27; === file) {
+                return false;
+            }
+            if (&#x27;tests&#x27; === file &amp;&amp; &#x27;test&#x27; !== me._appConfigStatic.env) {
+                return false;
+            }
+
+            pathParts = libpath.join(subdir, file).split(&#x27;&#x2F;&#x27;);
+            if (!isFile) {
+
+                &#x2F;&#x2F; mojits are loaded another way later
+                if (&#x27;.&#x27; === subdir &amp;&amp; &#x27;mojits&#x27; === file) {
+                    return false;
+                }
+
+                if (pathParts.length === 3 &amp;&amp; &#x27;archetypes&#x27; === pathParts[0]) {
+                    subtype = pathParts[1];
+                    res = {
+                        pkg: pkg,
+                        fsPath: libpath.join(dir, subdir, file),
+                        shortPath: pathParts.slice(2).join(&#x27;&#x2F;&#x27;)
+                    };
+                    res = me._parseResourceArchetype(res, subtype);
+                    if (res) {
+                        resources.push(res);
+                    }
+                    &#x2F;&#x2F; no need to recurse into the archetype at this time
+                    return false;
+                }
+
+                &#x2F;&#x2F; otherwise, just recurse
+                return true;
+            }
+
+            fileParts = file.split(&#x27;.&#x27;);
+            ext = fileParts[fileParts.length - 1];
+
+            if (&#x27;.&#x27; === subdir &amp;&amp; &#x27;json&#x27; === ext) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: libpath.join(subdir, file)
+                };
+                res = me._parseResourceConfig(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;commands&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceCommand(res);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;middleware&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceMiddleware(res);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;actions&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceAction(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 3 &amp;&amp; &#x27;addons&#x27; === pathParts[0]) {
+                subtype = pathParts[1];
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(2).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceAddon(res, mojitType, subtype);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;assets&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceAsset(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;binders&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceBinder(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (&#x27;.&#x27; === subdir &amp;&amp; &#x27;controller&#x27; === fileParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: libpath.join(subdir, file)
+                };
+                res = me._parseResourceController(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;lang&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceYuiLang(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;models&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceModel(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;specs&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceSpec(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; &#x27;views&#x27; === pathParts[0]) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceView(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            if (pathParts.length &gt;= 2 &amp;&amp; (&#x27;yui_modules&#x27; === pathParts[0]
+                        || &#x27;autoload&#x27; === pathParts[0]
+                        || &#x27;tests&#x27; === pathParts[0])) {
+                res = {
+                    pkg: pkg,
+                    fsPath: libpath.join(dir, subdir, file),
+                    shortPath: pathParts.slice(1).join(&#x27;&#x2F;&#x27;)
+                };
+                res = me._parseResourceYuiModule(res, mojitType);
+                if (res) {
+                    resources.push(res);
+                }
+                return;
+            }
+
+            &#x2F;&#x2F; unknown file, just skip.  (this includes config files which are
+            &#x2F;&#x2F; handled separately.)
+            return;
+        });
+
+        return resources;
+    },
+
+
+    &#x2F;**
+     * @method _parsePath
+     * @param res {object} partial resource
+     * @return {object} metadata: ext, shortFile, affinity, contextKey, and contextParts
+     * @private
+     *&#x2F;
+    _parsePath: function(res, defaultAffinity) {
+        var out = {},
+            fileParts,
+            device;
+
+        out.contextKey = &#x27;*&#x27;;
+        out.contextParts = {};
+        out.affinity = defaultAffinity || &#x27;server&#x27;;
+        out.ext = libpath.extname(res.shortPath);
+
+        fileParts = libpath.basename(res.shortPath, out.ext).split(&#x27;.&#x27;);
+        if (fileParts.length &gt;= 3) {
+            device = fileParts.pop();
+        }
+        if (fileParts.length &gt;= 2) {
+            out.affinity = fileParts.pop();
+        }
+        out.shortFile = fileParts.join(&#x27;.&#x27;);
+
+        out.affinity = new Affinity(out.affinity);
+        if (device) {
+            out.contextParts.device = device;
+        }
+        if (!this._objectIsEmpty(out.contextParts)) {
+            out.contextKey = libqs.stringify(out.contextParts);
+        }
+        return out;
+    },
+
+
+    &#x2F;**
+     * utility that registers the resource for later parts of the algorithm
+     *
+     * @method _preloadResource
+     * @param res {object} metadata about the resource
+     * @param mojitType {string} which mojit, if applicatable
+     * @return {nothing}
+     * @private
+     *&#x2F;
+    _preloadResource: function(res, mojitType) {
+        var dest,
+            config,
+            using,
+            skipping;
+
+        if (&#x27;spec&#x27; === res.type) {
+            config = this._readConfigYCB({}, res.fsPath);
+            if (!this._appConfigStatic.specs) {
+                this._appConfigStatic.specs = {};
+            }
+            this._appConfigStatic.specs[res.specName] = config;
+            this._dynamicURLs[res.dynamicHandlerURL] = res.fsPath;
+            return;
+        }
+
+        &#x2F;&#x2F; non-contextualized resources
+        &#x2F;&#x2F; (... which are most app-level resources)
+        if (!res.pathParts) {
+            this._appMetaNC[res.id] = res;
+            return;
+        }
+
+        if (!mojitType) {
+            dest = this._preload.appMeta;
+        } else if (&#x27;shared&#x27; === mojitType) {
+            res.sharedMojit = true;
+            dest = this._preload.sharedMeta;
+        } else {
+            if (!this._preload.mojitMeta[mojitType]) {
+                this._preload.mojitMeta[mojitType] = {};
+            }
+            dest = this._preload.mojitMeta[mojitType];
+        }
+
+        if (!dest[res.id]) {
+            dest[res.id] = {};
+        }
+        dest = dest[res.id];
+        if (!dest[res.pathParts.affinity]) {
+            dest[res.pathParts.affinity] = {};
+        }
+        dest = dest[res.pathParts.affinity];
+        if (!dest.contexts) {
+            dest.contexts = {};
+        }
+        if (dest[res.pathParts.contextKey]) {
+            using = &#x27;from pkg &#x27; + dest[res.pathParts.contextKey].pkg.name + &#x27;@&#x27; +
+                dest[res.pathParts.contextKey].pkg.version;
+            skipping = &#x27;from pkg &#x27; + res.pkg.name + &#x27;@&#x27; + res.pkg.version;
+            if (using === skipping) {
+                using = dest[res.pathParts.contextKey].shortPath;
+                skipping = res.shortPath;
+            }
+            if (using === skipping) {
+                using = dest[res.pathParts.contextKey].fsPath;
+                skipping = res.fsPath;
+            }
+            logger.log(&#x27;ALREADY EXISTS: &#x27; + res.type + &#x27; &#x27; + res.shortPath +
+                    (mojitType ? &#x27; -- in mojit &#x27; + mojitType : &#x27;&#x27;) +
+                    &#x27; -- using &#x27; + using + &#x27; -- skipping &#x27; + skipping,
+                    &#x27;info&#x27;, NAME);
+            return;
+        }
+        dest.contexts[res.pathParts.contextKey] = res.pathParts.contextParts;
+        dest[res.pathParts.contextKey] = res;
+        delete res.pathParts;
+
+        if (res.staticHandlerURL) {
+            this._staticURLs[res.staticHandlerURL] = res.staticHandlerFsPath;
+            delete res.staticHandlerFsPath;
+        }
+    },
+
+
+    &#x2F;**
+     * Note: this MUST be called before _parseResourceSpec()
+     *
+     * Generates URL&#x27;s about each spec in application.json
+     *
+     * @method _urlsForAppSpecs
+     * @return {nothing}
+     * @private
+     *&#x2F;
+    _urlsForAppSpecs: function() {
+        var specs = this._appConfigStatic.specs || {},
+            appConfig,
+            prefix,
+            id,
+            url;
+
+        appConfig = this._appConfigStatic.staticHandling || {};
+        prefix = &#x27;&#x2F;static&#x27;;
+        if (typeof appConfig.prefix !== &#x27;undefined&#x27;) {
+            prefix = appConfig.prefix ? &#x27;&#x2F;&#x27; + appConfig.prefix : &#x27;&#x27;;
+        }
+
+        for (id in specs) {
+            if (specs.hasOwnProperty(id)) {
+                &#x2F;&#x2F; Set the URL of the spec
+                &#x2F;&#x2F; TODO:  use appconfig.staticHandling.appName
+                url = prefix + &#x27;&#x2F;&#x27; + id + &#x27;&#x2F;specs&#x2F;default.json&#x27;;
+                this._dynamicURLs[url] = &#x27;application.json&#x27;;
+            }
+        }
+    },
+
+
+    &#x2F;**
+     * prereads the configuration file, if possible
+     * (configuration files in YCB format cannot be preread)
+     *
+     * @method _prereadConfigs
+     * @param src {object} contextualized resources
+     * @return {nothing}
+     * @private
+     *&#x2F;
+    _prereadConfigs: function(src) {
+        var ctxKey,
+            res,
+            resid;
+
+        if ((!src) || (!Object.keys(src))) {
+            return;
+        }
+        for (ctxKey in src.contexts) {
+            if (src.contexts.hasOwnProperty(ctxKey)) {
+                for (resid in src[ctxKey]) {
+                    if (src[ctxKey].hasOwnProperty(resid)) {
+                        res = src[ctxKey][resid];
+                        if (&#x27;config&#x27; === res.type &amp;&amp;
+                                !this._jsonCache[res.fsPath]) {
+                            &#x2F;&#x2F;logger.log(&#x27;prereading &#x27; + res.fsPath, &#x27;info&#x27;,
+                            &#x2F;&#x2F;    NAME);
+                            this._jsonCache[res.fsPath] =
+                                this._readConfigJSON(res.fsPath);
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+
+    &#x2F;**
+     * Reads and parses a JSON file
+     *
+     * @method _readConfigJSON
+     * @param fullpath {string} path to JSON file
+     * @return {mixed} contents of JSON file
+     * @private
+     *&#x2F;
+    _readConfigJSON: function(fullpath) {
+        &#x2F;&#x2F;logger.log(&#x27;_readConfigJSON(&#x27; + fullpath + &#x27;)&#x27;);
+        var json,
+            contents = this._libs.fs.readFileSync(fullpath, &#x27;utf-8&#x27;);
+
+        try {
+            json = Y.JSON.parse(contents);
+        } catch (e) {
+            logger.log(this._reportJavaScriptSyntaxErrors(contents, fullpath),
+                &#x27;warn&#x27;, NAME);
+            throw new Error(&#x27;Error parsing JSON file: &#x27; + fullpath);
+        }
+        return json;
+    },
+
+
+    &#x2F;**
+     * Create a lookup table for validating YCB dimensions and values. The
+     * table looks like this:
+     *
+     * &lt;pre&gt;
+     * {
+     *   &quot;dim1&quot;: {
+     *     &quot;val1&quot;: null,
+     *     &quot;val2&quot;: null,
+     *     ...
+     *   },
+     *   ...
+     * }
+     * &lt;&#x2F;pre&gt;
+     *
+     * @method _precalcValidYCBDimensions
+     * @param dimensions {object} Top-level YCB &quot;dimensions&quot; object
+     * @return object
+     * @private
+     *&#x2F;
+    _precalcValidYCBDimensions: function(dimensions) {
+        var validDims = {},
+            name,
+            i;
+
+        for (i = 0; i &lt; dimensions.length; i += 1) {
+            for (name in dimensions[i]) {
+                if (dimensions[i].hasOwnProperty(name)) {
+                    validDims[name] = {};
+                    this._flattenYCBDimension(validDims[name],
+                        dimensions[i][name]);
+                }
+            }
+        }
+
+        return validDims;
+    },
+
+
+    &#x2F;**
+     * Flatten the keys in a nested structure into a single object. The first
+     * argument is modified. All values are set to null.
+     *
+     * @method _flattenYCBDimensions
+     * @param keys {object} The accumulator for keys.
+     * @param obj {object}
+     * @private
+     *&#x2F;
+    _flattenYCBDimension: function(keys, obj) {
+        var name;
+
+        for (name in obj) {
+            if (obj.hasOwnProperty(name)) {
+                keys[name] = null;
+                if (typeof obj[name] === &#x27;object&#x27;) {
+                    this._flattenYCBDimension(keys, obj[name]);
+                }
+            }
+        }
+    },
+
+
+    &#x2F;**
+     * Return a context that contains only valid dimensions and values.
+     *
+     * @method _getValidYCBContext
+     * @param ctx {object} runtime context
+     * @return {object} filtered runtime context
+     * @private
+     *&#x2F;
+    _getValidYCBContext: function(ctx) {
+        var validDims = this._validYCBDims,
+            validCtx = {},
+            name,
+            value;
+
+        for (name in ctx) {
+            if (ctx.hasOwnProperty(name)) {
+                value = ctx[name];
+                if (validDims[name] &amp;&amp; validDims[name].hasOwnProperty(value)) {
+                    validCtx[name] = value;
+                }
+            }
+        }
+        return validCtx;
+    },
+
+
+    &#x2F;**
+     * reads a configuration file that is in YCB format
+     *
+     * @method _readConfigYCB
+     * @param ctx {object} runtime context
+     * @param fullpath {string} path to the YCB file
+     * @param isAppConfig {boolean} indicates whether the file being read is the application.json
+     * @return {object} the contextualized configuration
+     * @private
+     *&#x2F;
+    _readConfigYCB: function(ctx, fullpath, isAppConfig) {
+        var cacheKey,
+            appConfigStatic,
+            jsonCache = this._jsonCache,
+            json,
+            ycbCache = this._ycbCache,
+            ycb;
+
+        ctx = this._getValidYCBContext(ctx);
+
+        &#x2F;&#x2F;cache key only needs to account for dynamic context
+        cacheKey = Y.JSON.stringify(ctx);
+
+        &#x2F;&#x2F;logger.log(&#x27;_readConfigYCB(&#x27;+fullpath+&#x27;)&#x27;, &#x27;mojito&#x27;, NAME);
+
+        if (!fullpath) {
+            &#x2F;&#x2F;logger.log(&#x27;unknown fullpath&#x27;, &#x27;mojito&#x27;, NAME);
+            return {};
+        }
+
+        if (!ycbCache[fullpath]) {
+            ycbCache[fullpath] = {};
+        }
+
+        ycb = ycbCache[fullpath][cacheKey];
+        if (!ycb) {
+            json = jsonCache[fullpath];
+            if (!json) {
+                json = this._readConfigJSON(fullpath);
+                jsonCache[fullpath] = json;
+            }
+            json = this._ycbDims.concat(json);
+
+            ctx = this._mergeRecursive(this._cloneObj(this._defaultYCBContext),
+                ctx);
+
+            &#x2F;&#x2F; libycb.read() will distructively modify its first argument
+            ycb = libycb.read(this._cloneObj(json), ctx);
+            if (isAppConfig) {
+                appConfigStatic = this._cloneObj(this._appConfigStatic);
+                ycb = this._mergeRecursive(appConfigStatic, ycb);
+            }
+            ycbCache[fullpath][cacheKey] = ycb;
+        }
+        return ycb;
+    },
+
+
+    &#x2F;**
+     * Reads a configuration file for a mojit
+     *
+     * @method _readMojitConfigFile
+     * @param path {string} path to the file
+     * @param ycb {boolean} indicates whether the file should be read using the YCB library
+     * @return {object} the configuration
+     * @private
+     *&#x2F;
+    _readMojitConfigFile: function(path, ycb) {
+        &#x2F;&#x2F;logger.log(&#x27;_readMojitConfigFile(&#x27; + path + &#x27;,&#x27; + ycb + &#x27;)&#x27;);
+        var json,
+            contents;
+
+        if (!this._libs.path.existsSync(path)) {
+            return {};
+        }
+        if (ycb) {
+            return this._readConfigYCB({}, path);
+        }
+        try {
+            contents = this._libs.fs.readFileSync(path, &#x27;utf-8&#x27;);
+            json = Y.JSON.parse(contents);
+        } catch (e) {
+            logger.log(this._reportJavaScriptSyntaxErrors(contents, path),
+                &#x27;warn&#x27;, NAME);
+            throw new Error(&#x27;Error reading or parsing JSON file: &#x27; + path);
+        }
+        return json;
+    },
+
+
+    &#x2F;** 
+     * Registers the mojit&#x27;s package.json as a static resource
+     *
+     * @method _mojitPackageAsAsset
+     * @param dir {string} directory of mojit
+     * @param mojitType {string} name of mojit
+     * @param packageJson {object} contents of mojit&#x27;s package.json
+     * @return {nothing}
+     * @private
+     *&#x2F;
+    _mojitPackageAsAsset: function(dir, mojitType, packageJson) {
+        var pkg,
+            fakeResource;
+
+        &#x2F;&#x2F; FUTURE:  deprecate config.mojito in package.json
+        pkg = (packageJson.yahoo &amp;&amp; packageJson.yahoo.mojito &amp;&amp;
+                packageJson.yahoo.mojito[&#x27;package&#x27;]) ||
+            (packageJson.config &amp;&amp; packageJson.config.mojito &amp;&amp;
+                packageJson.config.mojito[&#x27;package&#x27;]);
+
+        if (pkg === &#x27;public&#x27;) {
+            &#x2F;&#x2F; We have to check if the &quot;package.json&quot; files wants to do this
+            fakeResource = {
+                type: &#x27;package&#x27;,
+                fsPath: libpath.join(dir, &#x27;package.json&#x27;),
+                shortPath: &#x27;package.json&#x27;
+            };
+            this._precalcStaticURL(fakeResource, mojitType);
+            if (fakeResource.staticHandlerURL) {
+                this._staticURLs[fakeResource.staticHandlerURL] =
+                    fakeResource.staticHandlerFsPath;
+            }
+        }
+    },
+
+
+    &#x2F;**
+     * Checks to see if the version of Mojito specified in a mojit&#x27;s
+     * package.json matches the current verison of Mojito.
+     *
+     * @method _mojitoVersionMatch
+     * @param pack {object} contents of the mojit&#x27;s package.json file
+     * @param version {string} current version of mojito
+     * @return {boolean} returns true if the mojit can be used
+     * @private
+     *&#x2F;
+    _mojitoVersionMatch: function(pack, version) {
+        var packageVersion;
+
+        &#x2F;&#x2F; There was no package.json file so assume version is OK
+        if (Object.keys(pack).length === 0) {
+            return true;
+        }
+
+        &#x2F;&#x2F; If we have a version make sure it is less than the given one
+        packageVersion = (pack.yahoo &amp;&amp; pack.yahoo.mojito &amp;&amp;
+                pack.yahoo.mojito.version) ||
+            (pack.config &amp;&amp; pack.config.mojito &amp;&amp; pack.config.mojito.version);
+
+        if (packageVersion) {
+            if (packageVersion === &#x27;*&#x27;) {
+                return true;
+            }
+            &#x2F;&#x2F; TODO: [Issue 95] Put real version checking code here.
+            return packageVersion &lt;= version;
+        }
+
+        &#x2F;&#x2F; No version is set so return false as we don&#x27;t know what this is
+        return false;
+    },
+
+
+    &#x2F;**
+     * Takes the preloaded info and resolves (&quot;cooks down&quot;) affinity, etc.
+     *
+     * This function is a doozy.  This is where all the magic happens as far
+     * as which version of each resource is used.  The results are stored in
+     * this._fwMeta, _appMeta, _mojitMeta, etc.  The primary key of these is
+     * the environment (&quot;client&quot; or &quot;server&quot;).  The secondary key is the
+     * context key -- a string representation of the partial context.
+     *
+     * We do that to have fast lookup during runtime.
+     *
+     * The algorithm chooses first from the most specific source:  mojit-
+     * specific has higher precedence than shared. Within each of those,
+     * the environment-specific version (&quot;client&quot; or &quot;server&quot;) has higher
+     * precedence than the &quot;common&quot; affinity.
+     *
+     * We do this for each context key (partial context).  We resolve
+     * context inheritance (for example no-context versus device=iphone)
+     * at runtime (in getMojitTypeDetails()).
+     *
+     * (Half of the above algorithm is implemented here, and half in
+     * _cookdownMerge() which is a utility for this method.)
+     *
+     * @method _cookdown
+     * @return {nothing}
+     * @private
+     *&#x2F;
+    _cookdown: function() {
+        &#x2F;&#x2F;logger.log(&#x27;_cookdown()&#x27;);
+        var env,
+            envs = [&#x27;client&#x27;, &#x27;server&#x27;],
+            type,   &#x2F;&#x2F; mojit type
+            i,
+            merged, &#x2F;&#x2F; results of _cookdownMerge()
+            resid,
+            resids, &#x2F;&#x2F; array (really object keys) of all resource IDs
+            ctxKey;
+
+        &#x2F;&#x2F; example of _preload.mojitMeta:
+        &#x2F;&#x2F; [type][resid][affinity] = {
+        &#x2F;&#x2F;      &quot;contexts&quot;: { &quot;device=iphone&quot;: { &quot;device&quot;:&quot;iphone&quot;} },
+        &#x2F;&#x2F;      &quot;device=iphone&quot;: {
+        &#x2F;&#x2F;          &quot;type&quot;: ...
+        &#x2F;&#x2F;          &quot;fsPath&quot;: ...
+        &#x2F;&#x2F;      }
+        &#x2F;&#x2F; }
+        &#x2F;&#x2F; resid was generated during _preloadFile*(), for example:
+        &#x2F;&#x2F;      controller is &#x27;controller&#x27;
+        &#x2F;&#x2F;      model is &#x27;model-foo&#x27;
+        &#x2F;&#x2F;      view is &#x27;view-index&#x27;
+        &#x2F;&#x2F;
+        &#x2F;&#x2F; TODO 2011-06-16: [Issue 109] break down into smaller pieces
+        &#x2F;&#x2F; (at least for more fine-grained unit testing).
+        for (type in this._preload.mojitMeta) {
+            if (this._preload.mojitMeta.hasOwnProperty(type)) {
+                &#x2F;&#x2F; TODO: LINT [Issue 110] detect dupe resids.
+                resids = {};
+
+                &#x2F;&#x2F; need resids from all sources
+                for (resid in this._preload.sharedMeta) {
+                    if (this._preload.sharedMeta.hasOwnProperty(resid)) {
+                        resids[resid] = true;
+                    }
+                }
+                for (resid in this._preload.mojitMeta[type]) {
+                    if (this._preload.mojitMeta[type].hasOwnProperty(resid)) {
+                        resids[resid] = true;
+                    }
+                }
+
+                for (resid in resids) {
+                    if (resids.hasOwnProperty(resid)) {
+                        for (i = 0; i &lt; envs.length; i += 1) {
+                            env = envs[i];
+                            merged = this._cookdownMerge(env, [
+                                &#x2F;&#x2F; ORDER IS IMPORTANT
+                                this._preload.sharedMeta[resid],
+                                this._preload.mojitMeta[type][resid]
+                            ]);
+                            if (merged) {
+                                if (!this._mojitMeta[env]) {
+                                    this._mojitMeta[env] = {};
+                                }
+                                if (!this._mojitMeta[env][type]) {
+                                    this._mojitMeta[env][type] = {};
+                                }
+                                if (!this._mojitMeta[env][type].contexts) {
+                                    this._mojitMeta[env][type].contexts = {};
+                                }
+                                for (ctxKey in merged.contexts) {
+                                    if (merged.contexts.
+                                            hasOwnProperty(ctxKey)) {
+                                        this._mojitMeta[env][type
+                                            ].contexts[ctxKey] =
+                                            merged.contexts[ctxKey];
+                                        if (!this._mojitMeta[env
+                                                ][type][ctxKey]) {
+                                            this._mojitMeta[env
+                                                ][type][ctxKey] = {};
+                                        }
+                                        &#x2F;&#x2F; TODO: give example of
+                                        &#x2F;&#x2F; data structure.
+                                        this._mojitMeta[env
+                                            ][type][ctxKey][resid] =
+                                            merged[ctxKey];
+                                    }
+                                }
+                            } &#x2F;&#x2F; have merged
+                        } &#x2F;&#x2F; foreach env
+                    }
+                } &#x2F;&#x2F; foreach resid
+            }
+        } &#x2F;&#x2F; foreach type
+
+        for (resid in this._preload.appMeta) {
+            if (this._preload.appMeta.hasOwnProperty(resid)) {
+                for (i = 0; i &lt; envs.length; i += 1) {
+                    env = envs[i];
+                    merged = this._cookdownMerge(env,
+                        [this._preload.appMeta[resid]]);
+                    if (merged) {
+                        if (!this._appMeta[env]) {
+                            this._appMeta[env] = {};
+                        }
+                        if (!this._appMeta[env].contexts) {
+                            this._appMeta[env].contexts = {};
+                        }
+                        for (ctxKey in merged.contexts) {
+                            if (merged.contexts.hasOwnProperty(ctxKey)) {
+                                this._appMeta[env].contexts[ctxKey] =
+                                    merged.contexts[ctxKey];
+                                if (!this._appMeta[env][ctxKey]) {
+                                    this._appMeta[env][ctxKey] = {};
+                                }
+                                this._appMeta[env][ctxKey][resid] =
+                                    merged[ctxKey];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        for (resid in this._preload.sharedMeta) {
+            if (this._preload.sharedMeta.hasOwnProperty(resid)) {
+                for (i = 0; i &lt; envs.length; i += 1) {
+                    env = envs[i];
+                    merged = this._cookdownMerge(env,
+                        [this._preload.sharedMeta[resid]]);
+                    if (merged) {
+                        if (!this._sharedMeta[env]) {
+                            this._sharedMeta[env] = {};
+                        }
+                        if (!this._sharedMeta[env].contexts) {
+                            this._sharedMeta[env].contexts = {};
+                        }
+                        for (ctxKey in merged.contexts) {
+                            if (merged.contexts.hasOwnProperty(ctxKey)) {
+                                this._sharedMeta[env].contexts[ctxKey] =
+                                    merged.contexts[ctxKey];
+                                if (!this._sharedMeta[env][ctxKey]) {
+                                    this._sharedMeta[env][ctxKey] = {};
+                                }
+                                this._sharedMeta[env][ctxKey][resid] =
+                                    merged[ctxKey];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        delete this._preload_routes;
+        delete this._preload;
+    },
+
+
+    &#x2F;**
+     * This is a utility for _cookdown().  See docs on that for details.
+     *
+     * The general idea is that we start with the lowest priority items
+     * and let higher priority items clobber.
+     *
+     * @method _cookdownMerge
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param srcs {array} ORDER MATTERS! list of resources to merge
+     * @return {TODO} TODO
+     * @private
+     *&#x2F;
+    _cookdownMerge: function(env, srcs) {
+        var merged = { contexts: {} },
+            affinities = [&#x27;common&#x27;, env],   &#x2F;&#x2F; priority order
+            s,
+            src,
+            lastS = srcs.length - 1,
+            found = false,  &#x2F;&#x2F; TODO: when is found==false?
+            a,
+            affinity,
+            ctx,
+            res,
+            ctxKey;
+
+        for (s = 0; s &lt; srcs.length; s += 1) {
+            src = srcs[s];
+            if (!src) {
+                continue;
+            }
+            for (a = 0; a &lt; affinities.length; a += 1) {
+                affinity = affinities[a];
+                if (!src[affinity]) {
+                    continue;
+                }
+                for (ctxKey in src[affinity].contexts) {
+                    if (src[affinity].contexts.hasOwnProperty(ctxKey)) {
+                        merged.contexts[ctxKey] =
+                            src[affinity].contexts[ctxKey];
+                        res = this._cloneObj(src[affinity][ctxKey]);
+                        if ((&#x27;config&#x27; === res.type) &amp;&amp; (s !== lastS)) {
+                            &#x2F;&#x2F; only pull in configs from the last source
+                            continue;
+                        }
+                        merged.type = res.type;
+                        merged[ctxKey] = res;
+                        found = true;
+                    }
+                }
+            }
+        }
+        if (!found) {
+            return null;
+        }
+        return merged;
+    },
+
+
+    &#x2F;**
+     * Calculates, at server start time, the YUI module dependencies
+     * for mojit controllers and binders
+     *
+     * @method _precalcYuiDependencies
+     * @return {nothing}
+     * @private
+     *&#x2F;
+    _precalcYuiDependencies: function() {
+        var e,
+            i,
+            env,
+            envs = [&#x27;client&#x27;, &#x27;server&#x27;],
+            mojitType,
+            ctxKey,
+            module,
+            parts,
+            required,
+            resid,
+            res,
+            sorted,
+            ctxs;
+
+        for (e = 0; e &lt; envs.length; e += 1) {
+            env = envs[e];
+
+            &#x2F;&#x2F; mojit-specific
+            &#x2F;&#x2F; --------------
+            if (!this._mojitYuiSorted[env]) {
+                this._mojitYuiRequired[env] = {};
+                this._mojitYuiSorted[env] = {};
+                this._mojitYuiSortedPaths[env] = {};
+            }
+            for (mojitType in this._mojitMeta[env]) {
+                if (this._mojitMeta[env].hasOwnProperty(mojitType)) {
+
+                    if (!this._mojitYuiSorted[env][mojitType]) {
+                        this._mojitYuiRequired[env][mojitType] = {};
+                        this._mojitYuiSorted[env][mojitType] = {};
+                        this._mojitYuiSortedPaths[env][mojitType] = {};
+                    }
+                    for (ctxKey in this._mojitMeta[env][mojitType].contexts) {
+                        if (this._mojitMeta[env
+                                ][mojitType].contexts.hasOwnProperty(ctxKey)) {
+
+                            &#x2F;&#x2F; we handle non-context version below
+                            if (&#x27;*&#x27; === ctxKey) {
+                                continue;
+                            }
+                            if (!this._mojitYuiSorted[env
+                                    ][mojitType].contexts) {
+                                this._mojitYuiRequired[env
+                                    ][mojitType].contexts = {};
+                                this._mojitYuiSorted[env
+                                    ][mojitType].contexts = {};
+                                this._mojitYuiSortedPaths[env
+                                    ][mojitType].contexts = {};
+                            }
+
+                            parts = {};
+                            this._precalcYuiDependencies_getDepParts(env,
+                                this._mojitMeta[env][mojitType][&#x27;*&#x27;], parts);
+                            this._precalcYuiDependencies_getDepParts(env,
+                                this._mojitMeta[env][mojitType][ctxKey], parts);
+                            if (parts.controller &amp;&amp;
+                                    parts.modules[&#x27;inlinecss&#x2F;&#x27; + mojitType]) {
+                                parts.modules[parts.controller.yuiModuleName].
+                                    requires.push(&#x27;inlinecss&#x2F;&#x27; + mojitType);
+                            }
+                            this._mojitYuiSorted[env
+                                ][mojitType].contexts[ctxKey] =
+                                this._mojitMeta[env
+                                    ][mojitType].contexts[ctxKey];
+                            this._mojitYuiRequired[env
+                                ][mojitType].contexts[ctxKey] =
+                                this._mojitMeta[env
+                                    ][mojitType].contexts[ctxKey];
+                            if (parts.controller) {
+                                parts.required[parts.controller.yuiModuleName] =
+                                    true;
+                                &#x2F;&#x2F; dependencies necessary to dispatch the mojit
+                                parts.required[&#x27;mojito-dispatcher&#x27;] = true;
+                                sorted = this._sortYUIModules(
+                                    this._mojitMeta[env][mojitType
+                                        ].contexts[ctxKey],
+                                    env,
+                                    this._appConfigStatic.yui,
+                                    mojitType,
+                                    parts.modules,
+                                    parts.required
+                                );
+                                this._mojitYuiRequired[env
+                                    ][mojitType][ctxKey] =
+                                    Object.keys(parts.required);
+                                this._mojitYuiSorted[env
+                                    ][mojitType][ctxKey] = sorted.sorted;
+                                this._mojitYuiSortedPaths[env
+                                    ][mojitType][ctxKey] = sorted.paths;
+                            }
+
+                            &#x2F;&#x2F; also calculate sortedPaths for each individual binder
+                            if (&#x27;client&#x27; === env) {
+                                for (resid in this._mojitMeta[env
+                                        ][mojitType][ctxKey]) {
+                                    if (this._mojitMeta[env
+                                            ][mojitType][ctxKey
+                                            ].hasOwnProperty(resid)) {
+                                        res = this._mojitMeta[env
+                                            ][mojitType][ctxKey][resid];
+                                        if (res.type !== &#x27;binder&#x27;) {
+                                            continue;
+                                        }
+                                        required = {};
+                                        required[res.yuiModuleName] = true;
+                                        &#x2F;&#x2F; all binders have this dependency,
+                                        &#x2F;&#x2F; even if not explicitly given
+                                        required[&#x27;mojito-client&#x27;] = true;
+                                        &#x2F;&#x2F; view engines are needed to support
+                                        &#x2F;&#x2F; mojitProxy.render()
+                                        for (i in parts.viewEngines) {
+                                            if (parts.viewEngines.
+                                                    hasOwnProperty(i)) {
+                                                required[parts.viewEngines[i]] =
+                                                    true;
+                                            }
+                                        }
+                                        sorted = this._sortYUIModules(
+                                            this._mojitMeta[env][mojitType
+                                                ].contexts[ctxKey],
+                                            env,
+                                            this._appConfigStatic.yui,
+                                            mojitType,
+                                            parts.modules,
+                                            required
+                                        );
+                                        res.yuiSortedPaths = sorted.paths;
+                                    }
+                                }
+                            } &#x2F;&#x2F; env==client
+                        }
+                    } &#x2F;&#x2F; foreach context (except &#x27;*&#x27;)
+
+                    &#x2F;&#x2F; here&#x27;s where we handle the non-context version
+                    if (this._mojitMeta[env][mojitType][&#x27;*&#x27;]) {
+                        if (!this._mojitYuiSorted[env][mojitType].contexts) {
+                            this._mojitYuiRequired[env
+                                ][mojitType].contexts = {};
+                            this._mojitYuiSorted[env][mojitType].contexts = {};
+                            this._mojitYuiSortedPaths[env
+                                ][mojitType].contexts = {};
+                        }
+                        parts = {};
+                        this._precalcYuiDependencies_getDepParts(env,
+                            this._mojitMeta[env][mojitType][&#x27;*&#x27;],
+                            parts);
+                        if (parts.controller &amp;&amp; parts.modules[&#x27;inlinecss&#x2F;&#x27; +
+                                mojitType]) {
+                            parts.modules[parts.controller.yuiModuleName].
+                                requires.push(&#x27;inlinecss&#x2F;&#x27; + mojitType);
+                        }
+                        this._mojitYuiSorted[env][mojitType].contexts[&#x27;*&#x27;] =
+                            this._mojitMeta[env][mojitType].contexts[&#x27;*&#x27;];
+                        this._mojitYuiRequired[env][mojitType].contexts[&#x27;*&#x27;] =
+                            this._mojitMeta[env][mojitType].contexts[&#x27;*&#x27;];
+                        if (parts.controller) {
+                            parts.required[parts.controller.yuiModuleName] =
+                                true;
+                            &#x2F;&#x2F; dependencies necessary to dispatch the mojit
+                            parts.required[&#x27;mojito-dispatcher&#x27;] = true;
+                            sorted = this._sortYUIModules(
+                                this._mojitMeta[env][mojitType].contexts[&#x27;*&#x27;],
+                                env,
+                                this._appConfigStatic.yui,
+                                mojitType,
+                                parts.modules,
+                                parts.required
+                            );
+                            this._mojitYuiRequired[env][mojitType][&#x27;*&#x27;] =
+                                Object.keys(parts.required);
+                            this._mojitYuiSorted[env][mojitType][&#x27;*&#x27;] =
+                                sorted.sorted;
+                            this._mojitYuiSortedPaths[env][mojitType][&#x27;*&#x27;] =
+                                sorted.paths;
+                        }
+
+                        &#x2F;&#x2F; also calculate sortedPaths for each individual binder
+                        if (&#x27;client&#x27; === env) {
+                            for (resid in this._mojitMeta[env
+                                    ][mojitType][&#x27;*&#x27;]) {
+                                if (this._mojitMeta[env][mojitType
+                                        ][&#x27;*&#x27;].hasOwnProperty(resid)) {
+                                    res = this._mojitMeta[env][mojitType
+                                        ][&#x27;*&#x27;][resid];
+                                    if (res.type !== &#x27;binder&#x27;) {
+                                        continue;
+                                    }
+                                    required = {};
+                                    required[res.yuiModuleName] = true;
+                                    &#x2F;&#x2F; all binders have this dependency, even if
+                                    &#x2F;&#x2F; not explicitly given
+                                    required[&#x27;mojito-client&#x27;] = true;
+                                    &#x2F;&#x2F; view engines are needed to support
+                                    &#x2F;&#x2F; mojitProxy.render()
+                                    for (i in parts.viewEngines) {
+                                        if (parts.viewEngines.
+                                                hasOwnProperty(i)
+                                                ) {
+                                            required[parts.viewEngines[i]] =
+                                                true;
+                                        }
+                                    }
+                                    sorted = this._sortYUIModules(
+                                        this._mojitMeta[env][mojitType
+                                            ].contexts[&#x27;*&#x27;],
+                                        env,
+                                        this._appConfigStatic.yui,
+                                        mojitType,
+                                        parts.modules,
+                                        required
+                                    );
+                                    res.yuiSortedPaths = sorted.paths;
+                                }
+                            }
+                        } &#x2F;&#x2F; env==client
+                    } &#x2F;&#x2F; context==&#x27;*&#x27;
+                }
+            } &#x2F;&#x2F; foreach mojitType
+        } &#x2F;&#x2F; foreach env
+
+        &#x2F;&#x2F; log warning if server mojit has dom dependency
+        Y.Object.each(this._mojitYuiRequired.server, function(val, mojit) {
+            var deps = (val[&#x27;*&#x27;] &amp;&amp; val[&#x27;*&#x27;].join()) || &#x27;&#x27;,
+                badre = &#x2F;\b(dom-\w+|node-\w+|io-upload-iframe)&#x2F;g,
+                isbad = deps.match(badre);
+
+            if (isbad) {
+                logger.log(&#x27;your mojit &quot;&#x27; + mojit + &#x27;&quot; has a server affinity and these client-related deps: &#x27; + isbad.join(&#x27;, &#x27;), &#x27;WARN&#x27;, NAME);
+                logger.log(&#x27;Mojito may be unable to start, unless you have provided server-side DOM&#x2F;host-object suppport&#x27;, &#x27;WARN&#x27;, NAME);
+            }
+        });
+
+    },
+
+
+    &#x2F;&#x2F; Fills dest with:
+    &#x2F;&#x2F;  .controller     resource for the controller
+    &#x2F;&#x2F;  .modules        hash yuiModuleName: {
+    &#x2F;&#x2F;                          fullpath: where to load the module from
+    &#x2F;&#x2F;                          requires: list of required modules
+    &#x2F;&#x2F;                      }
+    &#x2F;&#x2F;  .required       hash yuiModuleName:true of modules required by the
+    &#x2F;&#x2F;                      source controller
+    &#x2F;&#x2F;  .viewEngines    hash name:yuiModuleName of view engines
+    &#x2F;&#x2F;
+    &#x2F;&#x2F; @method _precalcYuiDependencies_getDepParts
+    &#x2F;&#x2F; @param env {string} &quot;client&quot; or &quot;server&quot;
+    &#x2F;&#x2F; @param source {object} list of resources
+    &#x2F;&#x2F; @param dest {object} where to add results
+    &#x2F;&#x2F; @return {nothing} results put in &quot;dest&quot; argument
+    &#x2F;&#x2F; @private
+    _precalcYuiDependencies_getDepParts: function(env, source, dest) {
+        var resid,
+            res,
+            viewEngine;
+
+        if (!source) {
+            return;
+        }
+        dest.required = dest.required || {};
+        dest.viewEngines = dest.viewEngines || {};
+        dest.modules = dest.modules || {};
+
+        &#x2F;&#x2F; all mojits essentially have this dependency implicitly (even it not
+        &#x2F;&#x2F; given explicitly)
+        dest.required.mojito = true;
+
+        for (resid in source) {
+            if (source.hasOwnProperty(resid)) {
+                res = source[resid];
+                if (&#x27;view&#x27; === res.type) {
+                    viewEngine = source[&#x27;addon-view-engines-&#x27; + res.viewEngine];
+                    if (viewEngine) {
+                        dest.required[viewEngine.yuiModuleName] = true;
+                        dest.viewEngines[res.viewEngine] =
+                            viewEngine.yuiModuleName;
+                    }
+                }
+                if (res.yuiModuleName) {
+                    &#x2F;&#x2F; The binder is part of the resources for the server,
+                    &#x2F;&#x2F; but shouldn&#x27;t be added as a runtime dependency.
+                    if (&#x27;server&#x27; === env &amp;&amp; &#x27;binder&#x27; === res.type) {
+                        continue;
+                    }
+                    if (!res.sharedMojit) {
+                        dest.required[res.yuiModuleName] = true;
+                    }
+                    dest.modules[res.yuiModuleName] = {
+                        requires: res.yuiModuleMeta.requires,
+                        fullpath: ((&#x27;client&#x27; === env) ?
+                                res.staticHandlerURL :
+                                res.fsPath)
+                    };
+                    if ((&#x27;controller&#x27; === res.type)) {
+                        dest.controller = res;
+                    }
+                }
+            }
+        }
+        &#x2F;&#x2F; TODO: move other dynamic dependency adjustments
+        &#x2F;&#x2F; (compiled views inlinecss) here.
+    },
+
+
+    &#x2F;**
+     * Uses YUI Loader to sort a list of YUI modules.
+     *
+     * @method _sortYUIModules
+     * @param ctx {object} runtime context
+     * @param env {string} runtime environment (&quot;client&quot; or &quot;server&quot;)
+     * @param yuiConfig {object} configuration for YUI
+     * @param mojitType {string} name of mojit
+     * @param modules {object} YUI configuration for all modules
+     * @param required {object} lookup hash of modules that are required
+     * @return {object} list of load-order sorted module names, and object
+     *      listing paths used to load those modules
+     * @private
+     *&#x2F;
+    _sortYUIModules: function(ctx, env, yuiConfig, mojitType, modules,
+            required) {
+        var YUI = serverYUI,
+            Y,
+            loader,
+            sortedPaths = {},
+            usePrecomputed = -1 !== this._appConfigStatic.yui.
+                dependencyCalculations.indexOf(&#x27;precomputed&#x27;),
+            useOnDemand = -1 !== this._appConfigStatic.yui.
+                dependencyCalculations.indexOf(&#x27;ondemand&#x27;),
+            j,
+            module,
+            info;
+
+        if (!usePrecomputed) {
+            useOnDemand = true;
+        }
+
+        if (&#x27;client&#x27; === env) {
+            &#x2F;&#x2F; Use clientYUI to avoid cross-contamination with serverYUI
+            YUI = clientYUI;
+        }
+
+        &#x2F;&#x2F; We don&#x27;t actually need the full list, just the base required modules.
+        &#x2F;&#x2F; YUI.Loader() will do the rest at runtime.
+        if (useOnDemand) {
+            for (module in required) {
+                if (required.hasOwnProperty(module)) {
+                    sortedPaths[module] = modules[module].fullpath;
+                }
+            }
+            return { sorted: Object.keys(required), paths: sortedPaths };
+        }
+
+        Y = YUI({ useSync: true }).use(&#x27;loader-base&#x27;);
+        Y.applyConfig({ useSync: false });
+
+        &#x2F;&#x2F; We need to clear YUI&#x27;s cached dependencies, since there&#x27;s no
+        &#x2F;&#x2F; guarantee that the previously calculated dependencies have been done
+        &#x2F;&#x2F; using the same context as this calculation.
+        delete YUI.Env._renderedMods;
+
+        &#x2F;&#x2F;Use ignoreRegistered here instead of the old &#x60;delete YUI.Env._renderedMods&#x60; hack
+        loader = new Y.Loader({ lang: ctx.lang, ignoreRegistered: true });
+
+        &#x2F;&#x2F;Only override the default if it&#x27;s required
+        if (yuiConfig &amp;&amp; yuiConfig.base) {
+            loader.base = yuiConfig.base;
+        }
+        loader.addGroup({modules: modules}, mojitType);
+        loader.calculate({required: required});
+        for (j = 0; j &lt; loader.sorted.length; j += 1) {
+            module = loader.sorted[j];
+            info = loader.moduleInfo[module];
+            if (info) {
+                &#x2F;&#x2F; modules with &quot;nodejs&quot; in their name are tweaks on other modules
+                if (&#x27;client&#x27; === env &amp;&amp; module.indexOf(&#x27;nodejs&#x27;) !== -1) {
+                    continue;
+                }
+                sortedPaths[module] = info.fullpath || loader._url(info.path);
+            }
+        }
+        return { sorted: loader.sorted, paths: sortedPaths };
+    },
+
+
+    &#x2F;**
+     * Calculates the static handling URL for a resource.
+     *
+     * @method _precalcStaticURL
+     * @param res {object} metadata about the resource
+     * @param mojitType {string} mojit type, can be undefined for non-mojit-specific resources
+     * @return {nothing} new metadata added to the &quot;res&quot; argument
+     * @private
+     *&#x2F;
+    _precalcStaticURL: function(res, mojitType) {
+        &#x2F;* alternate approach which shows power of precalculating the URL and
+         * then passing it around everywhere
+        res.staticHandlerURL = &#x27;&#x2F;static&#x2F;&#x27; + Math.floor(Math.random() *
+            1000000000);
+        return;
+        *&#x2F;
+        var url,
+            parts = [],
+            path,
+            i,
+            config = this._appConfigStatic.staticHandling || {},
+            prefix = config.prefix,
+            appName = config.appName || this._shortRoot,
+            frameworkName = config.frameworkName || &#x27;mojito&#x27;,
+            rollupParts = [],
+            rollupFsPath;
+
+        &#x2F;&#x2F; TODO: [Issue 111] magic constants should should come from fw.json.
+
+        &#x2F;*
+        Server only framework mojits like DaliProxy and HTMLFrameMojit should
+        never have static URLs associated with them, so we skip them. This never
+        used to be an issue until we added the &quot;assumeRollups&quot; functionality to
+        preload JSON specs for specified mojits during the compile step (mojito
+        compile json) for Livestand. I think we need to reevaluate this entire
+        process so we don&#x27;t have such a fragile condition below.
+         *&#x2F;
+        &#x2F;&#x2F; TODO: reevaluate this entire process so we don&#x27;t have such a fragile
+        &#x2F;&#x2F; condition below.
+        if (mojitType === &#x27;DaliProxy&#x27; || mojitType === &#x27;HTMLFrameMojit&#x27;) {
+            return;
+        }
+
+        switch (res.type) {
+        case &#x27;action&#x27;:
+            path = libpath.join(&#x27;actions&#x27;, res.shortPath);
+            break;
+        case &#x27;addon&#x27;:
+            path = libpath.join(&#x27;addons&#x27;, res.addonType, res.shortPath);
+            break;
+        case &#x27;asset&#x27;:
+            path = libpath.join(&#x27;assets&#x27;, res.shortPath);
+            break;
+        case &#x27;binder&#x27;:
+            path = libpath.join(&#x27;binders&#x27;, res.shortPath);
+            break;
+        case &#x27;controller&#x27;:
+            path = res.shortPath;
+            break;
+        case &#x27;model&#x27;:
+            path = libpath.join(&#x27;models&#x27;, res.shortPath);
+            break;
+        case &#x27;view&#x27;:
+            path = libpath.join(&#x27;views&#x27;, res.shortPath);
+            break;
+        case &#x27;yui-lang&#x27;:
+            path = libpath.join(&#x27;lang&#x27;, res.shortPath);
+            break;
+        case &#x27;yui-module&#x27;:
+            &#x2F;&#x2F; FUTURE:  change this to &#x27;yui_modules&#x27;
+            path = libpath.join(&#x27;autoload&#x27;, res.shortPath);
+            break;
+        case &#x27;package&#x27;:
+            path = res.shortPath;
+            break;
+        default:
+            return;
+        }
+
+        if (!config.hasOwnProperty(&#x27;prefix&#x27;)) {
+            prefix = &#x27;static&#x27;;
+        }
+        if (prefix) {
+            parts.push(prefix);
+            rollupParts.push(prefix);
+        }
+
+        if (&#x27;shared&#x27; === mojitType) {
+            if (res.pkg &amp;&amp; &#x27;mojito&#x27; === res.pkg.name) {
+                parts.push(frameworkName);
+                if (config.useRollups &amp;&amp; res.yuiModuleName) {
+                    &#x2F;&#x2F; fw resources are put into app-level rollup
+                    rollupParts.push(appName);
+                    rollupFsPath = libpath.join(this._root, &#x27;rollup.client.js&#x27;);
+                }
+            } else {
+                parts.push(appName);
+                if (config.useRollups &amp;&amp; res.yuiModuleName) {
+                    rollupParts.push(appName);
+                    rollupFsPath = libpath.join(this._root, &#x27;rollup.client.js&#x27;);
+                }
+            }
+        } else {
+            parts.push(mojitType);
+            if (config.useRollups &amp;&amp; res.yuiModuleName) {
+                rollupParts.push(mojitType);
+                rollupFsPath = libpath.join(this._mojitPaths[mojitType],
+                    &#x27;rollup.client.js&#x27;);
+            }
+        }
+        if (mojitType) {
+            if (!this._mojitAssetRoots[mojitType]) {
+                this._mojitAssetRoots[mojitType] = &#x27;&#x2F;&#x27; +
+                    libpath.join(parts.join(&#x27;&#x2F;&#x27;), &#x27;assets&#x27;);
+            }
+        }
+
+        &#x2F;&#x2F; only use rollup URL if rollup file exists or we are assuming rollups
+        if ((rollupFsPath &amp;&amp; this._libs.path.existsSync(rollupFsPath) &amp;&amp;
+                config.useRollups) || this._appConfigStatic.assumeRollups) {
+            &#x2F;&#x2F; useful for debugging:  path += &#x27;?orig=&#x27; + path;
+            res.rollupURL = &#x27;&#x2F;&#x27; + libpath.join(rollupParts.join(&#x27;&#x2F;&#x27;),
+                &#x27;rollup.client.js&#x27;);
+            url = res.rollupURL;
+            res.staticHandlerFsPath = rollupFsPath;
+        }
+        if (!url) {
+            url = &#x27;&#x2F;&#x27; + libpath.join(parts.join(&#x27;&#x2F;&#x27;), path);
+            res.staticHandlerFsPath = res.fsPath;
+        }
+        res.staticHandlerURL = url;
+    },
+
+
+    &#x2F;**
+     * Attempt to gather YUI-module details.
+     *
+     * @method _precalcYuiModule
+     * @param res {object} metadata about the resource
+     * @return {nothing} new metadata added to the &quot;res&quot; argument
+     * @private
+     *&#x2F;
+    _precalcYuiModule: function(res) {
+        var file = this._libs.fs.readFileSync(res.fsPath, &#x27;utf8&#x27;),
+            ctx = {
+                console: {
+                    log: function() {}
+                },
+                window: {},
+                document: {},
+                YUI: {
+                    add: function(name, fn, version, meta) {
+                        res.yuiModuleName = name;
+                        res.yuiModuleVersion = version;
+                        res.yuiModuleMeta = meta || {};
+                    }
+                }
+            };
+
+        try {
+            libvm.runInNewContext(file, ctx, res.fsPath);
+        } catch (e) {
+            if (e.stack.indexOf(&#x27;SyntaxError:&#x27;) === 0) {
+                &#x2F;&#x2F; the stack of a SyntaxError thrown by runInNewContext() lacks
+                &#x2F;&#x2F; filename, line and column numbers for the error. Also, it
+                &#x2F;&#x2F; does not write to stderr as the docs claim.
+
+                &#x2F;&#x2F; see &quot;Lack of error message in vm.* stuff&quot; from 2011-04-29 at
+                &#x2F;&#x2F; http:&#x2F;&#x2F;groups.google.com&#x2F;group&#x2F;nodejs&#x2F;browse_thread&#x2F;
+                &#x2F;&#x2F; thread&#x2F;2075b964a3f7dd79&#x2F;bd0df1ae36829813
+
+                logger.log(this._reportJavaScriptSyntaxErrors(file));
+                logger.log(e.message + &#x27; in file: &#x27; + res.fsPath, &#x27;error&#x27;,
+                    NAME);
+
+            } else {
+                logger.log(e.message + &#x27;\n&#x27; + e.stack, &#x27;error&#x27;, NAME);
+            }
+            process.exit(-1);
+        }
+    },
+
+
+    &#x2F;**
+     * Reads one the configuration files for a mojit
+     *
+     * @method _getMojitConfig
+     * @param env {string} &quot;client&quot; or &quot;server&quot;
+     * @param ctx {object} runtime context
+     * @param mojitType {string} name of mojit
+     * @param name {string} config resource name, either &quot;definition&quot; or &quot;defaults&quot;
+     * @private
+     *&#x2F;
+    _getMojitConfig: function(env, ctx, mojitType, name) {
+        &#x2F;&#x2F;logger.log(&#x27;_getMojitConfig(&#x27;+env+&#x27;,&#x27;+mojitType+&#x27;,&#x27;+name+&#x27;)&#x27;);
+        var resid,
+            res;
+
+        if (!this._mojitMeta[env][mojitType]) {
+            throw new Error(&#x27;Cannot find meta data for mojit type \&quot;&#x27; + mojitType +
+                &#x27;\&quot;&#x27;);
+        }
+
+        resid = &#x27;config-&#x27; + name;
+        res = this._getContextualizedResource(this._mojitMeta[env][mojitType], ctx,
+            resid);
+        if (!res) {
+            return {};
+        }
+        return this._readConfigYCB(ctx, res.fsPath);
+    },
+
+
+    &#x2F;**
+     * Returns whether a runtime context matches a partial context
+     *
+     * @method _matchContext
+     * @param ctx {object} runtime context
+     * @param ctxParts {object} partial context
+     * @private
+     *&#x2F;
+    _matchContext: function(ctx, ctxParts) {
+        var k;
+
+        for (k in ctxParts) {
+            if (ctxParts.hasOwnProperty(k)) {
+                &#x2F;&#x2F; FUTURE -- handle &quot;lang&quot; slightly specially (&quot;en&quot; should match
+                &#x2F;&#x2F; &quot;en-US&quot;)
+                &#x2F;&#x2F; For now we will skip the &quot;lang&quot; check as it could change on
+                &#x2F;&#x2F; the fly in the client and we need all the &quot;lang&quot; files
+                &#x2F;&#x2F; available in our YUI instance.
+                if (k !== &#x27;lang&#x27; &amp;&amp; ctx[k] !== ctxParts[k]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    },
+
+
+    &#x2F;**
+     * Returns a list of resource metadata that match the context
+     *
+     * @method _getResourceListForContext
+     * @param src {object} list of contextualized resources, key is contextKey
+     * @param ctx {object} context to match
+     * @return {object} list of resources, key is resource ID
+     * @private
+     *&#x2F;
+    _getResourceListForContext: function(src, ctx) {
+        var list = {},  &#x2F;&#x2F; resid: resource
+            resid,
+            ctxKey;
+
+        if (src[&#x27;*&#x27;]) {
+            for (resid in src[&#x27;*&#x27;]) {
+                if (src[&#x27;*&#x27;].hasOwnProperty(resid)) {
+                    list[resid] = src[&#x27;*&#x27;][resid];
+                }
+            }
+        }
+        for (ctxKey in src.contexts) {
+            if (src.contexts.hasOwnProperty(ctxKey)) {
+                if (&#x27;*&#x27; === ctxKey) {
+                    continue;
+                }
+                if (!this._matchContext(ctx, src.contexts[ctxKey])) {
+                    continue;
+                }
+                for (resid in src[ctxKey]) {
+                    if (src[ctxKey].hasOwnProperty(resid)) {
+                        list[resid] = src[ctxKey][resid];
+                    }
+                }
+            }
+        }
+        return list;
+    },
+
+
+    &#x2F;**
+     * Returns a list of the language resources
+     * doesn&#x27;t discriminate based on context:  returns all langs for all
+     * contexts.
+     *
+     * @method _getLangList
+     * @param src {object} list of contextualized resources, key is contextKey
+     * @return {object} list of language resources, key is resource ID
+     * @private
+     *&#x2F;
+    _getLangList: function(src) {
+        var list = {},  &#x2F;&#x2F; resid: res
+            ctxKey,
+            resid,
+            res;
+
+        for (ctxKey in src.contexts) {
+            if (src.contexts.hasOwnProperty(ctxKey)) {
+                for (resid in src[ctxKey]) {
+                    if (src[ctxKey].hasOwnProperty(resid)) {
+                        res = src[ctxKey][resid];
+                        if (&#x27;yui-lang&#x27; === res.type) {
+                            list[resid] = res;
+                        }
+                    }
+                }
+            }
+        }
+        return list;
+    },
+
+
+    &#x2F;**
+     * Returns the metadata for a resource specific for a particular runtime context
+     *
+     * @method _getContextualizedResource
+     * @param src {object} list of contextualized resources, key is contextKey
+     * @param ctx {object} context to match
+     * @param resid {string} ID of resource to find
+     * @return {object} resource metadata
+     * @private
+     *&#x2F;
+    _getContextualizedResource: function(src, ctx, resid) {
+        var ctxKey,
+            res;
+
+        &#x2F;&#x2F; TODO: [Issue 100] Review, for when there is no app.json file.
+        if (!src || !src.contexts) {
+            return {};
+        }
+
+        for (ctxKey in src.contexts) {
+            if (src.contexts.hasOwnProperty(ctxKey)) {
+                &#x2F;&#x2F; look for specific first
+                if (&#x27;*&#x27; === ctxKey) {
+                    continue;
+                }
+                if (!this._matchContext(ctx, src.contexts[ctxKey])) {
+                    continue;
+                }
+                res = src[ctxKey][resid];
+                if (res) {
+                    return res;
+                }
+            }
+        }
+        &#x2F;&#x2F; fallback
+        return src[&#x27;*&#x27;][resid];
+    },
+
+
+    &#x2F;**
+     * Indicates whether file should be skipped based on its path
+     *
+     * @method _skipBadPath
+     * @param pathParts {object} return value of _parsePath() (or the equivalent)
+     * @return {boolean} true indicates that the file should be skipped
+     * @private
+     *&#x2F;
+    _skipBadPath: function(pathParts) {
+        var ext = pathParts.ext.substring(1);
+        if (ext.match(isNotAlphaNum)) {
+            return true;
+        }
+        return false;
+    },
+
+
+    &#x2F;**
+     * Generate a report of syntax errors for JavaScript code. This is also
+     * very useful to find syntax errors in JSON documents.
+     *
+     * @method _reportJavaScriptSyntaxErrors
+     * @param {string} js the JavaScript
+     * @param {string} filename OPTIONAL. the name of the file containing the
+     *     JavaScript
+     * @return {string} if errors were found, a multi-line error report
+     * @private
+     *&#x2F;
+    _reportJavaScriptSyntaxErrors: function(js, filename) {
+
+        &#x2F;&#x2F; use a really lenient JSLINT to find syntax errors
+
+        var jslint = require(&#x27;.&#x2F;management&#x2F;fulljslint&#x27;).jslint,
+            opts = {
+                &#x2F;&#x2F; turn off all the usual checks
+                devel: true,
+                browser: true,
+                node: true,
+                rhino: true,
+                widget: true,
+                windows: true,
+                bitwise: true,
+                regexp: true,
+                confusion: true,
+                undef: true,
+                &#x27;continue&#x27;: true,
+                unparam: true,
+                debug: true,
+                sloppy: true,
+                eqeq: true,
+                sub: true,
+                es5: true,
+                vars: true,
+                evil: true,
+                white: true,
+                forin: true,
+                css: true,
+                newcap: true,
+                cap: true,
+                nomen: true,
+                on: true,
+                plusplus: true,
+                fragment: true,
+
+                &#x2F;&#x2F; prevent well-known globals from showing up as errors
+                predef: [
+                    &#x2F;&#x2F; CommonJS
+                    &#x27;exports&#x27;,
+                    &#x2F;&#x2F; YUI
+                    &#x27;YUI&#x27;, &#x27;YUI_config&#x27;, &#x27;YAHOO&#x27;, &#x27;YAHOO_config&#x27;, &#x27;Y&#x27;,
+                    &#x2F;&#x2F; Node
+                    &#x27;global&#x27;, &#x27;process&#x27;, &#x27;require&#x27;, &#x27;__filename&#x27;, &#x27;module&#x27;,
+                    &#x2F;&#x2F; Browser
+                    &#x27;document&#x27;, &#x27;navigator&#x27;, &#x27;console&#x27;, &#x27;self&#x27;, &#x27;window&#x27;
+                ]
+            },
+            &#x2F;&#x2F; identify errors about undefined globals
+            nameIsNotDefined = &#x2F; is not defined\.$&#x2F;,
+            success,
+            report = [],
+            len,
+            e,
+            i;
+
+        success = jslint(js, opts);
+        if (!success) {
+            len = jslint.errors.length;
+            for (i = 0; i &lt; len; i += 1) {
+                e = jslint.errors[i];
+                if (e &amp;&amp; e.reason &amp;&amp; !nameIsNotDefined.test(e.reason)) {
+                    report.push(e.line + &#x27;,&#x27; + e.character + &#x27;: &#x27; + e.reason);
+                    report.push(&#x27;    &#x27; +
+                        (e.evidence || &#x27;&#x27;).replace(&#x2F;^\s+|\s+$&#x2F;, &#x27;&#x27;));
+                }
+            }
+        }
+
+        if (filename &amp;&amp; report.length) {
+            report.unshift(&#x27;Syntax errors detected in &#x27; + filename);
+        }
+
+        return report.join(&#x27;\n&#x27;);
+    },
+
+
+    &#x2F;**
+     * Returns the selector for the runtime context
+     *
+     * @method _selectorFromContext
+     * @param ctx {object} runtime context
+     * @return {string|null} selector for context
+     * @private
+     *&#x2F;
+    _selectorFromContext: function(ctx) {
+        if (ctx.device) {
+            return ctx.device;
+        }
+        return null;
+    },
+
+
+    &#x2F;**
+     * @method _objectIsEmpty
+     * @param o {object}
+     * @return {boolean} true if the object is empty
+     * @private
+     *&#x2F;
+    _objectIsEmpty: function(o) {
+        if (!o) {
+            return true;
+        }
+        return (0 === Object.keys(o).length);
+    },
+
+
+    &#x2F;&#x2F; from http:&#x2F;&#x2F;stackoverflow.com&#x2F;questions&#x2F;171251&#x2F;
+    &#x2F;&#x2F; how-can-i-merge-properties-of-two-javascript-objects-dynamically&#x2F;
+    &#x2F;&#x2F; 383245#383245
+    &#x2F;**
+     * Recursively merge one object onto another
+     *
+     * @method _mergeRecursive
+     * @param dest {object} object to merge into
+     * @param src {object} object to merge onto &quot;dest&quot;
+     * @param matchType {boolean} controls whether a non-object in the src is
+     *          allowed to clobber a non-object in the dest (if a different type)
+     * @return {object} the modified &quot;dest&quot; object is also returned directly
+     * @private
+     *&#x2F;
+    _mergeRecursive: function(dest, src, typeMatch) {
+        var p;
+
+        for (p in src) {
+            if (src.hasOwnProperty(p)) {
+                &#x2F;&#x2F; Property in destination object set; update its value.
+                if (src[p] &amp;&amp; src[p].constructor === Object) {
+                    if (!dest[p]) {
+                        dest[p] = {};
+                    }
+                    dest[p] = this._mergeRecursive(dest[p], src[p]);
+                } else {
+                    if (dest[p] &amp;&amp; typeMatch) {
+                        if (typeof dest[p] === typeof src[p]) {
+                            dest[p] = src[p];
+                        }
+                    } else {
+                        dest[p] = src[p];
+                    }
+                }
+            }
+        }
+        return dest;
+    },
+
+
+    &#x2F;**
+     * @method _cloneObj
+     * @param o {mixed}
+     * @return {mixed} deep copy of argument
+     * @private
+     *&#x2F;
+    _cloneObj: function(o) {
+        var newO,
+            i;
+
+        if (typeof o !== &#x27;object&#x27;) {
+            return o;
+        }
+        if (!o) {
+            return o;
+        }
+
+        if (&#x27;[object Array]&#x27; === Object.prototype.toString.apply(o)) {
+            newO = [];
+            for (i = 0; i &lt; o.length; i += 1) {
+                newO[i] = this._cloneObj(o[i]);
+            }
+            return newO;
+        }
+
+        newO = {};
+        for (i in o) {
+            if (o.hasOwnProperty(i)) {
+                newO[i] = this._cloneObj(o[i]);
+            }
+        }
+        return newO;
+    },
+
+
+    &#x2F;**
+     * A wrapper for fs.readdirSync() that guarantees ordering. The order in
+     * which the file system is walked is significant within the resource
+     * store, e.g., when looking up a matching context.
+     *
+     * @method _sortedReaddirSync
+     * @param path {string} directory to read
+     * @return {array} files in the directory
+     * @private
+     *&#x2F;
+    _sortedReaddirSync: function(path) {
+        var out = this._libs.fs.readdirSync(path);
+        return out.sort();
+    },
+
+
+    &#x2F;** 
+     * Recursively walks a directory
+     *
+     * @method _walkDirRecursive
+     * @param dir {string} directory to start at
+     * @param cb {function(error, subdir, name, isFile)} callback called for each file
+     * @param _subdir {string} INTERNAL argument, please ignore
+     * @return {nothing} value returned via callback
+     * @private
+     *&#x2F;
+    _walkDirRecursive: function(dir, cb, _subdir) {
+        var subdir,
+            fulldir,
+            children,
+            i,
+            childName,
+            childPath,
+            childFullPath,
+            childStat;
+
+        subdir = _subdir || &#x27;.&#x27;;
+        fulldir = libpath.join(dir, subdir);
+        if (!this._libs.path.existsSync(fulldir)) {
+            return;
+        }
+
+        children = this._sortedReaddirSync(fulldir);
+        for (i = 0; i &lt; children.length; i += 1) {
+            childName = children[i];
+            if (&#x27;.&#x27; === childName.substring(0, 1)) {
+                continue;
+            }
+            if (&#x27;node_modules&#x27; === childName) {
+                continue;
+            }
+            childPath = libpath.join(subdir, childName);
+            childFullPath = libpath.join(dir, childPath);
+            childStat = this._libs.fs.statSync(childFullPath);
+            if (childStat.isFile()) {
+                cb(null, subdir, childName, true);
+            } else if (childStat.isDirectory()) {
+                if (cb(null, subdir, childName, false)) {
+                    this._walkDirRecursive(dir, cb, childPath);
+                }
+            }
+        }
+    }
+
+
+};
+
+
+module.exports = ServerStore;
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>

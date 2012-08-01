@@ -1,0 +1,293 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Simple Logging - Mojito Code Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="simple-logging">
+<h1>Simple Logging<a class="headerlink" href="#simple-logging" title="Permalink to this headline">¶</a></h1>
+<p><strong>Time Estimate:</strong> 15 minutes</p>
+<p><strong>Difficulty:</strong> Intermediate</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to configure the log levels for the client and the server in Mojito.</p>
+<p>The following topics will be covered:</p>
+<ul class="simple">
+<li>configuring the logging levels</li>
+<li>displaying client-side and server-side logging</li>
+<li>using <tt class="docutils literal"><span class="pre">Y.log</span></tt> to set log levels</li>
+</ul>
+</div>
+<div class="section" id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="log-configuration">
+<h3>Log Configuration<a class="headerlink" href="#log-configuration" title="Permalink to this headline">¶</a></h3>
+<p>Logging is configured in the <tt class="docutils literal"><span class="pre">application.json</span></tt> file with the <tt class="docutils literal"><span class="pre">log</span></tt> object. The <tt class="docutils literal"><span class="pre">log</span></tt> object can contain a <tt class="docutils literal"><span class="pre">client</span></tt> object and/or a <tt class="docutils literal"><span class="pre">server</span></tt> object to configure logging
+for the client and server respectively. In the example <tt class="docutils literal"><span class="pre">log</span></tt> object below, you can see that you can configure the levels and some elements of the output for logs.
+See <a class="reference external" href="../topics/mojito_logging.html#log-defaults">Log Defaults</a> for the list of configuration properties and their default values.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="s2">&quot;log&quot;</span><span class="o">:</span><span class="p">{</span>
+  <span class="s2">&quot;client&quot;</span><span class="o">:</span><span class="p">{</span>
+    <span class="s2">&quot;level&quot;</span><span class="o">:</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;yui&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;server&quot;</span><span class="o">:</span><span class="p">{</span>
+    <span class="s2">&quot;level&quot;</span><span class="o">:</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;yui&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="log-levels">
+<h3>Log Levels<a class="headerlink" href="#log-levels" title="Permalink to this headline">¶</a></h3>
+<p>Mojito has the following five log levels that you configure in <tt class="docutils literal"><span class="pre">application.json</span></tt> or set with <tt class="docutils literal"><span class="pre">Y.log</span></tt>.</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">DEBUG</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">INFO</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">WARN</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">ERROR</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">MOJITO</span></tt></li>
+</ul>
+<p>Setting a log level of <tt class="docutils literal"><span class="pre">WARN</span></tt> will filter out all <tt class="docutils literal"><span class="pre">DEBUG</span></tt> and <tt class="docutils literal"><span class="pre">INFO</span></tt> messages, while <tt class="docutils literal"><span class="pre">WARN</span></tt>, <tt class="docutils literal"><span class="pre">ERROR</span></tt>, and <tt class="docutils literal"><span class="pre">MOJITO</span></tt> log messages will be processed. To see all log messages,
+set the log level to <tt class="docutils literal"><span class="pre">DEBUG</span></tt>. The <tt class="docutils literal"><span class="pre">MOJITO</span></tt> log level is for showing Mojito framework-level logging that indicate important framework events are occurring.</p>
+</div>
+<div class="section" id="setting-log-level-with-y-log">
+<h3>Setting Log Level with Y.log<a class="headerlink" href="#setting-log-level-with-y-log" title="Permalink to this headline">¶</a></h3>
+<p>The function <tt class="docutils literal"><span class="pre">Y.log</span></tt> takes two parameters. The first parameter is the log message, and the second parameter is used to indicate the log level. When the second parameter is omitted,
+the log message will be reported at the default or configured log level.</p>
+<p>For example, the first use of <tt class="docutils literal"><span class="pre">Y.log</span></tt> below will report the message at the log level that is configured in <tt class="docutils literal"><span class="pre">application.json</span></tt> or use the default. The second use of <tt class="docutils literal"><span class="pre">Y.log</span></tt> will
+use the log level <tt class="docutils literal"><span class="pre">INFO</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;This message will be reported at the log level set in application.json or the default level.&quot;</span><span class="p">);</span>
+<span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;This log message will be reported at the INFO log level.&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="setting-up-this-example">
+<h2>Setting Up this Example<a class="headerlink" href="#setting-up-this-example" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run <tt class="docutils literal"><span class="pre">simple_logging</span></tt>:</p>
+<ol class="arabic">
+<li><p class="first">Create your application.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">app</span> <span class="pre">simple_logging</span></tt></p>
+</li>
+<li><p class="first">Change to the application directory.</p>
+</li>
+<li><p class="first">Create your mojit.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">log</span></tt></p>
+</li>
+<li><p class="first">To configure the log levels for the client and server, replace the code in <tt class="docutils literal"><span class="pre">application.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;frame&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;HTMLFrameMojit&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;config&quot;</span><span class="o">:</span><span class="p">{</span>
+          <span class="s2">&quot;deploy&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+          <span class="s2">&quot;child&quot;</span><span class="o">:</span><span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;log&quot;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;log&quot;</span><span class="o">:</span><span class="p">{</span>
+      <span class="s2">&quot;client&quot;</span><span class="o">:</span><span class="p">{</span>
+        <span class="s2">&quot;level&quot;</span><span class="o">:</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;yui&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="kc">false</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;server&quot;</span><span class="o">:</span><span class="p">{</span>
+        <span class="s2">&quot;level&quot;</span><span class="o">:</span><span class="s2">&quot;debug&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;yui&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To configure routing, create the file <tt class="docutils literal"><span class="pre">routes.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;master&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;root&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verb&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;frame.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change to <tt class="docutils literal"><span class="pre">mojits/log</span></tt>.</p>
+</li>
+<li><p class="first">Modify your controller so that one log message uses the default log level and one log message has the log level set by <tt class="docutils literal"><span class="pre">Y.log</span></tt> by replacing the code in <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[CONTROLLER]: entering into controller index (...)&#39;</span><span class="p">,</span><span class="s2">&quot;info&quot;</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">today</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+      <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">type</span> <span class="o">:</span> <span class="s1">&#39;simple&#39;</span><span class="p">,</span>
+        <span class="nx">time</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="nx">hours</span><span class="o">:</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span><span class="o">%</span><span class="mi">12</span><span class="p">,</span>
+          <span class="nx">minutes</span><span class="o">:</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span><span class="o">&lt;</span><span class="mi">10</span> <span class="o">?</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()</span> <span class="o">:</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">(),</span>
+          <span class="nx">period</span><span class="o">:</span> <span class="nx">today</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()</span><span class="o">&gt;=</span><span class="mi">12</span> <span class="o">?</span> <span class="s2">&quot;p.m.&quot;</span> <span class="o">:</span> <span class="s2">&quot;a.m.&quot;</span>
+        <span class="p">},</span>
+        <span class="nx">show</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nx">hide</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">list</span> <span class="o">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nx">id</span><span class="o">:</span> <span class="mi">3</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nx">hole</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">html</span> <span class="o">:</span> <span class="s2">&quot;&lt;h3 style=&#39;color:red;&#39;&gt;simple html&lt;/h3&gt;&quot;</span>
+      <span class="p">};</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[CONTROLLER]: Today &#39;</span> <span class="o">+</span><span class="nx">today</span><span class="p">);</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To display your client logging,  replace the content of <tt class="docutils literal"><span class="pre">binders/index.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;logBinderIndex&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span> <span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">namespace</span><span class="p">(</span><span class="s1">&#39;mojito.binders&#39;</span><span class="p">)[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mojitProxy</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[BINDER]: Log message from init.&#39;</span><span class="p">,</span><span class="s2">&quot;info&quot;</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">mojitProxy</span> <span class="o">=</span> <span class="nx">mojitProxy</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="nx">bind</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">Y</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;[BINDER]: Log message from bind.&#39;</span><span class="p">,</span><span class="s2">&quot;info&quot;</span><span class="p">);</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">node</span> <span class="o">=</span> <span class="nx">node</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;mojito-client&#39;</span><span class="p">]});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Modify the default view template by replacing the code in <tt class="docutils literal"><span class="pre">views/index.mu.html</span></tt> with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">style=</span><span class="s">&quot;color: #606; font-weight:bold;&quot;</span><span class="nt">&gt;</span>Simple Log Configuration <span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;div&gt;</span>This app is to demonstrate the the logging level and its configuration.
+    <span class="nt">&lt;h3&gt;</span> Server Configuration <span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;b&gt;</span>Log level: <span class="nt">&lt;/b&gt;</span> DEBUG <span class="nt">&lt;br/&gt;</span>
+    <span class="nt">&lt;b&gt;</span>Timestamp: <span class="nt">&lt;/b&gt;</span> TRUE <span class="nt">&lt;br/&gt;</span>
+    <span class="nt">&lt;h3&gt;</span> Client Configuration <span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;b&gt;</span>Log level: <span class="nt">&lt;/b&gt;</span> INFO <span class="nt">&lt;br/&gt;</span>
+    <span class="nt">&lt;b&gt;</span>Timestamp: <span class="nt">&lt;/b&gt;</span> FALSE <span class="nt">&lt;br/&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">From the application directory, run the server.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span></tt></p>
+</li>
+<li><p class="first">Open the URL below in a browser and look at the output from the Mojito server. You should see the log messages from the controller that start with the string &#8220;[CONTROLLER]:&#8221;. Notice that the two messages have different log levels.</p>
+<p><a class="reference external" href="http://localhost:8666/">http://localhost:8666/</a></p>
+</li>
+<li><p class="first">Open your browser&#8217;s developer console, such as Firebug, and view the console logs. You should see the client log messages from the binder that start with the string &#8220;[BINDER]&#8221;.</p>
+</li>
+</ol>
+</div>
+<div class="section" id="source-code">
+<h2>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/simple_logging/">Simple Logging App</a></li>
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/simple_logging/application.json">Logging Configuration</a></li>
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/simple_logging/mojits/log/controller.server.js">Mojit Controller</a></li>
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/simple_logging/mojits/log/binders/index.js">Binder</a></li>
+</ul>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

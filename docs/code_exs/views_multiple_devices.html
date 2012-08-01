@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Creating Views for Different Devices - Mojito Code Examples</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?3.5.0/build/cssgrids/cssgrids-min.css&amp;3.5.0/build/cssreset/cssreset-min.css&amp;3.5.0/build/cssfonts/cssfonts-min.css&amp;3.5.0/build/cssbutton/cssbutton-min.css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.9.0/build/treeview/assets/skins/sam/treeview.css"> 
+    <link rel="stylesheet" type="text/css" href="_static/pipes.css">
+</head>
+<body class="yui-skin-sam yui3-skin-sam seoui seoui-fixed">
+	<div id="seoui-container">
+	    <header>
+  <div id="doc">
+        <div id="hd">
+            <div id="login">You're logged in as <a href="https://edit.yahoo.com/config/eval_profile?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes">zhouyaoji</a> (<a href="https://login.yahoo.com/config/login?.done=http%3A%2F%2Fpipes.yahoo.com&.intl=us&.pd=c%3DdTYCKFOp2e5m7Y4v1lJ1mBU-&.src=pipes&logout=1">logout</a>)</div>
+            <a class="logo" href="."><img src="http://l.yimg.com/a/i/us/pps/pipeslogo_whitebg.gif" width="119" height="45" alt="Pipes" title="Pipes"/></a>
+            <div class="nav">
+                <ul id="topnav">
+                    <li><a class="navlink" href="http://pipes.yahoo.com/">Home</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/person.info">My Pipes</a></li>
+                    <li><a class="navlink" href="http://pipes.yahoo.com/pipes/pipes.popular">Browse</a></li>
+                    <li><a class="navlink" href="http://discuss.pipes.yahoo.com/">Discuss</a></li>
+                    <li><a class="navlink" href="../docs">Documentation</a></li>
+                    <li class="newpipeli"><a class="navlink newpipe" href="http://pipes.yahoo.com/pipes/pipe.edit">Create a pipe</a></li>
+                </ul>
+                <form id="searchbox" action="http://pipes.yahoo.com/pipes/search" method="get">
+                     <input type="text" name="q" value="">
+                     <input type="image" class="searchimg" src="http://l.yimg.com/a/i/spacer.gif" width="20" height="19" alt="submit">
+                </form>
+            </div>
+        </div>
+
+    	</header>
+    	<div id="seoui-application-content">
+            <div class="yui3-g">
+                <div class="yui3-u-2-1">
+                    
+                    <div class="section" id="creating-views-for-different-devices">
+<h1>Creating Views for Different Devices<a class="headerlink" href="#creating-views-for-different-devices" title="Permalink to this headline">¶</a></h1>
+<p><strong>Time Estimate:</strong> 15 minutes</p>
+<p><strong>Difficulty Level:</strong> Intermediate</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This example shows how to create specialized views for different wireless devices, such as iPhones, BlackBerries, and Android phones. Each device uses different view templates but the
+same data from the controller.</p>
+<p>The following topics will be covered:</p>
+<ul class="simple">
+<li>creating specialized views for wireless devices</li>
+<li>using query parameters to select the device view</li>
+<li>using the user agent to select the device view</li>
+</ul>
+</div>
+<div class="section" id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></h2>
+<p>The following screenshots show you how the application appears on different devices.</p>
+<img alt="_images/preview.iphone.gif" src="_images/preview.iphone.gif" style="width: 401px; height: 368px;" />
+<img alt="_images/preview.android.gif" src="_images/preview.android.gif" style="width: 401px; height: 368px;" />
+<img alt="_images/preview.blackberry.gif" src="_images/preview.blackberry.gif" style="width: 401px; height: 368px;" />
+<p>For each device&#8217;s customized view, you need to create a view template. This code example uses the view templates <tt class="docutils literal"><span class="pre">index.iphone.mu.html</span></tt>, <tt class="docutils literal"><span class="pre">index.android.mu.html</span></tt>, and <tt class="docutils literal"><span class="pre">index.blackberry.mu.html</span></tt>
+to create customized views for iPhones, Android phones, and BlackBerries. The <tt class="docutils literal"><span class="pre">mu</span></tt> in the view template file names represents the Mustache rendering engine that renders Mustache tags.</p>
+<p>Mojito uses two ways to determine what device is making an HTTP request for a page. The first way is to use the value assign to the query string parameter <tt class="docutils literal"><span class="pre">device</span></tt>. For example,
+if Mojito received an HTTP GET request on the URL below, it would render the iPhone view into HTML and serve the page to the device.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//localhost:8666?device=iphone</span>
+</pre></div>
+</div>
+<p>Mojito also uses the HTTP User-Agent header field to decide which view to render and serve. In this example HTTP header, the User-Agent field indicates that the HTTP request is coming from an Android device,
+so Mojito would use the Android view template and serve the rendered HTML to the device.</p>
+<div class="highlight-javascript"><pre>Host: learnto.mobi
+Accept-Encoding: gzip
+Referer: http://learnto.mobi/
+Accept-Language: en-US
+User-Agent: Mozilla/5.0 (Linux; U; Android 2.2; en-us; PC36100 Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1
+Accept: application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5
+Accept-Charset: utf-8, iso-8859-1, utf-16, *;q=0.7</pre>
+</div>
+<p>How does Mojito know which view template file to use? Mojito determines which view template file to use based on a file naming convention. The naming convention has three parts based on the action and
+the device as shown here:</p>
+<p><tt class="docutils literal"><span class="pre">{action}.{device}.{rendering_engine}.html</span></tt></p>
+<p>Thus, if an iPhone was making an HTTP GET request on the index (action) file and the view template was being rendered by the Mustache rendering engine, Mojito would use <tt class="docutils literal"><span class="pre">index.iphone.mu.html</span></tt>
+and serve the rendered view as HTML to the iPhone.</p>
+<p>The view templates used in this code example use the controller to get the data for the Mustache variable <tt class="docutils literal"><span class="pre">{{mojit_view_id}}</span></tt>, but each view template uses customized CSS.</p>
+</div>
+<div class="section" id="setting-up-this-example">
+<h2>Setting Up this Example<a class="headerlink" href="#setting-up-this-example" title="Permalink to this headline">¶</a></h2>
+<p>To set up and run <tt class="docutils literal"><span class="pre">device_views</span></tt>:</p>
+<ol class="arabic">
+<li><p class="first">Create your application.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">app</span> <span class="pre">device_views</span></tt></p>
+</li>
+<li><p class="first">Change to the application directory.</p>
+</li>
+<li><p class="first">Create your mojit.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">create</span> <span class="pre">mojit</span> <span class="pre">device</span></tt></p>
+</li>
+<li><p class="first">To configure you application, replace the code in <tt class="docutils literal"><span class="pre">application.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;specs&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;device&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;device&quot;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To configure routing, create the file <tt class="docutils literal"><span class="pre">routes.json</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;settings&quot;</span><span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;master&quot;</span> <span class="p">],</span>
+    <span class="s2">&quot;_device_view&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;verb&quot;</span><span class="o">:</span> <span class="p">[</span><span class="s2">&quot;get&quot;</span><span class="p">],</span>
+      <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;call&quot;</span><span class="o">:</span> <span class="s2">&quot;device.index&quot;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Change to <tt class="docutils literal"><span class="pre">mojits/device</span></tt>.</p>
+</li>
+<li><p class="first">Replace the code in <tt class="docutils literal"><span class="pre">controller.server.js</span></tt> with the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">YUI</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;device&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Y</span><span class="p">,</span><span class="nx">NAME</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Y</span><span class="p">.</span><span class="nx">mojito</span><span class="p">.</span><span class="nx">controllers</span><span class="p">[</span><span class="nx">NAME</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="cm">/* Method corresponding to the &#39;index&#39; action.</span>
+<span class="cm">    *</span>
+<span class="cm">    * @param ac {Object} The action context that</span>
+<span class="cm">    * provides access to the Mojito API.</span>
+<span class="cm">    */</span>
+    <span class="nx">index</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ac</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">ac</span><span class="p">.</span><span class="nx">done</span><span class="p">({</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Device Views&#39;</span><span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">},</span> <span class="s1">&#39;0.0.1&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">requires</span><span class="o">:</span> <span class="p">[]});</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To modify the default view template, replace the code in <tt class="docutils literal"><span class="pre">views/index.mu.html</span></tt> with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">h2</span> <span class="p">{</span>
+         <span class="k">border-style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+         <span class="k">border-width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+         <span class="k">border-color</span><span class="o">:</span> <span class="m">#461B7E</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">background-color</span><span class="o">:</span> <span class="m">#606</span><span class="p">;</span>
+         <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+         <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+         <span class="k">font-size</span><span class="o">:</span><span class="m">2.0em</span><span class="p">;</span>
+         <span class="k">color</span><span class="o">:</span> <span class="m">#FFF</span><span class="p">;</span>
+         <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+       <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2&gt;</span>Default View<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For the iPhone view, create the <tt class="docutils literal"><span class="pre">views/index.iphone.mu.html</span></tt> file with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">h2</span> <span class="p">{</span>
+         <span class="k">border-style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+         <span class="k">border-width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+         <span class="k">border-color</span><span class="o">:</span> <span class="m">#717D7D</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">background-color</span><span class="o">:</span> <span class="m">#808080</span><span class="p">;</span>
+         <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+         <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+         <span class="k">font-size</span><span class="o">:</span><span class="m">2.0em</span><span class="p">;</span>
+         <span class="k">color</span><span class="o">:</span> <span class="m">#FFF</span><span class="p">;</span>
+         <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span><span class="o">%</span><span class="p">;</span>
+       <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2&gt;</span>iPhone View<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For the Android view, create the <tt class="docutils literal"><span class="pre">views/index.android.mu.html</span></tt> file with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">h2</span> <span class="p">{</span>
+         <span class="k">border-style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+         <span class="k">border-width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+         <span class="k">border-color</span><span class="o">:</span> <span class="m">#8BB381</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">background-color</span><span class="o">:</span> <span class="m">#41A317</span><span class="p">;</span>
+         <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+         <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+         <span class="k">font-size</span><span class="o">:</span><span class="m">2.0em</span><span class="p">;</span>
+         <span class="k">color</span><span class="o">:</span> <span class="m">#FFF</span><span class="p">;</span>
+         <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+       <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h2&gt;</span>Android View<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For the BlackBerry view, create the <tt class="docutils literal"><span class="pre">views/index.blackberry.mu.html</span></tt> file with the following:</p>
+<div class="highlight-html"><div class="highlight"><pre><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;style </span><span class="na">type=</span><span class="s">&quot;text/css&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">h2</span> <span class="p">{</span>
+         <span class="k">border-style</span><span class="o">:</span> <span class="k">solid</span><span class="p">;</span>
+         <span class="k">border-width</span><span class="o">:</span> <span class="m">2px</span><span class="p">;</span>
+         <span class="k">border-color</span><span class="o">:</span> <span class="nb">black</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+         <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span> <span class="m">0px</span><span class="p">;</span>
+         <span class="k">background-color</span><span class="o">:</span> <span class="m">#000</span><span class="p">;</span>
+         <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+         <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+         <span class="k">font-size</span><span class="o">:</span><span class="m">2.0em</span><span class="p">;</span>
+         <span class="k">color</span><span class="o">:</span> <span class="m">#FFF</span><span class="p">;</span>
+         <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+       <span class="p">}</span>
+    <span class="nt">&lt;/style&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;{{mojit_view_id}}&quot;</span> <span class="na">class=</span><span class="s">&quot;mojit&quot;</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;h2&gt;</span>BlackBerry View<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">From the application directory, run the server.</p>
+<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">mojito</span> <span class="pre">start</span></tt></p>
+</li>
+<li><p class="first">To view your application, go to the URL:</p>
+<p><a class="reference external" href="http://localhost:8666">http://localhost:8666</a></p>
+</li>
+<li><p class="first">Request the iPhone view by adding query string parameter <tt class="docutils literal"><span class="pre">?device=iphone</span></tt>:</p>
+<p><a class="reference external" href="http://localhost:8666?device=iphone">http://localhost:8666?device=iphone</a></p>
+</li>
+</ol>
+</div>
+<div class="section" id="source-code">
+<h2>Source Code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/device_views/mojits/device/views/">View Templates</a></li>
+<li><a class="reference external" href="http://github.com/yahoo/mojito/tree/master/examples/developer-guide/device_views/">Device Views Application</a></li>
+</ul>
+</div>
+</div>
+
+                </div>
+            </div>
+            
+    	</div>
+	</div>
+	<footer>
+            <div id="ft">
+        <span class="copyright">Copyright &copy; 2012 Yahoo! Inc. All rights reserved.</span>
+        <ul id="ft-tou">
+            <li>
+                <a href="http://privacy.yahoo.com/privacy/us/pipes">Your Privacy</a> 
+            </li>
+            <li>
+                <a href="http://info.yahoo.com/legal/us/yahoo/pipes/pipes-4396.html">Terms of Use</a> 
+            </li>
+            <li>
+                <a href="http://docs.yahoo.com/info/copyright/copyright.html">Copyright/IP Policy</a>
+            </li>
+             <li>
+                <a href="<?php echo create_url('docs') ?>">Help</a> 
+            </li>
+            <li class="last">
+                <a href="http://suggestions.yahoo.com/?prop=Pipes">Feedback</a>
+            </li>
+        </ul>
+        <ul id="ft-extra">
+            <li><span>Powered by <a href="http://developer.yahoo.com/yql/console/" target="_blank">YQL</a></span></li>
+            <li class="last">             
+	            <a href="http://www.yahoo.com/">
+	                <span class="yahoo-logo-from">from</span>
+	                <img src="http://l.yimg.com/g/images/home_yahoo_grey.gif.v3" width="56" height="11" alt="Yahoo! Pipes">
+	            </a>        
+            </li>
+           
+        </ul>
+    </div><!--/#ft --> 
+	</footer>
+	<script type="text/javascript" src="http://yui.yahooapis.com/combo?3.4.1/build/yui/yui-min.js"></script>
+	<script type="text/javascript" src="/assets/devel-seoui-base.js?v=None"></script>
+	<script type="text/javascript" src="/assets/rst/ydn-min.js?v=None"></script>
+</body>
+</html>

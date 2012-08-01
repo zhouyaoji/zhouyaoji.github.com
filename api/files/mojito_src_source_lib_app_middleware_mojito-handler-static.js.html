@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;middleware&#x2F;mojito-handler-static.js - Mojito API</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.5.0&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="assets&#x2F;img&#x2F;mojito-logo-white-bkg.png" title="Mojito API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.3.29</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;classes/Analytics.common.html">Analytics.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Assets.common.html">Assets.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Carrier.common.html">Carrier.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Composite.common.html">Composite.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Config.common.html">Config.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.client.html">Cookie.client</a></li>
+            
+                <li><a href="..&#x2F;classes/Cookie.server.html">Cookie.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Deploy.server.html">Deploy.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Device.common.html">Device.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Http.server.html">Http.server</a></li>
+            
+                <li><a href="..&#x2F;classes/I13n.server.html">I13n.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Intl.common.html">Intl.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Meta.common.html">Meta.common</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoDispatcher.html">MojitoDispatcher</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitoServer.html">MojitoServer</a></li>
+            
+                <li><a href="..&#x2F;classes/MojitProxy.html">MojitProxy</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputAdapter.common.html">OutputAdapter.common</a></li>
+            
+                <li><a href="..&#x2F;classes/OutputHandler.html">OutputHandler</a></li>
+            
+                <li><a href="..&#x2F;classes/Params.common.html">Params.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Partial.common.html">Partial.common</a></li>
+            
+                <li><a href="..&#x2F;classes/ResourceStore.server.html">ResourceStore.server</a></li>
+            
+                <li><a href="..&#x2F;classes/Url.common.html">Url.common</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.Client.html">Y.mojito.Client</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.MojitoRouter.html">Y.mojito.lib.MojitoRouter</a></li>
+            
+                <li><a href="..&#x2F;classes/Y.mojito.lib.REST.html">Y.mojito.lib.REST</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/ActionContext.html">ActionContext</a></li>
+            
+                <li><a href="..&#x2F;modules/ActionContextAddon.html">ActionContextAddon</a></li>
+            
+                <li><a href="..&#x2F;modules/CommonLibs.html">CommonLibs</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoClient.html">MojitoClient</a></li>
+            
+                <li><a href="..&#x2F;modules/MojitoServer.html">MojitoServer</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: mojito_src&#x2F;source&#x2F;lib&#x2F;app&#x2F;middleware&#x2F;mojito-handler-static.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;*
+ * Ext JS Connect
+ * Copyright(c) 2010 Sencha Inc.
+ * MIT Licensed
+ *
+ * Modified by Yahoo!
+ * Copyright (c) 2011-2012, Yahoo! Inc.  All rights reserved.
+ * Yahoo! Copyrights licensed under the New BSD License.
+ * See the accompanying LICENSE file for terms.
+ *&#x2F;
+
+&#x2F;*
+ * Connect staticProvider middleware adapted for Mojito *
+ ********************************************************
+ * This was modified to allow load all files from the
+ * Mojito development environment instead of one static
+ * directory.
+ ********************************************************
+ *&#x2F;
+
+
+&#x2F;*jslint anon:true, sloppy:true, nomen:true*&#x2F;
+
+
+&#x2F;*
+ * Module dependencies.
+ *&#x2F;
+var fs = require(&#x27;fs&#x27;),
+    mime = require(&#x27;mime&#x27;),
+    pa = require(&#x27;path&#x27;),
+    parseUrl = require(&#x27;url&#x27;).parse,
+    logger,
+    NAME = &#x27;StaticHandler&#x27;;
+
+&#x2F;*
+ * File buffer cache.
+ *&#x2F;
+var _cache = {};
+
+&#x2F;*
+ * Check if &#x60;req&#x60; and response &#x60;headers&#x60;.
+ *
+ * @param {IncomingMessage} req
+ * @param {Object} headers
+ * @return {Boolean}
+ * @api private
+ *&#x2F;
+function modified(req, headers) {
+    var modifiedSince = req.headers[&#x27;if-modified-since&#x27;],
+        lastModified = headers[&#x27;Last-Modified&#x27;],
+        noneMatch = req.headers[&#x27;if-none-match&#x27;],
+        etag = headers.ETag;
+
+    &#x2F;&#x2F; Check If-None-Match
+    if (noneMatch &amp;&amp; etag &amp;&amp; noneMatch === etag) {
+        return false;
+    }
+
+    &#x2F;&#x2F; Check If-Modified-Since
+    if (modifiedSince &amp;&amp; lastModified) {
+        modifiedSince = new Date(modifiedSince);
+        lastModified = new Date(lastModified);
+        &#x2F;&#x2F; Ignore invalid dates
+        if (!isNaN(modifiedSince.getTime())) {
+            if (lastModified &lt;= modifiedSince) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+&#x2F;*
+ * Check if &#x60;req&#x60; is a conditional GET request.
+ *
+ * @method conditionalGET
+ * @param {IncomingMessage} req
+ * @return {Boolean}
+ * @api private
+ *&#x2F;
+function conditionalGET(req) {
+    return req.headers[&#x27;if-modified-since&#x27;] ||
+        req.headers[&#x27;if-none-match&#x27;];
+}
+
+&#x2F;*
+ * Return an ETag in the form of size-mtime.
+ *
+ * @method etag
+ * @param {Object} stat
+ * @return {String}
+ * @api private
+ *&#x2F;
+function etag(stat) {
+    return stat.size + &#x27;-&#x27; + Number(stat.mtime);
+}
+
+&#x2F;*
+ * Respond with 304 &quot;Not Modified&quot;.
+ *
+ * @method notModified
+ * @param {ServerResponse} res
+ * @param {Object} headers
+ * @api private
+ *&#x2F;
+function notModified(res, headers) {
+    &#x2F;&#x2F; Strip Content-* headers
+    Object.keys(headers).forEach(function(field) {
+        if (0 === field.indexOf(&#x27;Content&#x27;)) {
+            delete headers[field];
+        }
+    });
+    res.writeHead(304, headers);
+    res.end();
+}
+
+&#x2F;*
+ * Respond with 403 &quot;Forbidden&quot;.
+ *
+ * @method forbidden
+ * @param {ServerResponse} res
+ * @api private
+ *&#x2F;
+function forbidden(res) {
+    var body = &#x27;Forbidden&#x27;;
+    res.writeHead(403, {
+        &#x27;Content-Type&#x27;: &#x27;text&#x2F;plain&#x27;,
+        &#x27;Content-Length&#x27;: body.length
+    });
+    res.end(body);
+}
+
+&#x2F;*
+ * Clear the memory cache for &#x60;key&#x60; or the entire cache.
+ *
+ * @method clearCache
+ * @param {String} key
+ * @api public
+ *&#x2F;
+function clearCache(key) {
+    if (key) {
+        delete _cache[key];
+    } else {
+        _cache = {};
+    }
+}
+
+
+&#x2F;*
+ * Static file server.
+ *
+ * Options:
+ *
+ *   - &#x60;root&#x60;     Root path from which to serve static files.
+ *   - &#x60;maxAge&#x60;   Browser cache maxAge in milliseconds, defaults to 0
+ *   - &#x60;cache&#x60;    When true cache files in memory indefinitely,
+ *                until invalidated by a conditional GET request.
+ *                When given, maxAge will be derived from this value.
+ *
+ * @param {Object} options
+ * @return {Function}
+ * @api public
+ *&#x2F;
+function staticProvider(store, globalLogger) {
+    logger = globalLogger;
+    var appConfig = store.getAppConfig(null, &#x27;application&#x27;),
+        options = appConfig.staticHandling || {},
+        cache = options.cache,
+        maxAge = options.maxAge;
+
+    if (cache &amp;&amp; !maxAge) {
+        maxAge = cache;
+    }
+    maxAge = maxAge || 0;
+
+    return function(req, res, next) {
+        if (req.method !== &#x27;GET&#x27; &amp;&amp; req.method !== &#x27;HEAD&#x27;) {
+            return next();
+        }
+
+        var url = parseUrl(req.url),
+            path = url.pathname,
+            filename,
+            hit,
+            head = (req.method === &#x27;HEAD&#x27;);
+
+
+        &#x2F;&#x2F; TODO: [Issue 87] we should be able to just remove this, because
+        &#x2F;&#x2F; Mojito closes all bad URLs down.
+        &#x2F;&#x2F; Potentially malicious path
+        if (path.indexOf(&#x27;..&#x27;) !== -1) {
+            return forbidden(res);
+        }
+
+        logger.log(&#x27;serving static path: &#x27; + path, &#x27;debug&#x27;, &#x27;static-handler&#x27;);
+
+        &#x2F;&#x2F; Use the resource store as a URI &quot;rewriter&quot; here.
+        &#x2F;&#x2F; &#x2F;favicon.ico is sent to .&#x2F;my_app_folder&#x2F;assets&#x2F;favicon.ico
+        filename = store.fileFromStaticHandlerURL(path);
+        &#x2F;&#x2F; TODO: [Issue 80] remove this for performance
+        if ((!filename) &amp;&amp; (path === &#x27;&#x2F;favicon.ico&#x27;)) {
+            filename = pa.join(store._root, &#x27;assets&#x27;, path);
+        }
+
+        if (!filename) {
+            return next();
+        }
+
+        &#x2F;&#x2F;logger.log(&#x27;static GET &#x27; + filename, &#x27;debug&#x27;, &#x27;static-handler&#x27;);
+
+        &#x2F;&#x2F; Cache hit
+        &#x2F;&#x2F;if (cache &amp;&amp; !conditionalGET(req) &amp;&amp; (hit = _cache[path])) {
+        &#x2F;&#x2F;    res.writeHead(200, hit.headers);
+        &#x2F;&#x2F;    res.end(head ? undefined : hit.body);
+        &#x2F;&#x2F;    return;
+        &#x2F;&#x2F;}
+
+        &#x2F;&#x2F; DEBUG -- setTimeout(function() {
+
+        &#x2F;&#x2F; FUTURE [Issue 89] stat cache?
+        fs.stat(filename, function(err, stat) {
+            if (err) {
+                logger.log(&#x27;err finding: &#x27; + filename, &#x27;warn&#x27;, NAME);
+                &#x2F;&#x2F; TODO: [Issue 90] send next an error?
+                return next();
+            } else if (stat.isDirectory()) {
+                &#x2F;&#x2F; TODO: [Issue 90] send next an error?
+                return next();
+            }
+
+            &#x2F;&#x2F; Serve the file directly using buffers
+            function onRead(err, data) {
+                if (err) {
+                    logger.log(&#x27;NOT FOUND: &#x27; + filename, &#x27;warn&#x27;);
+                    return next(err);
+                }
+                var mimetype = mime.lookup(filename),
+                    charset = mime.charsets.lookup(mimetype),
+                    &#x2F;&#x2F; Response headers
+                    headers = {
+                        &#x27;Content-Type&#x27;: mimetype + (charset ? &#x27;; charset=&#x27; +
+                            charset : &#x27;&#x27;),
+                        &#x27;Content-Length&#x27;: stat.size,
+                        &#x27;Last-Modified&#x27;: options.forceUpdate ? new Date().toUTCString() : stat.ctime.toUTCString(),
+                        &#x27;Cache-Control&#x27;: &#x27;public max-age=&#x27; + (maxAge &#x2F; 1000),
+                        &#x27;ETag&#x27;: etag(stat)
+                    };
+
+                if (!options.forceUpdate &amp;&amp; !modified(req, headers)) {
+                    return notModified(res, headers);
+                }
+
+                &#x2F;&#x2F; logger.log(&#x27;(staticProvider) serving static file: &#x27; +
+                &#x2F;&#x2F;     filename);
+                res.writeHead(200, headers);
+                res.end(head ? undefined : data);
+
+                &#x2F;&#x2F; TODO: [Issue 92] This is not even being used here...
+                &#x2F;&#x2F; remove and revisit (the _cache use is commented out below)
+                &#x2F;&#x2F; Cache support
+                if (cache) {
+                    _cache[path] = {
+                        headers: headers,
+                        body: data
+                    };
+                }
+            }
+            fs.readFile(filename, onRead);
+        });
+
+        &#x2F;&#x2F; DEBUG -- }, 500);
+
+    };
+}
+
+
+&#x2F;**
+ * Export function to create the static handler.
+ * @param {Object} config The configuration data for the handler.
+ * @return {Object} A static handler.
+ *&#x2F;
+module.exports = function(config) {
+    return staticProvider(config.store, config.logger);
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>
