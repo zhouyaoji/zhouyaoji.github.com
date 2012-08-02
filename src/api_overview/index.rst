@@ -20,6 +20,7 @@ Table of Contents
 
 .. toctree::
    :maxdepth: 2
+   :hidden: true
 
    mojito_action_context
    mojito_addons
